@@ -2,12 +2,16 @@ import { notFound } from "next/navigation";
 import { allPrograms } from "@/data/allPrograms";
 import { CurriculumSection } from "../_components/CurriculumSection";
 import { GraduationCap, Briefcase, Info, BookOpen, ArrowRight } from "lucide-react";
+import { type Metadata } from "next";
 
-export default async function ProgramDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+
+export default async function ProgramDetailPage({ params }: PageProps) {
   const program = findProgramBySlug(params.slug);
   if (!program) return notFound();
 
