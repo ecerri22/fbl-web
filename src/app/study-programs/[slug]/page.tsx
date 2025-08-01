@@ -1,19 +1,13 @@
 import { notFound } from "next/navigation";
 import { allPrograms } from "@/data/allPrograms";
 import { CurriculumSection } from "../_components/CurriculumSection";
-import { GraduationCap, Briefcase, Info, BookOpen, ArrowRight } from "lucide-react";
-import { type Metadata } from "next";
+import { GraduationCap, Briefcase, Info, ArrowRight } from "lucide-react";
+import { Suspense } from "react";
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-
-export default async function ProgramDetailPage({ params }: PageProps) {
-  const program = findProgramBySlug(params.slug);
-  if (!program) return notFound();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function ProgramDetailPage({ params }: any ) {
+    const program = findProgramBySlug(params.slug);
+    if (!program) return notFound();
 
   return (
     <main className="bg-white min-h-screen">
@@ -77,5 +71,22 @@ function Section({ icon, title, children }: { icon: React.ReactNode; title: stri
 }
 
 function findProgramBySlug(slug: string) {
-  return allPrograms.find(p => p.slug === slug) || null;
+  return allPrograms.find((p) => p.slug === slug) || null;
+}
+
+export async function generateStaticParams() {
+  return allPrograms.map((program) => ({
+    slug: program.slug,
+  }));
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata({ params }: any ) {
+  const program = findProgramBySlug(params.slug);
+  if (!program) return { title: "Program Not Found" };
+
+  return {
+    title: program.name,
+    description: program.description || "Academic program details",
+  };
 }
