@@ -1,6 +1,7 @@
 import PageWrapper from "@/components/PageWrapper";
 import Image from "next/image";
 import { CheckCircle, Target, Eye } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -77,12 +78,7 @@ export default function AboutPage() {
             <p className="text-gray-600 mb-5 text-lg">
               Discover the right program for your future in Business and Law.
             </p>
-            <a
-              href="/study-programs"
-              className="bg-red-700 hover:bg-red-800 text-white font-semibold text-sm uppercase px-8 py-3 tracking-wider "
-            >
-              Explore Study Programs
-            </a>
+            <Link href="/study-programs/">Study Programs</Link>
           </div>
 
       </main>
