@@ -11,7 +11,7 @@ export default function PageHeader({ title, backgroundImage }: PageHeaderProps) 
     <section
         className="relative text-white py-24 px-6 text-center bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${backgroundImage || "/images/hero-default.jpg"})`,
+          backgroundImage: `url(${backgroundImage || "/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg"})`,
         }}
       >
         <div className="absolute inset-0 bg-blue-950 opacity-90 z-0" />

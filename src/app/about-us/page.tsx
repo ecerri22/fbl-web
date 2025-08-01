@@ -12,7 +12,7 @@ export default function AboutPage() {
           {/* Left: Image */}
           <div className="relative w-full h-[450px] rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/images/about-students.jpg" 
+              src="/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg" 
               alt="Happy Students"
               fill
               className="object-cover"

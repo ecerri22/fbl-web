@@ -288,7 +288,7 @@ export default function Home() {
             <div className="md:flex">
               <div className="w-full md:w-1/2 h-64 md:h-auto overflow-hidden">
                 <Image
-                  src="/images/fakulteti-ekonomik-uniel.jpg"
+                  src="/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg"
                   alt="Featured News"
                   height={400}
                   width={800}
