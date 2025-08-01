@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Briefcase, Globe, GraduationCap, Lightbulb, User, UserCheck, Users, CalendarDays, MapPin, Clock, Ticket } from "lucide-react";
 import Link from "next/link";
-import { events } from "@/data/eventsData";
+// import { events } from "@/data/eventsData";
 
 export default function Home() {
 
