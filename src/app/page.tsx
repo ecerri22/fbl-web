@@ -85,7 +85,8 @@ export default function Home() {
             // src="/images/fakulteti-ekonomik-uniel.jpg"
             src="/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg"
             alt="hero-banener"
-            fill
+            width={800}
+            height={400}
             className="object-cover w-full h-full"
           />
 
@@ -286,9 +287,11 @@ export default function Home() {
           <div className="h-50 col-span-1 md:col-span-2 bg-zinc-50 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition group">
             <div className="md:flex">
               <div className="w-full md:w-1/2 h-64 md:h-auto overflow-hidden">
-                <image
+                <Image
                   src="/images/fakulteti-ekonomik-uniel.jpg"
                   alt="Featured News"
+                  height={400}
+                  width={800}
                   className="w-full h-full object-cover object-center"
                 />
               </div>
