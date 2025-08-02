@@ -77,8 +77,8 @@ export default function Home() {
               Knowledge meets innovation
             </p>
 
-            <h1 className="text-4xl md:text-6xl font-semibold leading-tight font-playfair text-stone-800">
-              About University
+            <h1 className="text-4xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800">
+              About FBL
             </h1>
             
             <p className="text-stone-600">At FBL, we believe in the transformative power of education and the boundless potential that resides within each individual. Our mission is to foster intellectual curiosity, empower individuals to realize their fullest potential, and contribute meaningfully to the betterment of society. commitment to academic excellence, diversity, and community engagement.</p>
@@ -116,7 +116,7 @@ export default function Home() {
 
       {/* ACADEMIC & PROGRAMS */}
        <section className="px-6 md:px-16 pb-20 max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-semibold leading-tight font-playfair text-stone-800 mb-12 text-center">
+        <h1 className="text-4xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800 mb-12 text-center">
           Academics & Programs
         </h1>
 
@@ -185,6 +185,35 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Scholarships */}
+      <section className="relative bg-fixed bg-center bg-cover bg-[url('/images/rut-miit-3EMw3T-ZjkE-unsplash.jpg')]">
+        <div className="absolute inset-0 bg-black/80 z-0" />
+
+        <div className="relative z-10 flex items-center justify-center px-6 py-20">
+          <div className="max-w-3xl text-center text-white space-y-8">
+            <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair">
+              Scholarships and Financial Aid
+            </h1>
+            <p className="text-lg font-roboto">
+              Each semester, we are proud to honor academically talented and exceptionally skilled students
+              with a variety of scholarships and awards. Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Est reiciendis sed aspernatur aliquam facilis repellat quaerat a fugiat fuga quam!
+            </p>
+            <Link
+              href="/programs"
+              className="relative inline-block px-8 py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
+            >
+              <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
+              <span className="relative z-10 capitalize whitespace-nowrap">
+                Read more
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+
     </main>
   );
 }
