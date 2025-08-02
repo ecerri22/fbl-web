@@ -120,3 +120,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.font-playfair {
+  font-family: var(--font-playfair), serif;
+}
+
+.font-roboto {
+  font-family: var(--font-roboto), serif;
+}
