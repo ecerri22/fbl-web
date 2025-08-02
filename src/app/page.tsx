@@ -89,7 +89,7 @@ export default function Home() {
 
 
           {/* Right: Links column */}
-          <div className="flex flex-col items-start gap-4">        
+          <div className="flex flex-col items-start gap-8">        
             <Link href="/staff" className="flex flex-col px-6 py-3 gap-4">
               <h3 className="font-playfair text-2xl ">Undergraduate</h3>
               <p className="font-roboto text-lg underline underline-offset-20 hover:decoration-red-800 transition-all duration-500 ease-out ">Browse the Undergraduate degrees</p>
