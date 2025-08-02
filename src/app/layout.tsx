@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         <main className="flex-grow min-h-[500px]">{children}</main>
 
-        <Footer className="mt-auto" />
+        {/* <Footer className="mt-auto" /> */}
       </body>
     </html>
   );
