@@ -113,6 +113,78 @@ export default function Home() {
       </div>
 
       </section>
+
+      {/* ACADEMIC & PROGRAMS */}
+       <section className="px-6 md:px-16 pb-20 max-w-7xl mx-auto">
+        <h1 className="text-4xl md:text-6xl font-semibold leading-tight font-playfair text-stone-800 mb-12 text-center">
+          Academics & Programs
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Undergraduate */}
+          <div className="p-8 bg-neutral-100">
+            <h3 className="text-3xl font-semibold font-playfair text-stone-800 mb-6">
+              Undergraduate
+            </h3>
+            <ul className="space-y-4">
+
+              {["Finance", "Marketing", "Information Systems"].map((major) => (
+                <li key={major}>
+                  <Link
+                    href="#"
+                    className="group inline-flex items-center justify-between border border-neutral-800 px-6 py-3 text-neutral-800 font-roboto text-lg w-full hover:border-transparent hover:bg-red-800 hover:text-white transition-colors"
+                  >
+                    {major}
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </li>
+              ))}
+
+              <li>
+                <Link
+                  href="#"
+                  className="inline-flex justify-center border border-neutral-800/60 text-neutral-800/80 px-6 py-3 font-roboto text-lg w-full hover:border-neutral-800 hover:text-neutral-800 transition-colors"
+                >
+                  See More
+                </Link>
+              </li>
+
+            </ul>
+          </div>
+
+          {/* Graduate */}
+          <div className="p-8 bg-red-800">
+            <h3 className="text-3xl font-semibold font-playfair text-neutral-100 mb-6 ">
+              Graduate
+            </h3>
+            <ul className="space-y-4">
+              {["Business Analytics", "Economics", "Project Management"].map(
+                (major) => (
+                  <li key={major}>
+                    <Link
+                      href="#"
+                      className="group inline-flex items-center justify-between border border-neutral-100 px-6 py-3 text-neutral-100 font-roboto text-lg w-full hover:bg-neutral-100 hover:text-red-800 transition-colors"
+                    >
+                      {major}
+                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </li>
+                )
+              )}
+
+              <li>
+                <Link
+                  href="#"
+                  className="inline-flex justify-center border border-white/60 text-white/80 px-6 py-3 font-roboto text-lg w-full hover:text-white hover:border-white transition-colors"
+                >
+                  See More
+                </Link>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
