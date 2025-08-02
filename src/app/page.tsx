@@ -52,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION  */}
-      <section className="flex flex-col py-25 px-15 gap-20 items-center"> 
+      <section className="flex flex-col py-25 px-20 gap-20 items-center"> 
         <div className="flex flex-row items-end gap-10 w-full max-w-screen-xl mx-auto">
           <div className="w-1/2 flex justify-end items-end gap-10 ">
           
@@ -115,7 +115,7 @@ export default function Home() {
       </section>
 
       {/* ACADEMIC & PROGRAMS */}
-       <section className="px-6 md:px-16 pb-20 max-w-7xl mx-auto">
+       <section className="px-20 md:px-20 pb-20 max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800 mb-12 text-center">
           Academics & Programs
         </h1>
@@ -213,7 +213,82 @@ export default function Home() {
         </div>
       </section>
 
+      {/* EVENTS */}
+      <section className="flex flex-col gap-8 max-w-7xl mx-auto px-6 md:px-20 py-20">
+        {/* Header with title and link */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800">
+            Events
+          </h1>
+          <Link
+            href="#"
+            className="text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
+          >
+            View All
+          </Link>
+        </div>
 
+        {/* Content container */}
+        <div className="bg-neutral-100 flex flex-col md:flex-row overflow-hidden shadow-md">
+          {/* Events list */}
+          <div className="w-3/5 flex flex-col flex-1 justify-between">
+          {[ 
+            {
+              number: "01",
+              title: "Cultural Exchange: Building Global Connections",
+              date: "August 20, 2024",
+              location: "Albania"
+            },
+            {
+              number: "02",
+              title: "International Symposium on Business Ethics",
+              date: "September 15, 2024",
+              location: "Rome, Italy"
+            },
+            {
+              number: "03",
+              title: "Annual Career Fair and Networking Event",
+              date: "October 10, 2024",
+              location: "New York, USA"
+            }
+          ].map(({number, title, date, location}) => (
+             <div
+                key={number}
+                className="group flex items-start gap-6p p-5 cursor-pointer transition-colors duration-300 hover:bg-red-800"
+              >
+                {/* Padding on number container */}
+                <div className="text-5xl font-bold min-w-[3rem] font-playfair text-red-800 group-hover:text-neutral-100 px-4 py-3">
+                  {number}
+                </div>
+
+                {/* Padding on text container */}
+                <div className="flex flex-col px-4 py-3">
+                  <p className="text-lg font-semibold font-playfair text-red-800 group-hover:text-neutral-100">
+                    {title}
+                  </p>
+                  <div className="flex gap-6 text-sm text-stone-600 mt-1 font-roboto group-hover:text-neutral-200">
+                    <span>{date}</span>
+                    <span>{location}</span>
+                  </div>
+                </div>
+              </div>
+          ))}
+        </div>
+
+
+
+          {/* Side image */}
+          <div className="w-2/5 hidden md:block flex-shrink-0">
+            <Image
+              src="/images/rut-miit-3EMw3T-ZjkE-unsplash.jpg"
+              width={500}
+              height={500}
+              alt="Graduating students"
+              className="object-cover h-full w-full"
+            />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
