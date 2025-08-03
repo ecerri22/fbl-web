@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={`${playfair.variable} ${roboto.variable}`}>
       <body className={cn("flex flex-col min-h-screen font-sans")}>
         <header className="sticky top-0 z-50 bg-white shadow-sm border-b">
-          <nav className="relative flex items-center px-6 py-8 w-full max-w-[1440px] mx-auto">
+          <nav className="relative flex items-center px-6 py-6 w-full max-w-[1440px] mx-auto">
             <div className="absolute left-6">
               <h1 className="text-xl font-bold text-red-800">FBL</h1>
             </div>

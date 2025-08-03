@@ -289,6 +289,73 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* NEWS */}
+      <section className="flex flex-col gap-12 max-w-7xl mx-auto px-6 md:px-20 py-20">
+        {/* Header with title and link */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800">
+            Read Our Latest News
+          </h1>
+          <Link
+            href="#"
+            className="text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
+          >
+            View All
+          </Link>
+        </div>
+
+        {/* News list */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {[
+            {
+              img_alt: "students auditorium",
+              img_src: "/images/joecalih-WyBizVgCrDY-unsplash.jpg",
+              title: "Those Inequalities Are Inequalities",
+              content: "10 Effective Study Tips for College Success. Welcome...",
+              date: "August 20, 2024",
+            },
+            {
+              img_alt: "students graduating",
+              img_src: "/images/joecalih-WyBizVgCrDY-unsplash.jpg",
+              title: "After Decades of Improvement",
+              content: "10 Effective Study Tips for College Success. Welcome...",
+              date: "September 15, 2024",
+            },
+          ].map(({ title, content, date, img_src, img_alt }, idx) => (
+            <div
+              key={idx}
+              className="flex gap-5 p-5 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <Link href={`/news/${idx}`} className="flex-shrink-0 block group">
+                <div className="h-[12rem] w-[12rem] overflow-hidden ">
+                  <Image
+                    src={img_src}
+                    alt={img_alt}
+                    width={160}
+                    height={160}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                  />
+                </div>
+              </Link>
+
+              <div className="flex flex-col gap-2 justify-center">
+                <Link
+                  href={`/news/${idx}`}
+                  className="text-lg font-semibold font-playfair text-neutral-800 hover:text-red-800"
+                >
+                  {title}
+                </Link>
+                <p className="text-sm font-roboto text-neutral-600 mt-1">{content}</p>
+                <span className="text-sm text-stone-500 font-roboto mt-2">{date}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+
     </main>
   );
 }
