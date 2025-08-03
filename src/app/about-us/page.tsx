@@ -40,7 +40,7 @@ export default function AboutPage() {
 
           {/* Right: Stats */}
           <div className="flex flex-col justify-between h-full space-y-6 max-w-full overflow-hidden">
-            {[ "20'000", "15'000", "10'000" ].map((count, i) => (
+            {[ "20,000", "15,000", "10,000" ].map((count, i) => (
               <div key={i} className="flex flex-col bg-red-800 text-neutral-200 p-6 shadow-md w-full">
                 <p className="font-playfair text-5xl">{count}</p>
                 <p className="font-roboto text-md">undergraduate and graduate students</p>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             Welcome to the Faculty of Business and Law. Our mission is to cultivate future leaders who are grounded in ethics, driven by innovation, and committed to making meaningful contributions to society. 
           </p>
           <p className="text-neutral-600 font-roboto italic text-lg leading-relaxed">
-            At FBL, we believe in the power of education to transform lives and communities. Whether you're a prospective student, a parent, or a partner, I invite you to explore what makes our faculty a place of excellence and opportunity.
+            At FBL, we believe in the power of education to transform lives and communities. Whether you&#39;re a prospective student, a parent, or a partner, I invite you to explore what makes our faculty a place of excellence and opportunity.
           </p>
           <p className="text-neutral-700 font-roboto font-semibold mt-4 text-red-800">– Shpëtim Çerri, Dean of the Faculty of Business and Law</p>
         </section>
