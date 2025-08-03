@@ -1,5 +1,7 @@
 import PageWrapper from "@/components/PageWrapper";
+// import { Link } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -31,7 +33,7 @@ export default function AboutPage() {
               src="/images/javier-trueba-iQPr1XkF5F0-unsplash.jpg"
               alt="Happy students celebrating"
               fill
-              className="object-cover cover-top"
+              className="object-cover object-top"
               priority
             />
           </div>
@@ -45,6 +47,20 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Message from the Dean Section */}
+        <section className="max-w-4xl mx-auto text-center space-y-6 py-10 border-t border-b border-neutral-200">
+          <h2 className="text-3xl font-semibold font-playfair text-neutral-800">
+            Message from the Dean
+          </h2>
+          <p className="text-neutral-600 font-roboto italic text-lg leading-relaxed">
+            Welcome to the Faculty of Business and Law. Our mission is to cultivate future leaders who are grounded in ethics, driven by innovation, and committed to making meaningful contributions to society. 
+          </p>
+          <p className="text-neutral-600 font-roboto italic text-lg leading-relaxed">
+            At FBL, we believe in the power of education to transform lives and communities. Whether you're a prospective student, a parent, or a partner, I invite you to explore what makes our faculty a place of excellence and opportunity.
+          </p>
+          <p className="text-neutral-700 font-roboto font-semibold mt-4 text-red-800">– Shpëtim Çerri, Dean of the Faculty of Business and Law</p>
         </section>
 
         {/* History of FBL Section */}
@@ -99,13 +115,16 @@ export default function AboutPage() {
                 <div key={index} className="flex flex-col gap-3  ">
                   <h3 className="text-xl font-playfair text-neutral-800 self-end">{item.title}</h3>
                   <p className="text-md font-roboto text-neutral-500 self-end w-3/5 text-end">{item.description}</p>
-                  <Image
-                    src={item.image}
-                    width={600}
-                    height={400}
-                    alt={item.title}
-                    className="object-cover w-full h-80"
-                  />
+                  <div className="overflow-hidden rounded-md">
+                    <Image
+                      src={item.image}
+                      width={600}
+                      height={400}
+                      alt={item.title}
+                      className="object-cover w-full h-80 transition-transform duration-500 ease-in-out hover:scale-105"
+                    />
+                  </div>
+
                 </div>
               ))}
             </div>
@@ -127,20 +146,37 @@ export default function AboutPage() {
                 <div key={index} className="flex flex-col gap-3">
                   <h3 className="text-xl font-playfair text-neutral-800">{item.title}</h3>
                   <p className="text-md font-roboto text-neutral-500 text-start w-3/5">{item.description}</p>
-                  <Image
-                    src={item.image}
-                    width={600}
-                    height={400}
-                    alt={item.title}
-                    className="object-cover w-full h-80"
-                  />
+                  <div className="overflow-hidden rounded-md">
+                    <Image
+                      src={item.image}
+                      width={600}
+                      height={400}
+                      alt={item.title}
+                      className="object-cover w-full h-80 transition-transform duration-500 ease-in-out hover:scale-105"
+                    />
+                  </div>
+
                 </div>
               ))}
             </div>
           </div>
         </section>
 
+        {/* CTA */}
+        <section className="text-center py-16 border-t border-neutral-300">
+          <h2 className="text-2xl font-playfair mb-4">Ready to explore more?</h2>
+          <p className="text-neutral-600 mb-6">Discover our academic programs and see where your future begins.</p>
+          <Link
+            href="/programs"
+            className="relative inline-block px-8 py-4 font-roboto text-white overflow-hidden bg-red-800 group"
+          >
+            <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>
+            <span className="relative z-10 capitalize whitespace-nowrap">
+              View our programs
+            </span>
+          </Link>
 
+        </section>
 
       </main>
     </PageWrapper>
