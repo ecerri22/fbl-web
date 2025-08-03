@@ -28,10 +28,10 @@ export default function AboutPage() {
           {/* Left: Image */}
           <div className="relative w-full h-full overflow-hidden shadow-md">
             <Image
-              src="/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg"
+              src="/images/javier-trueba-iQPr1XkF5F0-unsplash.jpg"
               alt="Happy students celebrating"
               fill
-              className="object-cover"
+              className="object-cover cover-top"
               priority
             />
           </div>
@@ -75,7 +75,7 @@ export default function AboutPage() {
         </section>
 
         {/* Mission and Values Section */}
-        <section className="py-16 px-4 md:px-0 max-w-7xl mx-auto">
+        <section className="px-4 md:px-0 max-w-7xl mx-auto">
           <h2 className="text-3xl font-semibold font-playfair text-neutral-800 text-center mb-10">
             Mission and Values
           </h2>
@@ -88,12 +88,12 @@ export default function AboutPage() {
                   title: "Diversity",
                   description:
                     "Celebrating a rich tapestry of backgrounds, perspectives, and talents",
-                  image: "/images/christian-lendl-nxBucBB_ihQ-unsplash.jpg",
+                  image: "/images/sincerely-media-dGxOgeXAXm8-unsplash.jpg",
                 },
                 {
                   title: "Integrity",
                   description: "Upholding the highest standards of honesty and ethics",
-                  image: "/images/christian-lendl-nxBucBB_ihQ-unsplash.jpg",
+                  image: "/images/priscilla-du-preez-ggeZ9oyI-PE-unsplash.jpg",
                 },
               ].map((item, index) => (
                 <div key={index} className="flex flex-col gap-3  ">
@@ -116,12 +116,12 @@ export default function AboutPage() {
                 {
                   title: "Excellence",
                   description: "Pursuing the highest standards in learning and leadership",
-                  image: "/images/christian-lendl-nxBucBB_ihQ-unsplash.jpg",
+                  image: "/images/jeswin-thomas-MvTdmNqE_dA-unsplash.jpg",
                 },
                 {
                   title: "Innovation",
                   description: "Encouraging creativity, curiosity, and new ideas",
-                  image: "/images/christian-lendl-nxBucBB_ihQ-unsplash.jpg",
+                  image: "/images/dom-fou-YRMWVcdyhmI-unsplash.jpg",
                 },
               ].map((item, index) => (
                 <div key={index} className="flex flex-col gap-3">
