@@ -93,14 +93,14 @@ const programs: {
     slug: "law-integrated-master",
   },
   {
-    name: "Bachelor in Economic Informatics",
+    name: "Bachelor in Business Informatics",
     department: "Economics",
-    slug: "economic-informatics-bachelor",
+    slug: "business-informatics-bachelor",
   },
   {
-    name: "Professional Master's in Economic Informatics",
+    name: "Professional Master's in Business Informatics",
     department: "Economics",
-    slug: "economic-informatics-professional-master",
+    slug: "business-informatics-professional-master",
   },
   {
     name: "Bachelor in Tourism Economics",
@@ -178,7 +178,8 @@ export default function StudyProgramsPage() {
 
               return (
                 <div key={slug} className="w-full">
-                  {/* Image */}
+
+
                   <a
                     href={`/programs/${slug}`}
                     className="block w-full overflow-hidden group"
@@ -193,10 +194,9 @@ export default function StudyProgramsPage() {
                     />
                   </a>
 
-                  {/* Text Box */}
                   <a
                     href={`/programs/${slug}`}
-                    className="flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
+                    className="h-18 flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
                   >
                     <span className="group-hover:underline text-base group-hover:decoration-red-800">
                       {name}
