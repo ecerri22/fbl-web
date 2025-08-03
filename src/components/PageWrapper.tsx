@@ -27,7 +27,6 @@ export default function PageWrapper({ children }: PageWrapperProps) {
       {!isHome && (
         <PageHeader
           title={dynamicTitle || "Page"}
-          backgroundImage="/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg"
         />
       )}
       <main>{children}</main>

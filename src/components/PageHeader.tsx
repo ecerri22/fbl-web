@@ -6,15 +6,14 @@ interface PageHeaderProps {
   backgroundImage?: string;
 }
 
-export default function PageHeader({ title, backgroundImage }: PageHeaderProps) {
+export default function PageHeader({ title}: PageHeaderProps) {
   return (
     <section
-        className="relative text-white py-24 px-6 text-center bg-cover bg-center bg-no-repeat"
+        className="relative text-white py-30 px-6 text-center bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${backgroundImage || "/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg"})`,
+          backgroundImage: `url("/images/rut-miit-RpxgkJRqg5I-unsplash.jpg")`,
         }}
       >
-        <div className="absolute inset-0 bg-blue-950 opacity-90 z-0" />
         
         <div className="relative z-10">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">{title}</h1>
