@@ -77,11 +77,11 @@ export default function Home() {
               Knowledge meets innovation
             </p>
 
-            <h1 className="text-4xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800">
+            <h1 className="text-4xl md:text-5xl font-semibold leading-tight font-playfair text-neutral-800">
               About FBL
             </h1>
             
-            <p className="text-stone-600">At FBL, we believe in the transformative power of education and the boundless potential that resides within each individual. Our mission is to foster intellectual curiosity, empower individuals to realize their fullest potential, and contribute meaningfully to the betterment of society. commitment to academic excellence, diversity, and community engagement.</p>
+            <p className="text-neutral-600">At FBL, we believe in the transformative power of education and the boundless potential that resides within each individual. Our mission is to foster intellectual curiosity, empower individuals to realize their fullest potential, and contribute meaningfully to the betterment of society. commitment to academic excellence, diversity, and community engagement.</p>
             
             <Link
               href="/programs"
@@ -116,14 +116,14 @@ export default function Home() {
 
       {/* ACADEMIC & PROGRAMS */}
        <section className="px-20 md:px-20 pb-20 max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800 mb-12 text-center">
+        <h1 className="text-4xl md:text-5xl font-semibold leading-tight font-playfair text-neutral-800 mb-12 text-center">
           Academics & Programs
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Undergraduate */}
           <div className="p-8 bg-neutral-100">
-            <h3 className="text-3xl font-semibold font-playfair text-stone-800 mb-6">
+            <h3 className="text-3xl font-semibold font-playfair text-neutral-800 mb-6">
               Undergraduate
             </h3>
             <ul className="space-y-4">
@@ -217,7 +217,7 @@ export default function Home() {
       <section className="flex flex-col gap-8 max-w-7xl mx-auto px-6 md:px-20 py-20">
         {/* Header with title and link */}
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800">
+          <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair text-neutral-800">
             Events
           </h1>
           <Link
@@ -266,7 +266,7 @@ export default function Home() {
                   <p className="text-lg font-semibold font-playfair text-red-800 group-hover:text-neutral-100">
                     {title}
                   </p>
-                  <div className="flex gap-6 text-sm text-stone-600 mt-1 font-roboto group-hover:text-neutral-200">
+                  <div className="flex gap-6 text-sm text-neutral-600 mt-1 font-roboto group-hover:text-neutral-200">
                     <span>{date}</span>
                     <span>{location}</span>
                   </div>
@@ -294,7 +294,7 @@ export default function Home() {
       <section className="flex flex-col gap-12 max-w-7xl mx-auto px-6 md:px-20 py-20">
         {/* Header with title and link */}
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair text-stone-800">
+          <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair text-neutral-800">
             Read Our Latest News
           </h1>
           <Link

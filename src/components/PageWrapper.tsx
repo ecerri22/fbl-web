@@ -29,7 +29,7 @@ export default function PageWrapper({ children }: PageWrapperProps) {
           title={dynamicTitle || "Page"}
         />
       )}
-      <main>{children}</main>
+      <main className="px-6 md:px-30 lg:px-40 py-20">{children}</main>
     </>
   );
 }
