@@ -20,7 +20,7 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  title: "Fakulteti i Biznesit dhe Ligjit",
+  title: "Fakulteti i Biznesit dhe Drejtësisë",
   description: "Zbuloni programet tona akademike dhe aktivitetet kërkimore.",
 };
 

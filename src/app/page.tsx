@@ -4,8 +4,39 @@ import { ArrowRight, Briefcase, Globe, GraduationCap, Lightbulb, User, UserCheck
 import Link from "next/link";
 // import { events } from "@/data/eventsData";
 
-
 export default function Home() {
+  const departments = [
+    {
+      name: "Business Administration",
+      slug: "business-administration",
+      image: "/images/departments/business-admn-img.jpg",
+    },
+    {
+      name: "Economics",
+      slug: "economics",
+      image: "/images/departments/economics-img.jpg",
+    },
+    {
+      name: "Law",
+      slug: "law",
+      image: "/images/departments/law-img.jpg",
+    },
+    {
+      name: "Marketing & Engineering",
+      slug: "marketing-engineering",
+      image: "/images/departments/marketing-img.jpg",
+    },
+    {
+      name: "Finance & Accounting",
+      slug: "finance-accounting",
+      image: "/images/departments/finance-accounting-img.jpg",
+    },
+    {
+      name: "Scientific Research Center for Research and Development in Law and Economics",
+      slug: "scientific-research-center",
+      image: "/images/departments/research-img.jpg",
+    },
+  ];
 
   return (
     <main className="min-h-screen bg-white">
@@ -52,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION  */}
-      <section className="flex flex-col py-25 px-20 gap-20 items-center"> 
+      <section className="flex flex-col max-w-7xl mx-auto px-6 md:px-20 py-20 gap-20 items-center"> 
         <div className="flex flex-row items-end gap-10 w-full max-w-screen-xl mx-auto">
           <div className="w-1/2 flex justify-end items-end gap-10 ">
           
@@ -290,8 +321,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* DEPARTMENTS */}
+      <section className="max-w-7xl mx-auto px-6 md:px-20 pb-20">
+        <h2 className="text-3xl md:text-5xl font-playfair font-semibold mb-12 text-center text-neutral-800">
+          Our Departments
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 justify-items-center">
+          {departments.map(({ name, slug, image }) => (
+            <div key={slug} className="w-72 w-full">
+              {/* Image */}
+              <Link
+                href={`/departments/${slug}`}
+                className="block w-full overflow-hidden group"
+                aria-label={`Visit ${name} department page`}
+              >
+                <Image
+                  src={image}
+                  alt={name}
+                  width={288} 
+                  height={208} 
+                  className="object-cover w-full h-auto transition-transform duration-500 ease-in-out group-hover:scale-105"
+                />
+              </Link>
+
+              {/* Box immediately below image */}
+              <Link
+                href={`/departments/${slug}`}
+                className="flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
+              >
+                <span className="group-hover:underline text-lg group-hover:decoration-red-800">
+                  {name}
+                </span>
+                <span className="transition-colors duration-300 group-hover:text-red-800">
+                  →
+                </span>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
       {/* NEWS */}
-      <section className="flex flex-col gap-12 max-w-7xl mx-auto px-6 md:px-20 py-20">
+      <section className="flex flex-col gap-12 max-w-7xl mx-auto px-6 md:px-20 pb-20">
         {/* Header with title and link */}
         <div className="flex justify-between items-center">
           <h1 className="text-3xl md:text-5xl font-semibold leading-tight font-playfair text-neutral-800">

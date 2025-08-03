@@ -115,7 +115,7 @@ export default function AboutPage() {
                 <div key={index} className="flex flex-col gap-3  ">
                   <h3 className="text-xl font-playfair text-neutral-800 self-end">{item.title}</h3>
                   <p className="text-md font-roboto text-neutral-500 self-end w-3/5 text-end">{item.description}</p>
-                  <div className="overflow-hidden rounded-md">
+                  <div className="overflow-hidden">
                     <Image
                       src={item.image}
                       width={600}
@@ -146,7 +146,7 @@ export default function AboutPage() {
                 <div key={index} className="flex flex-col gap-3">
                   <h3 className="text-xl font-playfair text-neutral-800">{item.title}</h3>
                   <p className="text-md font-roboto text-neutral-500 text-start w-3/5">{item.description}</p>
-                  <div className="overflow-hidden rounded-md">
+                  <div className="overflow-hidden">
                     <Image
                       src={item.image}
                       width={600}
