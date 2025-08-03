@@ -15,7 +15,7 @@ export default function PageHeader({ title}: PageHeaderProps) {
         }}
       >
         
-        <div className="relative z-10">
+        <div className="relative z-10 font-playfair">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">{title}</h1>
           <div className="text-sm flex justify-center items-center gap-2 text-zinc-200">
             <Link href="/" className="hover:underline">Home</Link>

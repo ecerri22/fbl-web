@@ -163,7 +163,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="text-center py-16 border-t border-neutral-300">
+        <section className="text-center pt-16 border-t border-neutral-300">
           <h2 className="text-2xl font-playfair mb-4">Ready to explore more?</h2>
           <p className="text-neutral-600 mb-6">Discover our academic programs and see where your future begins.</p>
           <Link
