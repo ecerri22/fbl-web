@@ -48,11 +48,3 @@ export async function generateStaticParams() {
   return staffMembers.map((s) => ({ slug: s.slug }));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata({ params }: any ) {
-  const staff = staffMembers.find((s) => s.slug === params.slug);
-  return {
-    title: staff?.name || "Staff Member Not Found",
-    description: staff?.title || "Staff details",
-  };
-}
