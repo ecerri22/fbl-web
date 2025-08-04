@@ -8,7 +8,7 @@ import PageWrapper from "@/components/PageWrapper";
 import DepartmentStaffSection from "@/app/staff/_components/DepartmentStaffSection";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function DepartmentPage({ params }: { params: { slug: string } }) {
+export default function DepartmentPage({ params }: { params: any }) {
   const department = departmentsData.find((d) => d.slug === params.slug);
   if (!department) return notFound();
 
