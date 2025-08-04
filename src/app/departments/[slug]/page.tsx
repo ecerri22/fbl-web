@@ -2,17 +2,13 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { departmentsData } from "@/data/departmentsData";
+import { Metadata } from "next";
 import { Users } from "lucide-react";
 import PageWrapper from "@/components/PageWrapper";
 import DepartmentStaffSection from "@/app/staff/_components/DepartmentStaffSection";
 
-interface DepartmentPageProps {
-  params: { slug: string };
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function DepartmentPage({ params }: DepartmentPageProps) {
-
+export default function DepartmentPage({ params }: { params: { slug: string } }) {
   const department = departmentsData.find((d) => d.slug === params.slug);
   if (!department) return notFound();
 
@@ -145,3 +141,15 @@ export async function generateStaticParams() {
   return departmentsData.map((d) => ({ slug: d.slug }));
 }
 
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { slug: string };
+// }): Promise<Metadata> {
+//   const department = departments.find((d) => d.slug === params.slug);
+//   return {
+//     title: department?.name || "Departament i panjohur",
+//     description:
+//       department?.shortDescription || "Faqja e departamentit në FBL.",
+//   };
+// }
