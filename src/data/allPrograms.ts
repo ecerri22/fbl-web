@@ -8,6 +8,10 @@ export const allPrograms = [
     department: "Business Administration",
     departmentSlug: "business-administration",
     description: "Bachelor program focused on core business administration principles.",
+    why: "Gain comprehensive knowledge in management, finance, and marketing to lead organizations.",
+    career: "Career paths include management, entrepreneurship, consultancy, or administrative roles in various industries.",
+    admission: "High school diploma and successful completion of the admission process.",
+    curriculum: "/curricula/business-administration-bachelor.pdf",
   },
   {
     name: "Professional Master's in Business Administration",
@@ -17,6 +21,10 @@ export const allPrograms = [
     department: "Business Administration",
     departmentSlug: "business-administration",
     description: "Professional Master's program in advanced business administration topics.",
+    why: "Enhance your business acumen with practical knowledge applicable to leadership roles.",
+    career: "Managerial positions, business consultancy, and strategic planning roles.",
+    admission: "Bachelor’s degree in a related field and admission interview.",
+    curriculum: "/curricula/business-administration-professional-master.pdf",
   },
   {
     name: "Master of Science in Management",
@@ -26,6 +34,10 @@ export const allPrograms = [
     department: "Business Administration",
     departmentSlug: "business-administration",
     description: "MSc program covering management theory and practice.",
+    why: "Gain analytical and strategic thinking skills for effective organizational leadership.",
+    career: "Opportunities in corporate management, policy development, and academia.",
+    admission: "Bachelor’s degree in management or a related field.",
+    curriculum: "/curricula/management-master-science.pdf",
   },
 
   // Finance & Accounting
@@ -37,6 +49,10 @@ export const allPrograms = [
     department: "Finance & Accounting",
     departmentSlug: "finance-accounting",
     description: "Undergraduate program focused on finance and accounting fundamentals.",
+    why: "Develop strong skills in accounting principles and financial analysis.",
+    career: "Accountant, financial analyst, auditor, or tax consultant.",
+    admission: "High school diploma and entrance exam.",
+    curriculum: "/curricula/finance-accounting-bachelor.pdf",
   },
   {
     name: "Professional Master's in Finance",
@@ -46,6 +62,10 @@ export const allPrograms = [
     department: "Finance & Accounting",
     departmentSlug: "finance-accounting",
     description: "Professional Master's program with advanced finance topics.",
+    why: "Equip yourself with in-depth knowledge of financial instruments and markets.",
+    career: "Finance manager, investment advisor, or banking specialist.",
+    admission: "Bachelor’s degree in finance or economics and admission interview.",
+    curriculum: "/curricula/finance-professional-master.pdf",
   },
   {
     name: "Master of Science in Banking Management",
@@ -55,6 +75,10 @@ export const allPrograms = [
     department: "Finance & Accounting",
     departmentSlug: "finance-accounting",
     description: "MSc focusing on banking and financial management.",
+    why: "Learn how banks operate and how to manage financial institutions effectively.",
+    career: "Banking officer, financial consultant, risk manager.",
+    admission: "Bachelor’s degree in finance, economics, or business.",
+    curriculum: "/curricula/banking-management-master-science.pdf",
   },
   {
     name: "Professional Master's in Accounting",
@@ -64,6 +88,10 @@ export const allPrograms = [
     department: "Finance & Accounting",
     departmentSlug: "finance-accounting",
     description: "Professional Master's in advanced accounting topics.",
+    why: "Strengthen your practical accounting skills for high-level corporate roles.",
+    career: "Certified accountant, auditor, financial controller.",
+    admission: "Bachelor’s degree in accounting or related field.",
+    curriculum: "/curricula/accounting-professional-master.pdf",
   },
   {
     name: "Master of Science in Accounting and Auditing",
@@ -73,6 +101,10 @@ export const allPrograms = [
     department: "Finance & Accounting",
     departmentSlug: "finance-accounting",
     description: "MSc covering accounting and auditing principles and practices.",
+    why: "Deepen your expertise in financial reporting and audit standards.",
+    career: "Auditor, compliance officer, corporate accountant.",
+    admission: "Bachelor’s degree in accounting or finance.",
+    curriculum: "/curricula/accounting-auditing-master-science.pdf",
   },
 
   // Law
@@ -84,6 +116,10 @@ export const allPrograms = [
     department: "Law",
     departmentSlug: "law",
     description: "Bachelor program combining economics and legal studies.",
+    why: "Understand the intersection of law and economics to navigate complex regulations.",
+    career: "Legal advisor, compliance officer, government specialist.",
+    admission: "High school diploma and entrance exam.",
+    curriculum: "/curricula/economy-law-bachelor.pdf",
   },
   {
     name: "Professional Master's in Economy and Law in the Public Sector",
@@ -93,6 +129,10 @@ export const allPrograms = [
     department: "Law",
     departmentSlug: "law",
     description: "Professional Master's focusing on public sector economy and law.",
+    why: "Develop expertise in legal-economic frameworks in public administration.",
+    career: "Public policy advisor, legal consultant, administrative officer.",
+    admission: "Bachelor’s degree in economics, law, or public administration.",
+    curriculum: "/curricula/economy-law-public-sector-master.pdf",
   },
   {
     name: "Master of Science in Economy and Law in International Markets",
@@ -102,6 +142,10 @@ export const allPrograms = [
     department: "Law",
     departmentSlug: "law",
     description: "MSc program on economy and law in international markets.",
+    why: "Gain global insight into legal and economic systems for international careers.",
+    career: "International legal advisor, trade consultant, compliance expert.",
+    admission: "Bachelor’s degree in related fields and language proficiency.",
+    curriculum: "/curricula/economy-law-international-markets-master.pdf",
   },
   {
     name: "Integrated Master of Science in Law",
@@ -111,6 +155,10 @@ export const allPrograms = [
     department: "Law",
     departmentSlug: "law",
     description: "Integrated Master's degree focusing on comprehensive law education.",
+    why: "Receive a complete legal education from undergraduate to graduate level.",
+    career: "Lawyer, judge assistant, legal consultant.",
+    admission: "High school diploma and national law admission requirements.",
+    curriculum: "/curricula/law-integrated-master.pdf",
   },
 
   // Economics
@@ -122,6 +170,10 @@ export const allPrograms = [
     department: "Economics",
     departmentSlug: "economics",
     description: "Bachelor program combining economics and information technology.",
+    why: "Blend IT skills with business knowledge for data-driven decisions.",
+    career: "IT analyst, business systems consultant, data analyst.",
+    admission: "High school diploma and entrance exam.",
+    curriculum: "/curricula/business-informatics-bachelor.pdf",
   },
   {
     name: "Professional Master's in Business Informatics",
@@ -131,6 +183,10 @@ export const allPrograms = [
     department: "Economics",
     departmentSlug: "economics",
     description: "Professional Master's degree in business informatics.",
+    why: "Enhance your digital and analytical capabilities for business innovation.",
+    career: "Business intelligence specialist, systems analyst, project manager.",
+    admission: "Bachelor’s degree in informatics, business, or engineering.",
+    curriculum: "/curricula/business-informatics-professional-master.pdf",
   },
 
   // Marketing & Engineering
@@ -142,6 +198,10 @@ export const allPrograms = [
     department: "Marketing & Engineering",
     departmentSlug: "marketing-engineering",
     description: "Bachelor degree focused on tourism and economics.",
+    why: "Explore tourism from an economic perspective and develop industry-ready skills.",
+    career: "Tourism manager, travel consultant, economic analyst in tourism.",
+    admission: "High school diploma and entrance exam.",
+    curriculum: "/curricula/tourism-economics-bachelor.pdf",
   },
   {
     name: "Bachelor in Business Administration and Engineering",
@@ -151,6 +211,10 @@ export const allPrograms = [
     department: "Marketing & Engineering",
     departmentSlug: "marketing-engineering",
     description: "Interdisciplinary bachelor program in business administration and engineering.",
+    why: "Bridge the gap between business operations and technical engineering knowledge.",
+    career: "Operations manager, process engineer, technical project leader.",
+    admission: "High school diploma and entrance exam.",
+    curriculum: "/curricula/business-engineering-bachelor.pdf",
   },
   {
     name: "Professional Master's in Marketing",
@@ -160,6 +224,10 @@ export const allPrograms = [
     department: "Marketing & Engineering",
     departmentSlug: "marketing-engineering",
     description: "Professional Master's degree focused on marketing strategies and management.",
+    why: "Master advanced marketing techniques for competitive business environments.",
+    career: "Marketing manager, brand strategist, digital marketing expert.",
+    admission: "Bachelor’s degree in marketing, business, or communication.",
+    curriculum: "/curricula/marketing-professional-master.pdf",
   },
   {
     name: "Master of Science in Marketing",
@@ -169,5 +237,9 @@ export const allPrograms = [
     department: "Marketing & Engineering",
     departmentSlug: "marketing-engineering",
     description: "MSc program on advanced marketing theories and applications.",
+    why: "Gain research-oriented knowledge in consumer behavior and market analysis.",
+    career: "Market analyst, academic researcher, corporate marketing strategist.",
+    admission: "Bachelor’s degree in a related discipline.",
+    curriculum: "/curricula/marketing-master-science.pdf",
   },
 ];

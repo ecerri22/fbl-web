@@ -16,13 +16,10 @@ type Program = {
   department: string
   departmentSlug: string
   description: string
-  why: string
-  career: string
-  admission: string
-  curriculum: {
-    viti1s1: Curriculum[]
-    viti1s2: Curriculum[]
-  }
+  why: string;        
+  career: string;     
+  admission: string;  
+  curriculum: string;
 }
 
 export default function StudyProgramsContent({
