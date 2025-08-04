@@ -11,24 +11,6 @@ export default function DepartmentPage({ params }: { params: { slug: string } })
   const department = departmentsData.find((d) => d.slug === params.slug);
   if (!department) return notFound();
 
-  const sortByRoleHierarchy = (a: any, b: any) => {
-  const hierarchy = [
-    "Shef Departamenti",
-    "Shefe Departamenti",
-    "Professor",
-    "Pedagog",
-    "Pedagoge",
-    "Lecturer",
-    "Assistant Lecturer",
-    "Asistent Lektor",
-  ];
-
-  const getRank = (title: string) =>
-    hierarchy.findIndex((h) => title.toLowerCase().includes(h.toLowerCase()));
-
-    return getRank(a.title) - getRank(b.title);
-  };
-
   return (
     <PageWrapper>
       <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
