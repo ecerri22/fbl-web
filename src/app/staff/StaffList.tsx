@@ -13,6 +13,7 @@ type Staff = {
   department: string;
   courses: string[];
   photo?: string;
+  fullTime?: boolean;
 };
 
 export default function StaffList() {

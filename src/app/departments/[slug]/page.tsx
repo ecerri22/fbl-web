@@ -1,133 +1,172 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { allPrograms } from "@/data/allPrograms";
+import { departmentsData } from "@/data/departmentsData";
 import { Metadata } from "next";
-import { GraduationCap, Users, Sparkles } from "lucide-react";
-import { departments } from "@/data/departmentsData";
+import { Users } from "lucide-react";
+import PageWrapper from "@/components/PageWrapper";
+import DepartmentStaffSection from "@/app/staff/_components/DepartmentStaffSection";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function DepartmentPage({ params }: { params: any }) {
-  const department = departments.find((d) => d.slug === params.slug);
+export default function DepartmentPage({ params }: { params: { slug: string } }) {
+  const department = departmentsData.find((d) => d.slug === params.slug);
   if (!department) return notFound();
 
-  const programs = allPrograms.filter((p) => p.departmentSlug === params.slug);
+  const sortByRoleHierarchy = (a: any, b: any) => {
+  const hierarchy = [
+    "Shef Departamenti",
+    "Shefe Departamenti",
+    "Professor",
+    "Pedagog",
+    "Pedagoge",
+    "Lecturer",
+    "Assistant Lecturer",
+    "Asistent Lektor",
+  ];
+
+  const getRank = (title: string) =>
+    hierarchy.findIndex((h) => title.toLowerCase().includes(h.toLowerCase()));
+
+    return getRank(a.title) - getRank(b.title);
+  };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
-      {/* Hero */}
-      <div className="relative h-72 w-full rounded-2xl overflow-hidden shadow-xl">
-        <Image
-          src={department.image}
-          alt={department.name}
-          fill
-          className="object-cover opacity-90"
-        />
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-center px-4">
-          <h1 className="text-4xl font-bold text-white drop-shadow">{department.name}</h1>
-        </div>
-      </div>
+    <PageWrapper>
+      <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
 
-      {/* Description */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-blue-950 flex items-center gap-2">
-          <Users className="w-6 h-6 text-blue-700" />
-          Rreth Departamentit
-        </h2>
-        <p className="text-gray-800 leading-relaxed">{department.description}</p>
-      </section>
+        {/* Header */}
+        <section className="flex flex-row justify-between w-full items-center pb-10 border-b border-neutral-300">
+          <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800">
+            {department.name}
+          </h1>
+          <p className="font-roboto text-neutral-500">
+            {department.shortDescription}
+          </p>
+        </section>
 
-      {/* Highlights */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold text-blue-950 flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-blue-700" />
-          Pse të studiosh këtu?
-        </h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          {department.highlights.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
-      </section>
+        {/* About Section */}
+        <section className="flex flex-col gap-12">
+          {/* Image */}
+          <div className="relative w-full h-[18rem] md:h-[20rem] overflow-hidden shadow-md">
+            <Image
+              src={department.image}
+              alt={`Image of ${department.name}`}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
 
-      {/* Study Programs */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold text-blue-950 flex items-center gap-2">
-          <GraduationCap className="w-6 h-6 text-blue-700" />
-          Programet e Studimit
-        </h2>
-        {programs.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programs.map((program) => (
-              <Link
-                key={program.slug}
-                href={`/study-programs/${program.slug}`}
-                className="bg-zinc-50 p-6 rounded-xl shadow hover:shadow-lg transition group"
-              >
-                <div>
-                  <div className="mb-3 text-blue-700 text-xs font-semibold uppercase tracking-widest">
-                    {program.level}
-                  </div>
-                  <h3 className="text-xl font-semibold text-blue-950 group-hover:text-red-700 transition">
-                    {program.name}
-                  </h3>
-                </div>
-                <div className="mt-6">
-                  <span className="text-sm text-red-700 hover:underline font-medium">
-                    Shiko më shumë →
+          {/* Description */}
+          <div className="text-neutral-500 inline">
+            <p>{department.description}</p>
+          </div>
+        </section>
+
+        {/* {department.whyStudy && (
+          <section className="bg-neutral-100 p-8 shadow-sm text-neutral-800 font-roboto ">
+            <h3 className="text-3xl font-playfair font-semibold mb-6 text-red-800">
+              Why Choose <span className="capitalize">{department.name.split(" ")[2] || "This Field"}</span>?
+            </h3>
+
+            <ul className="list-inside space-y-5 text-lg leading-relaxed border-red-800">
+              {department.whyStudy.split("\n").map((point, i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-4 hover:text-red-800 transition-colors cursor-pointer border-red-800 pl-4 border-l-2"
+                >
+                  {point.trim()}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )} */}
+
+
+        {/* Programs Section */}
+        <section className="space-y-10">
+          <h2 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 capitalize">
+            List of Programs
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {department.programs.map(({ name, slug }) => (
+              <div key={slug} className="w-full">
+                <Link
+                  href={`/programs/${slug}`}
+                  className="block w-full overflow-hidden group"
+                  aria-label={`Visit ${name}`}
+                >
+                  <Image
+                    src={department.image}
+                    alt={`Program: ${name}`}
+                    width={300}
+                    height={200}
+                    className="object-cover w-full h-48 transition-transform duration-500 ease-in-out group-hover:scale-105"
+                  />
+                </Link>
+
+                <Link
+                  href={`/programs/${slug}`}
+                  className="h-18 flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
+                >
+                  <span className="group-hover:underline text-base group-hover:decoration-red-800">
+                    {name}
                   </span>
-                </div>
-              </Link>
+                  <span className="transition-colors duration-300 group-hover:text-red-800">
+                    →
+                  </span>
+                </Link>
+              </div>
             ))}
           </div>
-        ) : (
-          <p className="text-gray-600">Nuk ka programe të regjistruara për këtë departament.</p>
-        )}
-      </section>
+        </section>
 
-      {/* Staff */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold text-blue-950 flex items-center gap-2">
-          <Users className="w-6 h-6 text-blue-700" />
-          Stafi Akademik
-        </h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {department.staff.map((member) => (
-            <li key={member.slug}>
-              <Link
-                href={`/staff/${member.slug}`}
-                className="block p-4 border rounded-xl bg-white shadow-sm hover:shadow-md hover:border-blue-300 transition"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-800 font-bold flex items-center justify-center text-sm">
-                    {member.name
-                      .split(" ")
-                      .map((part) => part[0])
-                      .join("")}
-                  </div>
-                  <div>
-                    <p className="text-blue-950 font-medium">{member.name}</p>
-                    <p className="text-gray-600 text-sm">{member.title}</p>
-                  </div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
+        {/* Staff Section */}
+        {/* <section className="mt-16 space-y-12"> */}
+           <DepartmentStaffSection staff={department.staff} />
+        {/* </section> */}
+
+        {/* CTA */}
+        <section className="text-center pt-16 border-t border-neutral-300 space-y-4">
+          <h2 className="text-2xl font-playfair font-semibold text-neutral-800">
+            Ready to begin your journey in {department.name.split(" ")[2]}?
+            </h2>
+          <p className="text-neutral-600">
+            Reach out to our team or visit the faculty to learn more about what we offer.
+          </p>
+          {/* {department.department_email && ( */}
+            <a
+              href={`mailto:${department.department_email}`}
+              className="relative inline-block px-8 py-4 font-roboto text-white overflow-hidden bg-red-800 group"
+            >
+              <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>
+              <span className="relative z-10 whitespace-nowrap">
+                Contact the Department
+              </span>
+            </a>
+          {/* )} */}
+
+        </section>
+
+
+      </main>
+    </PageWrapper>
   );
 }
 
 export async function generateStaticParams() {
-  return departments.map((d) => ({ slug: d.slug }));
+  return departmentsData.map((d) => ({ slug: d.slug }));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
-  const department = departments.find((d) => d.slug === params.slug);
-  return {
-    title: department?.name || "Departament i panjohur",
-    description: department?.description || "Faqja e departamentit.",
-  };
-}
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { slug: string };
+// }): Promise<Metadata> {
+//   const department = departments.find((d) => d.slug === params.slug);
+//   return {
+//     title: department?.name || "Departament i panjohur",
+//     description:
+//       department?.shortDescription || "Faqja e departamentit në FBL.",
+//   };
+// }

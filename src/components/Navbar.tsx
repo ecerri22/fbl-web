@@ -20,7 +20,7 @@ export default function Navbar() {
       : "text-neutral-800 hover:text-red-900";
 
   const departments = [
-    ["Business Administration", "administrim-biznes"],
+    ["Business Administration", "business-administration"],
     ["Economics", "economics"],
     ["Law", "law"],
     ["Marketing & Engineering", "marketing-engineering"],
