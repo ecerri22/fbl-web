@@ -10,6 +10,7 @@ interface DepartmentPageProps {
   params: { slug: string };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function DepartmentPage({ params }: DepartmentPageProps) {
 
   const department = departmentsData.find((d) => d.slug === params.slug);
