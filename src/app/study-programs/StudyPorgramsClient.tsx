@@ -13,20 +13,18 @@ type Curriculum = {
 }
 
 type Program = {
-  name: string
-  level: string
-  slug: string
-  department: string
-  departmentSlug: string
-  description: string
-  why: string
-  career: string
-  admission: string
-  curriculum: {
-    viti1s1: Curriculum[]
-    viti1s2: Curriculum[]
-  }
-}
+  name: string;
+  departmentCode: string;
+  slug: string;
+  level: string;
+  department: string;
+  departmentSlug: string;
+  description: string;
+  why: string;        
+  career: string;     
+  admission: string;  
+  curriculum: string; 
+};
 
 export default function StudyProgramsClient() {
   const searchParams = useSearchParams()
