@@ -1,23 +1,31 @@
-export const allPrograms: {
-  name: string;
-  departmentCode: string;
-  slug: string;
-}[] = [
+export const allPrograms = [
   // Business Administration
   {
     name: "Bachelor in Business Administration",
     departmentCode: "Business Administration",
     slug: "business-administration-bachelor",
+    level: "Bachelor",
+    department: "Business Administration",
+    departmentSlug: "business-administration",
+    description: "Bachelor program focused on core business administration principles.",
   },
   {
     name: "Professional Master's in Business Administration",
     departmentCode: "Business Administration",
     slug: "business-administration-professional-master",
+    level: "Professional Master",
+    department: "Business Administration",
+    departmentSlug: "business-administration",
+    description: "Professional Master's program in advanced business administration topics.",
   },
   {
     name: "Master of Science in Management",
     departmentCode: "Business Administration",
     slug: "management-master-science",
+    level: "Master of Science",
+    department: "Business Administration",
+    departmentSlug: "business-administration",
+    description: "MSc program covering management theory and practice.",
   },
 
   // Finance & Accounting
@@ -25,26 +33,46 @@ export const allPrograms: {
     name: "Bachelor in Finance and Accounting",
     departmentCode: "Finance & Accounting",
     slug: "finance-accounting-bachelor",
+    level: "Bachelor",
+    department: "Finance & Accounting",
+    departmentSlug: "finance-accounting",
+    description: "Undergraduate program focused on finance and accounting fundamentals.",
   },
   {
     name: "Professional Master's in Finance",
     departmentCode: "Finance & Accounting",
     slug: "finance-professional-master",
+    level: "Professional Master",
+    department: "Finance & Accounting",
+    departmentSlug: "finance-accounting",
+    description: "Professional Master's program with advanced finance topics.",
   },
   {
     name: "Master of Science in Banking Management",
     departmentCode: "Finance & Accounting",
     slug: "banking-management-master-science",
+    level: "Master of Science",
+    department: "Finance & Accounting",
+    departmentSlug: "finance-accounting",
+    description: "MSc focusing on banking and financial management.",
   },
   {
     name: "Professional Master's in Accounting",
     departmentCode: "Finance & Accounting",
     slug: "accounting-professional-master",
+    level: "Professional Master",
+    department: "Finance & Accounting",
+    departmentSlug: "finance-accounting",
+    description: "Professional Master's in advanced accounting topics.",
   },
   {
     name: "Master of Science in Accounting and Auditing",
     departmentCode: "Finance & Accounting",
     slug: "accounting-auditing-master-science",
+    level: "Master of Science",
+    department: "Finance & Accounting",
+    departmentSlug: "finance-accounting",
+    description: "MSc covering accounting and auditing principles and practices.",
   },
 
   // Law
@@ -52,21 +80,37 @@ export const allPrograms: {
     name: "Bachelor in Economy and Law",
     departmentCode: "Law",
     slug: "economy-law-bachelor",
+    level: "Bachelor",
+    department: "Law",
+    departmentSlug: "law",
+    description: "Bachelor program combining economics and legal studies.",
   },
   {
     name: "Professional Master's in Economy and Law in the Public Sector",
     departmentCode: "Law",
     slug: "economy-law-public-sector-master",
+    level: "Professional Master",
+    department: "Law",
+    departmentSlug: "law",
+    description: "Professional Master's focusing on public sector economy and law.",
   },
   {
     name: "Master of Science in Economy and Law in International Markets",
     departmentCode: "Law",
     slug: "economy-law-international-markets-master",
+    level: "Master of Science",
+    department: "Law",
+    departmentSlug: "law",
+    description: "MSc program on economy and law in international markets.",
   },
   {
     name: "Integrated Master of Science in Law",
     departmentCode: "Law",
     slug: "law-integrated-master",
+    level: "Integrated Master",
+    department: "Law",
+    departmentSlug: "law",
+    description: "Integrated Master's degree focusing on comprehensive law education.",
   },
 
   // Economics
@@ -74,11 +118,19 @@ export const allPrograms: {
     name: "Bachelor in Business Informatics",
     departmentCode: "Economics",
     slug: "business-informatics-bachelor",
+    level: "Bachelor",
+    department: "Economics",
+    departmentSlug: "economics",
+    description: "Bachelor program combining economics and information technology.",
   },
   {
     name: "Professional Master's in Business Informatics",
     departmentCode: "Economics",
     slug: "business-informatics-professional-master",
+    level: "Professional Master",
+    department: "Economics",
+    departmentSlug: "economics",
+    description: "Professional Master's degree in business informatics.",
   },
 
   // Marketing & Engineering
@@ -86,20 +138,36 @@ export const allPrograms: {
     name: "Bachelor in Tourism Economics",
     departmentCode: "Marketing & Engineering",
     slug: "tourism-economics-bachelor",
+    level: "Bachelor",
+    department: "Marketing & Engineering",
+    departmentSlug: "marketing-engineering",
+    description: "Bachelor degree focused on tourism and economics.",
   },
   {
     name: "Bachelor in Business Administration and Engineering",
     departmentCode: "Marketing & Engineering",
     slug: "business-engineering-bachelor",
+    level: "Bachelor",
+    department: "Marketing & Engineering",
+    departmentSlug: "marketing-engineering",
+    description: "Interdisciplinary bachelor program in business administration and engineering.",
   },
   {
     name: "Professional Master's in Marketing",
     departmentCode: "Marketing & Engineering",
     slug: "marketing-professional-master",
+    level: "Professional Master",
+    department: "Marketing & Engineering",
+    departmentSlug: "marketing-engineering",
+    description: "Professional Master's degree focused on marketing strategies and management.",
   },
   {
     name: "Master of Science in Marketing",
     departmentCode: "Marketing & Engineering",
     slug: "marketing-master-science",
+    level: "Master of Science",
+    department: "Marketing & Engineering",
+    departmentSlug: "marketing-engineering",
+    description: "MSc program on advanced marketing theories and applications.",
   },
 ];
