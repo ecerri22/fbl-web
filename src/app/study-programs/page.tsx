@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import PageWrapper from "@/components/PageWrapper";
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Department =
   | "Business Administration"
@@ -180,8 +181,8 @@ export default function StudyProgramsPage() {
                 <div key={slug} className="w-full">
 
 
-                  <a
-                    href={`/programs/${slug}`}
+                  <Link
+                    href={`/study-programs/${slug}`}
                     className="block w-full overflow-hidden group"
                     aria-label={`Visit ${name}`}
                   >
@@ -192,10 +193,10 @@ export default function StudyProgramsPage() {
                       height={200}
                       className="object-cover w-full h-48 transition-transform duration-500 ease-in-out group-hover:scale-105"
                     />
-                  </a>
+                  </Link>
 
-                  <a
-                    href={`/programs/${slug}`}
+                  <Link
+                    href={`/study-programs/${slug}`}
                     className="h-18 flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
                   >
                     <span className="group-hover:underline text-base group-hover:decoration-red-800">
@@ -204,7 +205,7 @@ export default function StudyProgramsPage() {
                     <span className="transition-colors duration-300 group-hover:text-red-800">
                       →
                     </span>
-                  </a>
+                  </Link>
                 </div>
               );
             })}

@@ -77,7 +77,7 @@ export default function Navbar() {
                       {({ active: itemActive }) => (
                         <Link
                           href={`/departments/${slug}`}
-                          className={`block px-4 py-2 text-sm ${
+                          className={`block px-4 py-2 text-md ${
                             active
                               ? "bg-red-50 text-red-800 font-medium"
                               : itemActive
