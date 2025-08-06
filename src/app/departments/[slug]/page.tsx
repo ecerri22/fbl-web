@@ -75,7 +75,7 @@ export default function DepartmentPage({ params }: { params: any }) {
             {department.programs.map(({ name, slug }) => (
               <div key={slug} className="w-full">
                 <Link
-                  href={`/programs/${slug}`}
+                  href={`/study-programs/${slug}`}
                   className="block w-full overflow-hidden group"
                   aria-label={`Visit ${name}`}
                 >
@@ -89,7 +89,7 @@ export default function DepartmentPage({ params }: { params: any }) {
                 </Link>
 
                 <Link
-                  href={`/programs/${slug}`}
+                  href={`/study-programs/${slug}`}
                   className="h-18 flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
                 >
                   <span className="group-hover:underline text-base group-hover:decoration-red-800">
