@@ -25,7 +25,6 @@ export default function Navbar() {
     ["Law", "law"],
     ["Marketing & Engineering", "marketing-engineering"],
     ["Finance & Accounting", "finance-accounting"],
-    ["Scientific Research Center", "research-center"],
   ];
 
   return (
@@ -40,6 +39,12 @@ export default function Navbar() {
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={isActive("/about-us")}>
             <Link href="/about-us">About Us</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={isActive("/staff")}>
+            <Link href="/staff">Staff</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 

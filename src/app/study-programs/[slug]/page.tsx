@@ -73,42 +73,8 @@ export default async function ProgramDetailPage({ params }: any) {
               <CurriculumSection curriculum={program.curriculum} />
             </section>
 
-            {/* FUTURE PATHS */}
-            <section id="future_build" className="space-y-12">
-              <div className="text-center max-w-3xl mx-auto">
-                <h2 className="text-2xl font-playfair font-bold text-neutral-800">
-                  What Future Will You Build?
-                </h2>
-                <p className="mt-2 text-neutral-600 text-md">
-                  {program.futureIntro}
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6 text-neutral-700">
-                {program.future?.map((item, i) => (
-                  <div
-                    key={i}
-                    className="bg-white border border-neutral-200 p-6 shadow hover:shadow-md transition"
-                  >
-                    <h3 className="text-lg font-semibold text-red-800 mb-2">{item.title}</h3>
-                    <p>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="text-center pt-6">
-                <p className="text-lg text-neutral-700">
-                  <p>You&apos;re not just earning a degree</p> 
-
-                  <span className="font-semibold text-red-800">
-                    You&apos;re preparing to lead, innovate, and make an impact.
-                  </span>
-                </p>
-              </div>
-            </section>
-
             {/* CAREER PROSPECTS */}
-            <section id="career" className="bg-neutral-50 py-20 px-6 md:px-12">
+            <section id="career" className="bg-neutral-100 py-20 px-6 md:px-12">
               <div className="max-w-5xl mx-auto space-y-10">
                 <h2 className="text-2xl font-playfair font-bold text-neutral-800">
                   Career Prospects
@@ -203,11 +169,6 @@ export default async function ProgramDetailPage({ params }: any) {
                     href: "#career",
                     label: "Career Prospects",
                     description: "Where this program can take you",
-                  },
-                  {
-                    href: "#future_build",
-                    label: "Future Paths",
-                    description: "What kind of professional you’ll become",
                   },
                   {
                     href: "#admission_requirements",

@@ -56,7 +56,7 @@ export default function Home() {
                 </h1>
 
                 <Link
-                  href="/programs"
+                  href="/study-programs"
                   className="relative inline-block px-8 py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
                 >
                   <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
@@ -69,11 +69,11 @@ export default function Home() {
 
             {/* Right: Links column */}
             <div className="flex flex-col items-start gap-8">        
-              <Link href="/staff" className="flex flex-col px-6 py-3 gap-4">
+              <Link href="#" className="flex flex-col px-6 py-3 gap-4">
                 <h3 className="font-playfair text-2xl ">Undergraduate</h3>
                 <p className="font-roboto text-lg underline underline-offset-20 hover:decoration-red-800 transition-all duration-500 ease-out ">Browse the Undergraduate degrees</p>
               </Link>
-              <Link href="/staff" className="flex flex-col px-6 py-3 gap-4">
+              <Link href="#" className="flex flex-col px-6 py-3 gap-4">
                 <h3 className="font-playfair text-2xl ">Graduate</h3>
                 <p className="font-roboto text-lg underline underline-offset-20 hover:decoration-red-800 transition-all duration-500 ease-out ">Browse the Graduate degrees</p>
               </Link>
@@ -115,7 +115,7 @@ export default function Home() {
             <p className="text-neutral-600">At FBL, we believe in the transformative power of education and the boundless potential that resides within each individual. Our mission is to foster intellectual curiosity, empower individuals to realize their fullest potential, and contribute meaningfully to the betterment of society. commitment to academic excellence, diversity, and community engagement.</p>
             
             <Link
-              href="/programs"
+              href="/study-programs"
               className="relative inline-block px-8 py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
             >
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
@@ -232,7 +232,7 @@ export default function Home() {
               elit. Est reiciendis sed aspernatur aliquam facilis repellat quaerat a fugiat fuga quam!
             </p>
             <Link
-              href="/programs"
+              href="/study-programs"
               className="relative inline-block px-8 py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
             >
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
