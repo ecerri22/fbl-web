@@ -11,21 +11,21 @@ export const departmentsData = [
       "We do not only educate professionals, but we shape leaders with real-world impact.",
     staff: [
       {
-        name: "Dr. John Doe",
+        name: "Dr. Jane Doe",
         title: "Head of Department",
-        slug: "john-doe",
-        fullTime: true,
-        img: "/images/staff/john-doe.jpg",
-        email: "john.doe@fbl.edu.al",
-        office: "Office 101",
-      },
-      {
-        name: "MSc. Jane Doe",
-        title: "Professor",
         slug: "jane-doe",
         fullTime: true,
         img: "/images/staff/jane-doe.jpg",
         email: "jane.doe@fbl.edu.al",
+        office: "Office 101",
+      },
+      {
+        name: "MSc. John Doe",
+        title: "Professor",
+        slug: "john-doe",
+        fullTime: true,
+        img: "/images/staff/john-doe.jpg",
+        email: "john.doe@fbl.edu.al",
         office: "Office 102",
       },
       {
