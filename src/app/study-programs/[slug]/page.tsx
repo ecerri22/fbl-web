@@ -37,7 +37,7 @@ export default async function ProgramDetailPage({ params }: any) {
                 </div>
 
                 <div className="text-neutral-500">
-                  <h2 className="text-2xl font-semibold font-playfair text-neutral-800 mb-4">
+                  <h2 className="text-3xl font-semibold font-playfair text-neutral-800 mb-4">
                     About the program
                   </h2>
                   <p>{program.description}</p>
@@ -49,7 +49,7 @@ export default async function ProgramDetailPage({ params }: any) {
 
             <section>
               <div className="text-neutral-500 space-y-4">
-                <h2 className="text-2xl font-semibold font-playfair text-neutral-800 mb-4">
+                <h2 className="text-3xl font-semibold font-playfair text-neutral-800 mb-4">
                   {program.whyTitle}
                 </h2>
                 <p className="text-base leading-relaxed">
@@ -76,7 +76,7 @@ export default async function ProgramDetailPage({ params }: any) {
             {/* CAREER PROSPECTS */}
             <section id="career" className="bg-neutral-100 py-20 px-6 md:px-12">
               <div className="max-w-5xl mx-auto space-y-10">
-                <h2 className="text-2xl font-playfair font-bold text-neutral-800">
+                <h2 className="text-3xl font-playfair font-bold text-neutral-800">
                   Career Prospects
                 </h2>
                 <p className="text-neutral-700 text-md leading-relaxed">
@@ -95,7 +95,7 @@ export default async function ProgramDetailPage({ params }: any) {
             {/* ADMISSION REQUIREMENTS */}
             <section id="admission_requirements" className="py-20 px-6 md:px-12 bg-white border-t border-neutral-200">
               <div className="max-w-5xl mx-auto space-y-10">
-                <h2 className="text-2xl font-playfair font-bold text-neutral-800">
+                <h2 className="text-3xl font-playfair font-bold text-neutral-800">
                   Admission Requirements
                 </h2>
 
@@ -220,7 +220,7 @@ export default async function ProgramDetailPage({ params }: any) {
 
         {/* CTA FINAL SECTION */}
         <section className="text-center pt-16 border-t border-neutral-300">
-          <h2 className="text-2xl font-playfair mb-4">Still exploring your path?</h2>
+          <h2 className="text-3xl font-playfair mb-4">Still exploring your path?</h2>
           <p className="text-neutral-600 mb-6">We offer a range of programs designed to shape the leaders, creators, and problem-solvers of tomorrow.</p>
           <Link
             href="/study-programs"
