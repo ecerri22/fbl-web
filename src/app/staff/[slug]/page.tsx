@@ -97,9 +97,7 @@ export default function StaffDetailPage({ params }: { params: any }) {
                   <ul className="list-inside space-y-5 text-red-800">
                     {staff.courses.map((course, i) => (
                       <li key={i}>
-                        <Link href="#" className="hover:text-neutral-800">
-                          {course}
-                        </Link>
+                        {course}
                       </li>
                     ))}
                   </ul>
