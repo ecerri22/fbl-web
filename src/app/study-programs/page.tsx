@@ -1,138 +1,41 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
+import { allPrograms } from "@/data/allPrograms"; 
 
-type Department =
-  | "Business Administration"
-  | "Economics"
-  | "Law"
-  | "Marketing & Engineering"
-  | "Finance & Accounting";
-
-const departments: Department[] = [
-  "Business Administration",
-  "Economics",
-  "Law",
-  "Marketing & Engineering",
-  "Finance & Accounting",
-];
-
-const departmentImages: Record<Department, string> = {
-  "Business Administration": "/images/departments/business-admn-img.jpg",
-  "Economics": "/images/departments/economics-img.jpg",
-  "Law": "/images/departments/law-img.jpg",
-  "Marketing & Engineering": "/images/departments/marketing-img.jpg",
-  "Finance & Accounting": "/images/departments/finance-accounting-img.jpg",
-};
-
-const programs: {
-  name: string;
-  department: Department;
-  slug: string;
-}[] = [
-  {
-    name: "Bachelor in Business Administration",
-    department: "Business Administration",
-    slug: "business-administration-bachelor",
-  },
-  {
-    name: "Professional Master's in Business Administration",
-    department: "Business Administration",
-    slug: "business-administration-professional-master",
-  },
-  {
-    name: "Master of Science in Management",
-    department: "Business Administration",
-    slug: "management-master-science",
-  },
-  {
-    name: "Bachelor in Finance and Accounting",
-    department: "Finance & Accounting",
-    slug: "finance-accounting-bachelor",
-  },
-  {
-    name: "Professional Master's in Finance",
-    department: "Finance & Accounting",
-    slug: "finance-professional-master",
-  },
-  {
-    name: "Master of Science in Banking Management",
-    department: "Finance & Accounting",
-    slug: "banking-management-master-science",
-  },
-  {
-    name: "Professional Master's in Accounting",
-    department: "Finance & Accounting",
-    slug: "accounting-professional-master",
-  },
-  {
-    name: "Master of Science in Accounting and Auditing",
-    department: "Finance & Accounting",
-    slug: "accounting-auditing-master-science",
-  },
-  {
-    name: "Bachelor in Economy and Law",
-    department: "Law",
-    slug: "economy-law-bachelor",
-  },
-  {
-    name: "Professional Master's in Economy and Law in the Public Sector",
-    department: "Law",
-    slug: "economy-law-public-sector-master",
-  },
-  {
-    name: "Master of Science in Economy and Law in International Markets",
-    department: "Law",
-    slug: "economy-law-international-markets-master",
-  },
-  {
-    name: "Integrated Master of Science in Law",
-    department: "Law",
-    slug: "law-integrated-master",
-  },
-  {
-    name: "Bachelor in Business Informatics",
-    department: "Economics",
-    slug: "business-informatics-bachelor",
-  },
-  {
-    name: "Professional Master's in Business Informatics",
-    department: "Economics",
-    slug: "business-informatics-professional-master",
-  },
-  {
-    name: "Bachelor in Tourism Economics",
-    department: "Marketing & Engineering",
-    slug: "tourism-economics-bachelor",
-  },
-  {
-    name: "Bachelor in Business Administration and Engineering",
-    department: "Marketing & Engineering",
-    slug: "business-engineering-bachelor",
-  },
-  {
-    name: "Professional Master's in Marketing",
-    department: "Marketing & Engineering",
-    slug: "marketing-professional-master",
-  },
-  {
-    name: "Master of Science in Marketing",
-    department: "Marketing & Engineering",
-    slug: "marketing-master-science",
-  },
-];
+type ProgramLevel = "Bachelor" | "Master";
 
 export default function StudyProgramsPage() {
+  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDept, setSelectedDept] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState<ProgramLevel | "">("");
 
-  const filteredPrograms = programs.filter((program) => {
-    const matchesSearch = program.name.toLowerCase().includes(searchTerm.toLowerCase());
+  // Unique list of departments from data
+  const departments = Array.from(new Set(allPrograms.map((p) => p.department)));
+
+  // Pre-select level from query (?level=bachelor or ?level=master)
+  useEffect(() => {
+    const levelParam = searchParams.get("level");
+    if (levelParam && (levelParam === "bachelor" || levelParam === "master")) {
+      setSelectedLevel(
+        levelParam === "bachelor" ? "Bachelor" : "Master"
+      );
+    }
+  }, [searchParams]);
+
+  // Filtering logic
+  const filteredPrograms = allPrograms.filter((program) => {
+    const matchesSearch = program.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
     const matchesDept = selectedDept ? program.department === selectedDept : true;
-    return matchesSearch && matchesDept;
+    const matchesLevel = selectedLevel ? program.level === selectedLevel : true;
+    return matchesSearch && matchesDept && matchesLevel;
   });
 
   return (
@@ -143,10 +46,11 @@ export default function StudyProgramsPage() {
             Academic Areas of Study
           </h1>
 
-          {/* Search and Dropdown */}
-          <div className="flex flex-col md:flex-row gap-6 py-10">
-            <div className="w-full md:w-2/3">
-              <p className="text-xl font-playfair mb-2">Areas of Study:</p>
+          {/* Filters */}
+          <div className="flex flex-col lg:flex-row gap-6 py-10">
+            {/* Search */}
+            <div className="w-full lg:w-1/2">
+              <p className="text-xl font-playfair mb-2">Search Programs:</p>
               <input
                 type="text"
                 placeholder="Search programs..."
@@ -155,8 +59,10 @@ export default function StudyProgramsPage() {
                 className="w-full border border-neutral-200 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-800"
               />
             </div>
-            <div className="w-full md:w-1/3">
-              <p className="text-xl font-playfair mb-2">Department Type:</p>
+
+            {/* Department */}
+            <div className="w-full lg:w-1/4">
+              <p className="text-xl font-playfair mb-2">Department:</p>
               <select
                 value={selectedDept}
                 onChange={(e) => setSelectedDept(e.target.value)}
@@ -170,25 +76,34 @@ export default function StudyProgramsPage() {
                 ))}
               </select>
             </div>
+
+            {/* Program Level */}
+            <div className="w-full lg:w-1/4">
+              <p className="text-xl font-playfair mb-2">Program Level:</p>
+              <select
+                value={selectedLevel}
+                onChange={(e) => setSelectedLevel(e.target.value as ProgramLevel | "")}
+                className="w-full border border-neutral-200 px-4 py-2 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-red-800"
+              >
+                <option value="">All Levels</option>
+                <option value="Bachelor">Bachelor</option>
+                <option value="Master">Master</option>
+              </select>
+            </div>
           </div>
 
           {/* Results */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {filteredPrograms.map(({ name, slug, department }) => {
-              const imageSrc = departmentImages[department] || "/images/default.jpg";
-
+            {filteredPrograms.map((program) => {
               return (
-                <div key={slug} className="w-full">
-
-
+                <div key={program.slug} className="w-full">
                   <Link
-                    href={`/study-programs/${slug}`}
+                    href={`/study-programs/${program.slug}`}
                     className="block w-full overflow-hidden group"
-                    aria-label={`Visit ${name}`}
                   >
                     <Image
-                      src={imageSrc}
-                      alt={department}
+                      src={program.image}
+                      alt={program.department}
                       width={300}
                       height={200}
                       className="object-cover w-full h-48 transition-transform duration-500 ease-in-out group-hover:scale-105"
@@ -196,11 +111,11 @@ export default function StudyProgramsPage() {
                   </Link>
 
                   <Link
-                    href={`/study-programs/${slug}`}
+                    href={`/study-programs/${program.slug}`}
                     className="h-18 flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
                   >
                     <span className="group-hover:underline text-base group-hover:decoration-red-800">
-                      {name}
+                      {program.name}
                     </span>
                     <span className="transition-colors duration-300 group-hover:text-red-800">
                       →
@@ -210,6 +125,13 @@ export default function StudyProgramsPage() {
               );
             })}
           </div>
+
+          {/* Empty State */}
+          {filteredPrograms.length === 0 && (
+            <div className="text-neutral-500 text-sm mt-6">
+              No programs match your filters.
+            </div>
+          )}
         </div>
       </main>
     </PageWrapper>
