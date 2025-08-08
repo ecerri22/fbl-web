@@ -7,12 +7,7 @@ const facultyData = [
     role: "Dean",
     name: "Prof. Assoc. Dr. John Doe",
     email: "x@test.com",
-  },
-  {
-    role: "Faculty Administrator",
-    name: "Prof. Assoc. Dr. John Doe",
-    email: "x@test.com",
-  },
+  }
 ];
 
 const departments = [
@@ -23,12 +18,7 @@ const departments = [
         role: "Head of Department",
         name: "Prof. Assoc. Dr. John Doe",
         email: "x@test.com",
-      },
-      {
-        role: "Department Coordinator",
-        name: "Prof. Assoc. Dr. John Doe",
-        email: "x@test.com",
-      },
+      }
     ],
   },
   {
@@ -38,12 +28,7 @@ const departments = [
         role: "Head of Department",
         name: "Prof. Assoc. Dr. John Doe",
         email: "x@test.com",
-      },
-      {
-        role: "Department Coordinator",
-        name: "Prof. Assoc. Dr. John Doe",
-        email: "x@test.com",
-      },
+      }
     ],
   },
   {
@@ -53,17 +38,7 @@ const departments = [
         role: "Head of Department",
         name: "Prof. Assoc. Dr. John Doe",
         email: "x@test.com",
-      },
-      {
-        role: "Department Coordinator",
-        name: "Prof. Assoc. Dr. John Doe",
-        email: "x@test.com",
-      },
-      {
-        role: "Department Coordinator",
-        name: "Prof. Assoc. Dr. John Doe",
-        email: "x@test.com",
-      },
+      }
     ],
   },
    {
@@ -73,37 +48,27 @@ const departments = [
         role: "Head of Department",
         name: "Prof. Assoc. Dr. John Doe",
         email: "x@test.com",
-      },
-      {
-        role: "Department Coordinator",
-        name: "Prof. Assoc. Dr. John Doe",
-        email: "x@test.com",
-      },
-      {
-        role: "Department Coordinator",
-        name: "Prof. Assoc. Dr. John Doe",
-        email: "x@test.com",
-      },
+      }
     ],
   },
-   {
+  {
     title: "Department of Finance & Accounting",
     members: [
       {
         role: "Head of Department",
         name: "Prof. Assoc. Dr. John Doe",
         email: "x@test.com",
-      },
+      }
+    ],
+  },
+  {
+    title: "Qendra Kërkimore Shkencore për Kërkime dhe Zhvillime në Drejtësi dhe Ekonomi",
+    members: [
       {
-        role: "Department Coordinator",
+        role: "Head of Department",
         name: "Prof. Assoc. Dr. John Doe",
         email: "x@test.com",
-      },
-      {
-        role: "Department Coordinator",
-        name: "Prof. Assoc. Dr. John Doe",
-        email: "x@test.com",
-      },
+      }
     ],
   },
 ];
