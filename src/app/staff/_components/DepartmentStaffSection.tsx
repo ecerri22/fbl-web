@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Mail, MapPin } from "lucide-react"; 
+import { usePathname } from "next/navigation";
 
 interface StaffMember {
   name: string;
@@ -22,6 +23,9 @@ interface DepartmentStaffSectionProps {
 const roleOrder = ["Professor", "Lecturer", "Assistant Lecturer"];
 
 function StaffCard({ member }: { member: StaffMember }) {
+
+  const pathname = usePathname();
+
   const [imgSrc, setImgSrc] = useState(
     member.imgSrc && member.imgSrc.trim() !== ""
       ? member.imgSrc
@@ -69,8 +73,11 @@ function StaffCard({ member }: { member: StaffMember }) {
         </div>
 
         <Link
-        href={`/staff/${member.slug}`}
-        className="relative inline-block px-4 py-2 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
+          href={{
+            pathname: `/staff/${member.slug}`,
+            query: { from: pathname },
+          }}
+          className="relative inline-block px-4 py-2 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
         >
           <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
           <span className="relative text-md z-10 capitalize whitespace-nowrap">
