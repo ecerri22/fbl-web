@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { staffMembers } from "@/data/staffData";
 import PageWrapper from "@/components/PageWrapper";
 import Image from "next/image";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowLeft, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,12 +19,15 @@ export default function StaffDetailPage({ params, searchParams}: any ) {
 
         <section className="max-w-5xl mx-auto">
           {/* Back button */}
-          <Link
-            href={from}
-            className="inline-block mb-10 hover:text-red-800 text-sm text-neutral-800"
-          >
-            ← Back to Department Page
-          </Link>
+          <div className="flex flex-row items-center mb-10 gap-2  hover:text-red-800 text-sm text-neutral-600">
+            <ArrowLeft className="w-4 h-4" />
+            <Link
+              href={from}
+              className="inline-block "
+            >
+              Back to Department Page
+            </Link>
+          </div>
 
           <div className="flex flex-col md:flex-row gap-12 mb-12">
             {/* LEFT: Image + Contact Info */}

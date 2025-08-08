@@ -371,7 +371,7 @@ export default function Home() {
             Read Our Latest News
           </h1>
           <Link
-            href="#"
+            href="/news"
             className="text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
           >
             View All

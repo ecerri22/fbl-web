@@ -112,6 +112,13 @@ export default function Navbar() {
             <Link href="/events">Events</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={isActive("/news")}>
+            <Link href="/news">News</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
       </NavigationMenuList>
     </NavigationMenu>
   );
