@@ -98,7 +98,7 @@ export default function NewsPage() {
                   onChange={(e) => {
                     setQ(e.target.value);
                     setPage(1);
-                    setSelectedPost(null); // ✅ return to grid
+                    setSelectedPost(null); 
                   }}
                   placeholder="Search news…"
                   className="w-full border border-neutral-200 pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-800"
