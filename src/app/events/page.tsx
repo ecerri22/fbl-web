@@ -28,23 +28,47 @@ function EventsInner() {
   const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedYear, setSelectedYear] = useState<string>("");
 
-  const categories = useMemo(
-    () => Array.from(new Set(events.flatMap((ev) => ev.categories ?? []))),
-    []
-  );
+  // ---- Academic year helpers (string-based, timezone-safe) ----
+  function parseYMD(dateStr: string) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    return { y, m, d };
+  }
+
+  // For a YYYY-MM-DD string, return the academic start year.
+  // Example: "2024-10-05" -> 2024 ; "2025-09-15" -> 2024
+  function academicStartYear(dateStr: string) {
+    const { y, m } = parseYMD(dateStr);
+    return m >= 10 ? y : y - 1; // Oct..Dec => same year; Jan..Sep => previous year
+  }
+
+  function academicYearLabelFromStr(dateStr: string) {
+    const start = academicStartYear(dateStr);
+    return `${start}-${start + 1}`;
+  }
+
+  // Build academic year options dynamically from the data
+  const years = useMemo(() => {
+    const set = new Set<string>();
+    for (const ev of events) set.add(academicYearLabelFromStr(ev.date));
+    return Array.from(set).sort((a, b) => Number(b.split("-")[0]) - Number(a.split("-")[0]));
+  }, []);
 
   const filteredEvents = useMemo(() => {
     const needle = searchTerm.trim().toLowerCase();
     return events.filter((ev) => {
       const matchesSearch = needle ? ev.title.toLowerCase().includes(needle) : true;
-      const matchesCategory = selectedCategory
-        ? (ev.categories ?? []).includes(selectedCategory)
-        : true;
-      return matchesSearch && matchesCategory;
+
+      let matchesYear = true;
+      if (selectedYear) {
+        const selectedStart = Number(selectedYear.split("-")[0]); 
+        matchesYear = academicStartYear(ev.date) === selectedStart;
+      }
+
+      return matchesSearch && matchesYear;
     });
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedYear]);
 
   const totalPages = Math.max(1, Math.ceil(filteredEvents.length / PAGE_SIZE));
   const clampedPage = Math.min(page, totalPages);
@@ -57,14 +81,15 @@ function EventsInner() {
     router.push(`/events?${sp.toString()}`);
   };
 
+  // Reset to page 1 when filters change
   useEffect(() => {
     const sp = new URLSearchParams(searchParams);
-    if ((searchTerm || selectedCategory) && (sp.get("page") ?? "1") !== "1") {
+    if ((searchTerm || selectedYear) && (sp.get("page") ?? "1") !== "1") {
       sp.set("page", "1");
       router.push(`/events?${sp.toString()}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedYear]);
 
   return (
     <main className="text-neutral-800 max-w-7xl mx-auto px-6 md:px-0 py-10 space-y-10">
@@ -85,18 +110,18 @@ function EventsInner() {
           </div>
         </div>
 
-        {/* Category */}
+        {/* Academic Year */}
         <div className="w-full lg:w-[22rem] bg-white">
-          <h3 className="text-xl font-playfair font-semibold mb-3">Category:</h3>
+          <h3 className="text-xl font-playfair font-semibold mb-3">Academic Year:</h3>
           <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
             className="w-full border border-neutral-200 px-4 py-2 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-red-800"
           >
-            <option value="">All Categories</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
+            <option value="">All Years</option>
+            {years.map((label) => (
+              <option key={label} value={label}>
+                {label}
               </option>
             ))}
           </select>
@@ -106,7 +131,7 @@ function EventsInner() {
       {/* Events Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {pageItems.map((ev) => (
-          <EventCard key={ev.slug} event={ev} />
+          <EventCard key={ev.id} event={ev} />
         ))}
       </section>
 
@@ -164,8 +189,7 @@ function EventCard({ event }: { event: EventItem }) {
             </div>
 
             <h3 className="mt-4 text-xl font-playfair leading-snug">
-                <Link href={`/events/${event.slug}`} className="hover:text-red-800">
-
+              <Link href={`/events/${event.slug}`} className="hover:text-red-800">
                 <span className="block overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
                   {event.title}
                 </span>
