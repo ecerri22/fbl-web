@@ -45,7 +45,7 @@ export default function EventDetailPage({params}: any ) {
 
   return (
     <PageWrapper>
-    <main className="max-w-7xl mx-auto px-6 md:px-0 py-10">
+    <div className="text-neutral-800 ">
       {/* Back link */}
       <div className="mb-6">
         <Link
@@ -96,15 +96,19 @@ export default function EventDetailPage({params}: any ) {
             {/* Highlights grid */}
             {Array.isArray((event as any).highlights) && (event as any).highlights.length > 0 && (
               <section className="space-y-4">
-                <h3 className="text-xl font-playfair text-neutral-800">Highlights</h3>
+                <h3 className="text-xl font-playfair text-neutral-800 max-[640px]:text-center">Highlights</h3>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {((event as any).highlights as { title: string; text: string }[]).map((h, i) => (
                     <li
                       key={i}
                       className="rounded border border-neutral-200 p-4 hover:shadow-sm transition"
                     >
-                      <div className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-red-800 mt-0.5 shrink-0" />
+                      <div className="flex items-start gap-3 max-[640px]:gap-0">
+                        {/* Hide icon at ≤640px */}
+                        <CheckCircle2
+                          className="w-5 h-5 text-red-800 mt-0.5 shrink-0 max-[640px]:hidden"
+                          aria-hidden="true"
+                        />
                         <div>
                           <div className="font-medium text-neutral-800">{h.title}</div>
                           <p className="text-sm text-neutral-700 mt-1">{h.text}</p>
@@ -115,6 +119,7 @@ export default function EventDetailPage({params}: any ) {
                 </ul>
               </section>
             )}
+
 
 
           </article>
@@ -229,7 +234,7 @@ export default function EventDetailPage({params}: any ) {
           </div>
         </aside>
       </section>
-    </main>
+    </div>
     </PageWrapper>
   );
 }
