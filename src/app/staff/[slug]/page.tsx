@@ -15,7 +15,7 @@ export default function StaffDetailPage({ params, searchParams}: any ) {
 
   return (
     <PageWrapper>
-      <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
+      <div className="text-neutral-800 space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
 
         <section className="max-w-5xl mx-auto">
           {/* Back button */}
@@ -32,12 +32,21 @@ export default function StaffDetailPage({ params, searchParams}: any ) {
           <div className="flex flex-col md:flex-row gap-12 mb-12">
             {/* LEFT: Image + Contact Info */}
             <div className="w-full md:w-1/3 flex flex-col items-center gap-12">
-              <div className="relative w-full h-96 overflow-hidden shadow">
+              <div
+                className="
+                  relative overflow-hidden shadow
+                  w-full max-w-xs    
+                  aspect-[4/5]     
+                  md:aspect-[3/4]   
+                "
+              >
                 <Image
                   src={staff.photo || "/images/default-profile-icon-6.jpg"}
                   alt={staff.name}
                   fill
-                  className="object-cover"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 90vw"
+                  className="object-cover object-top"
+                  priority
                 />
               </div>
 
@@ -121,7 +130,7 @@ export default function StaffDetailPage({ params, searchParams}: any ) {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </PageWrapper>
   );
 }
