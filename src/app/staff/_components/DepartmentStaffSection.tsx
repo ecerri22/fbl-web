@@ -23,9 +23,7 @@ interface DepartmentStaffSectionProps {
 const roleOrder = ["Professor", "Lecturer", "Assistant Lecturer"];
 
 function StaffCard({ member }: { member: StaffMember }) {
-
   const pathname = usePathname();
-
   const [imgSrc, setImgSrc] = useState(
     member.imgSrc && member.imgSrc.trim() !== ""
       ? member.imgSrc
@@ -37,57 +35,73 @@ function StaffCard({ member }: { member: StaffMember }) {
   }
 
   return (
-    <div className="flex border border-neutral-200 overflow-hidden shadow-sm w-[30rem] h-[20rem]">
-      <div className="w-1/2 relative">
+    <article
+      className="
+        overflow-hidden border border-neutral-200 shadow-sm bg-white
+        w-full sm:max-w-xl
+        grid grid-cols-1 sm:grid-cols-2
+      "
+    >
+      {/* Image */}
+      <div className="relative w-full h-56 sm:h-full">
         <Image
           src={imgSrc}
           alt={member.name}
           fill
-          className="object-cover h-full"
           onError={onImgError}
-          sizes="(max-width: 768px) 100vw, 30rem"
+          className="object-cover"
+          sizes="(min-width:1024px) 320px, (min-width:640px) 50vw, 100vw"
           priority={false}
         />
       </div>
 
-      <div className="w-1/2 p-6 flex flex-col justify-between items-center">
+      {/* Content */}
+      <div className="p-5 sm:p-6 flex flex-col gap-4 justify-between">
         <div>
-          <h3 className="font-playfair text-2xl font-semibold text-neutral-900">
+          <h3 className="font-playfair text-xl sm:text-2xl font-semibold text-neutral-900">
             {member.name}
           </h3>
           <p className="font-roboto text-neutral-500 mt-1">{member.title}</p>
         </div>
 
         <div className="space-y-2 text-red-800 font-roboto">
-          <div className="flex items-center gap-3">
-            <Mail size={18} />
-            <a href={`mailto:${member.email}`} className="hover:underline break-all">
+          <div className="flex items-start gap-3">
+            <Mail size={18} className="shrink-0 mt-0.5" />
+            <a
+              href={`mailto:${member.email}`}
+              className="hover:underline break-words [overflow-wrap:anywhere]"
+            >
               {member.email}
             </a>
           </div>
 
-          <div className="flex items-center gap-3">
-            <MapPin size={18} />
+          <div className="flex items-start gap-3 text-neutral-800">
+            <MapPin size={18} className="shrink-0 mt-0.5" />
             <span>{member.office}</span>
           </div>
         </div>
 
         <Link
-          href={{
-            pathname: `/staff/${member.slug}`,
-            query: { from: pathname },
-          }}
-          className="relative inline-block px-4 py-2 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
-        >
-          <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
-          <span className="relative text-md z-10 capitalize whitespace-nowrap">
-            More Details
-          </span>
+  href={{ pathname: `/staff/${member.slug}`, query: { from: pathname } }}
+  className={`
+    relative px-4 py-2 font-roboto text-white bg-red-800
+    transition-colors duration-300 group overflow-hidden
+    ${/* Full width and at bottom on mobile */""}
+    w-full text-center mt-auto
+    sm:w-auto sm:self-start sm:mt-0
+  `}
+>
+  <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
+  <span className="relative text-sm sm:text-base z-10 capitalize whitespace-nowrap">
+    More Details
+  </span>
         </Link>
+
       </div>
-    </div>
+    </article>
   );
 }
+
 
 export default function DepartmentStaffSection({
   staff,

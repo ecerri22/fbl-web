@@ -14,14 +14,14 @@ export default function DepartmentPage({ params }: { params: any }) {
 
   return (
     <PageWrapper>
-      <main className="text-neutral-800 max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
+      <div className="text-neutral-800 space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
 
         {/* Header */}
-        <section className="flex flex-row justify-between w-full items-center pb-10 border-b border-neutral-300">
-          <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800">
+        <section className="sm:text-center max-[640px]:text-center grid grid-cols-1 lg:grid-cols-[2fr_3fr] items-center gap-8 md:gap-12 pb-10 border-b border-neutral-300 md:justify-items-center sm:justify-items-center max-[640px]:justify-items-center">
+          <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 lg:text-start">
             {department.name}
           </h1>
-          <p className="font-roboto text-neutral-500">
+          <p className="font-roboto text-neutral-500 lg:justify-self-end lg:text-end">
             {department.shortDescription}
           </p>
         </section>
@@ -132,7 +132,7 @@ export default function DepartmentPage({ params }: { params: any }) {
         </section>
 
 
-      </main>
+      </div>
     </PageWrapper>
   );
 }
