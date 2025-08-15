@@ -17,7 +17,7 @@ export default function ResearchDetailPage({ params, searchParams}: any ) {
 
   return (
     <PageWrapper>
-      <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto px-6 md:px-0 py-10 space-y-10">
+      <main className="text-neutral-800 space-y-8 md:space-y-10 sm:space-y-10 max-[640px]:space-y-8">
         {/* Back link */}
         <div>
           <Link
@@ -30,7 +30,7 @@ export default function ResearchDetailPage({ params, searchParams}: any ) {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl font-playfair font-semibold">{project.title}</h1>
+        <h1 className="text-3xl font-playfair font-semibold max-[640px]:text-center text-start">{project.title}</h1>
 
         {/* Project Info */}
         <section className="space-y-1 text-md text-neutral-600">

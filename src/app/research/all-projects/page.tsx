@@ -43,21 +43,27 @@ export default function AllProjectsPage() {
 
   return (
     <PageWrapper>
-      <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto px-6 md:px-0 py-10 ">
+      <main className="text-neutral-800 ">
         {/* Header */}
-        <div className="flex items-center justify-between flex-wrap gap-4 pb-10">
-          <h1 className="text-3xl font-playfair font-semibold">All Research Projects</h1>
+        <div className="flex flex-col items-start sm:pb-10 border-b border-neutral-200 sm:flex-row sm:items-center sm:justify-between max-[640px]:gap-8 max-[640px]:pb-8">
+          {/* Back button first on mobile, second on sm+ */}
           <Link
             href="/research"
-            className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-red-800 transition-colors"
+            className="order-1 sm:order-2 inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-red-800 transition-colors "
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Research
           </Link>
+
+          {/* Title second on mobile, first on sm+ */}
+          <h1 className="order-2 sm:order-1 text-2xl sm:text-3xl font-playfair font-semibold max-[640px]:text-center">
+            All Research Projects
+          </h1>
         </div>
 
+
         {/* Filters  */}
-        <div className="flex flex-col lg:flex-row gap-6 py-10 border-t border-neutral-200">
+        <div className="flex flex-col lg:flex-row gap-6 py-10">
           {/* Search */}
           <div className="w-full lg:w-1/2">
             <p className="text-xl font-playfair mb-2">Search Projects:</p>

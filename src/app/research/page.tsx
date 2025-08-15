@@ -8,27 +8,28 @@ import PageWrapper from "@/components/PageWrapper";
 export default function ResearchPage() {
   return (
     <PageWrapper>
-      <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
+      <div className="text-neutral-800 space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
         {/* About Section */}
-        <section className="flex flex-row items-center pb-10 border-b-1 border-neutral-300">
+        <section className="grid grid-cols-1 gap-10 text-center md:flex md:flex-row items-center pb-10 border-b border-neutral-300">
           {/* Left */}
-          <div className="w-2/5 ">
-            <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800">
+          <div className="lg:w-2/5 ">
+            <h1 className="text-2xl lg:text-start sm:text-3xl md:text-4xl md:text-start font-semibold leading-tight font-playfair text-neutral-800">
               Scientific Research
             </h1>
           </div>
 
           {/* Right */}
-          <div className="w-3/5 flex flex-col justify-center h-full space-y-6 px-10">
-            <p className="font-roboto text-neutral-500">
+          <div className="lg:w-3/5 flex flex-col justify-center h-full space-y-6 lg:items-end">
+            <p className="font-roboto text-neutral-600 leading-relaxed max-w-prose md:text-end">
               We conduct impactful research in fields such as business, digital technology, law, and public policy. The faculty supports initiatives that bring tangible change to society and the economy.
             </p>
           </div>
+
         </section>
 
         {/* Research Fields */}
         <section className="">
-          <h2 className="text-3xl font-playfair text-neutral-800 mb-6">Main Research Areas</h2>
+          <h2 className="text-3xl font-playfair text-neutral-800 mb-6 lg:text-start text-center">Main Research Areas</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {[
               { title: "ABC", icon: <FlaskConical className="w-6 h-6 text-red-700" /> },
@@ -46,19 +47,22 @@ export default function ResearchPage() {
         </section>
 
         {/* projects */}
-        <section className="">          
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-playfair text-neutral-800">
+        <section>
+          {/* header */}
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
+            <h2 className="text-3xl font-playfair text-neutral-800 mb-4 sm:mb-0 lg:text-start text-center">
               Latest Projects
             </h2>
+            {/* Hide on small screens, show on sm+ */}
             <Link
               href="/research/all-projects"
-              className="text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
+              className="hidden sm:inline text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
             >
               View All
             </Link>
           </div>
-        
+
+          {/* cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {researchProjects.slice(-3).reverse().map((project, i) => (
               <div
@@ -67,7 +71,9 @@ export default function ResearchPage() {
               >
                 <h3 className="text-neutral-800 font-playfair text-lg">{project.title}</h3>
                 <p className="text-sm text-neutral-500 italic">{project.coordinator}</p>
-                <p className="text-sm text-neutral-600">{project.field} • Year: {project.year}</p>
+                <p className="text-sm text-neutral-600">
+                  {project.field} • Year: {project.year}
+                </p>
                 <Link
                   href={`/research/all-projects/${project.slug}?from=research`}
                   className="text-sm text-red-800 hover:underline font-medium inline-flex items-center gap-1"
@@ -76,13 +82,23 @@ export default function ResearchPage() {
                 </Link>
               </div>
             ))}
+          </div>
 
+          {/* Show View All below grid on small screens */}
+          <div className="mt-6 sm:hidden text-center">
+            <Link
+              href="/research/all-projects"
+              className="text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
+            >
+              View All
+            </Link>
           </div>
         </section>
 
+
         {/* collaborations */}
         <section className="">
-          <h2 className="text-3xl font-playfair text-neutral-800 mb-6">
+          <h2 className="text-3xl font-playfair text-neutral-800 mb-6 lg:text-start text-center">
             Partners & Collaborations
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-sm">
@@ -119,7 +135,7 @@ export default function ResearchPage() {
           </Link>
         </section>
 
-      </main>
+      </div>
     </PageWrapper>
   );
 }

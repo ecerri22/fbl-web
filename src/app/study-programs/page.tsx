@@ -49,7 +49,7 @@ function StudyProgramsInner() {
   return (
     <div className="text-neutral-800 space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
       <div>
-        <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 pb-10 border-b border-neutral-100 text-center lg:text-start">
+        <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 pb-10 border-b border-neutral-200 text-center lg:text-start">
           Academic Areas of Study
         </h1>
 
