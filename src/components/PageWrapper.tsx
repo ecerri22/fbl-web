@@ -5,32 +5,40 @@ import PageHeader from "./PageHeader";
 
 interface PageWrapperProps {
   children: React.ReactNode;
+  /** Optional: pass a custom header background for a page */
+  headerBackground?: string;
 }
 
-export default function PageWrapper({ children }: PageWrapperProps) {
+export default function PageWrapper({ children, headerBackground }: PageWrapperProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
   const dynamicTitle = pathname
-  .split("/")
-  .filter(Boolean)
-  .map((segment) =>
-    segment
-      .replace(/-/g, " ") 
-      .replace(/\b\w/g, (char) => char.toUpperCase()) 
-  )
-  .join(" / ");
-
+    .split("/")
+    .filter(Boolean)
+    .map((segment) =>
+      segment
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase())
+    )
+    .join(" / ");
 
   return (
     <>
       {!isHome && (
         <PageHeader
           title={dynamicTitle || "Page"}
+          backgroundImage={headerBackground}
         />
       )}
-      <main className="px-6 md:px-30 lg:px-40 py-20">{children}</main>
+
+      {/* Standardized container + responsive paddings  */}
+      <main className="mx-auto w-full max-w-7xl 
+      px-15 sm:px-20 md:px-20 lg:px-20  
+      py-15 sm:py-20 md:py-20 lg:py-20
+      ">
+        {children}
+      </main>
     </>
   );
 }
-

@@ -14,7 +14,7 @@ export default function DepartmentPage({ params }: { params: any }) {
 
   return (
     <PageWrapper>
-      <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
+      <main className="text-neutral-800 max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
 
         {/* Header */}
         <section className="flex flex-row justify-between w-full items-center pb-10 border-b border-neutral-300">
