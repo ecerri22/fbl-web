@@ -47,9 +47,9 @@ function StudyProgramsInner() {
   });
 
   return (
-    <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
+    <div className="text-neutral-800 space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
       <div>
-        <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 pb-10 border-b border-neutral-100">
+        <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 pb-10 border-b border-neutral-100 text-center lg:text-start">
           Academic Areas of Study
         </h1>
 
@@ -140,6 +140,6 @@ function StudyProgramsInner() {
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }
