@@ -6,27 +6,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function ProgramDetailPage({ params }: any) {
-    const { slug } = params; 
+  const { slug } = params;
   const program = findProgramBySlug(slug);
   if (!program) return notFound();
 
   return (
     <PageWrapper>
-      <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
+      <div className="text-neutral-800 space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
 
         {/* GRID */}
-        <div className="grid lg:grid-cols-[2fr_1fr] gap-12">
+        <div className="grid gap-12 lg:grid-cols-[2fr_1fr]">
 
           {/* LEFT COLUMN */}
-          <div className="space-y-24">
+          <div className="space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
 
             {/* OVERVIEW */}
             <section id="program_overview">
-              <div className="flex flex-col gap-12">
-                <div className="relative w-full h-[20rem] overflow-hidden rounded shadow-md">
+              <div className="flex flex-col gap-8 sm:gap-12 ">
+                <div className="relative w-full h-64 sm:h-[20rem] overflow-hidden rounded shadow-md">
                   <Image
                     src="/images/departments/business-admn-img.jpg"
                     alt="Program image"
@@ -36,20 +35,69 @@ export default async function ProgramDetailPage({ params }: any) {
                   />
                 </div>
 
-                <div className="text-neutral-500">
-                  <h2 className="text-3xl font-semibold font-playfair text-neutral-800 mb-4">
+                <div className="text-neutral-600">
+                  <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800 mb-3 sm:mb-4">
                     About the program
                   </h2>
-                  <p>{program.description}</p>
+                  <p className="leading-relaxed">{program.description}</p>
                 </div>
-
-
               </div>
             </section>
 
+            {/* --- MOBILE/TABLET ONLY: Snapshot + Jump Links right after Overview --- */}
+            <div className="lg:hidden space-y-8 lg:border-t lg:border-neutral-200 md:pt-6 ">
+              {/* SUMMARY BOX */}
+                <div className="bg-white border border-neutral-200 shadow-sm p-6 space-y-4">
+                  <h3 className="text-lg font-playfair font-semibold text-red-800">Program Snapshot</h3>
+                  <table className="w-full text-sm sm:text-base text-neutral-700">
+                    <tbody>
+                      <tr>
+                        <td className="py-2 text-neutral-500">Level</td>
+                        <td className="py-2 text-right font-medium">{program.level}</td>
+                      </tr>
+                      <tr className="border-t border-neutral-200">
+                        <td className="py-2 text-neutral-500">Duration</td>
+                        <td className="py-2 text-right font-medium">{program.duration || "3 years"}</td>
+                      </tr>
+                      <tr className="border-t border-neutral-200">
+                        <td className="py-2 text-neutral-500">Language</td>
+                        <td className="py-2 text-right font-medium">{program.language || "English"}</td>
+                      </tr>
+                      <tr className="border-t border-neutral-200">
+                        <td className="py-2 text-neutral-500">Tuition</td>
+                        <td className="py-2 text-right font-medium">{program.tuition || "1500 EUR/year"}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* JUMP LINKS */}
+                <div className="p-6 bg-neutral-50 border border-neutral-200 shadow-sm">
+                  <h4 className="text-lg font-playfair font-semibold text-red-800 mb-4">Jump to Section</h4>
+                  <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-neutral-700 leading-tight">
+                    {[
+                      { href: "#program_overview", label: "Program Overview", description: "What you’ll study and why it matters" },
+                      { href: "#curriculum", label: "Curriculum", description: "Semester-by-semester breakdown" },
+                      { href: "#career", label: "Career Prospects", description: "Where this program can take you" },
+                      { href: "#admission_requirements", label: "Admission", description: "What you need to apply" },
+                    ].map(({ href, label, description }) => (
+                      <li key={href}>
+                        <a href={href} className="flex items-center gap-2 font-medium text-neutral-800 hover:text-red-800 transition">
+                          <ArrowRight className="w-4 h-4 text-red-800" />
+                          {label}
+                        </a>
+                        <p className="pl-6 text-xs text-neutral-500">{description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+            </div>
+            {/* --- /MOBILE ONLY SECTION --- */}
+
+            {/* WHY / BENEFITS */}
             <section>
-              <div className="text-neutral-500 space-y-4">
-                <h2 className="text-3xl font-semibold font-playfair text-neutral-800 mb-4">
+              <div className="text-neutral-600 space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800 mb-3 sm:mb-4">
                   {program.whyTitle}
                 </h2>
                 <p className="text-base leading-relaxed">
@@ -64,7 +112,6 @@ export default async function ProgramDetailPage({ params }: any) {
                     ))}
                   </ul>
                 )}
-
               </div>
             </section>
 
@@ -74,15 +121,15 @@ export default async function ProgramDetailPage({ params }: any) {
             </section>
 
             {/* CAREER PROSPECTS */}
-            <section id="career" className="bg-neutral-100 py-20 px-6 md:px-12">
-              <div className="max-w-5xl mx-auto space-y-10">
-                <h2 className="text-3xl font-playfair font-bold text-neutral-800">
+            <section id="career" className="bg-neutral-100 py-16 sm:py-20 px-4 sm:px-6 md:px-12">
+              <div className="max-w-5xl mx-auto space-y-6 sm:space-y-10">
+                <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-neutral-800">
                   Career Prospects
                 </h2>
-                <p className="text-neutral-700 text-md leading-relaxed">
+                <p className="text-neutral-700 text-base leading-relaxed">
                   {program.careerIntro}
                 </p>
-                <ul className="list-disc list-inside space-y-4 text-neutral-800 text-base leading-relaxed">
+                <ul className="list-disc list-inside space-y-3 sm:space-y-4 text-neutral-800 text-base leading-relaxed">
                   {program.careerBulletPoints?.map((item, index) => (
                     <li key={index}>
                       <span className="font-semibold text-red-800">{item.label}:</span> {item.description}
@@ -93,44 +140,57 @@ export default async function ProgramDetailPage({ params }: any) {
             </section>
 
             {/* ADMISSION REQUIREMENTS */}
-            <section id="admission_requirements" className="py-20 px-6 md:px-12 bg-white border-t border-neutral-200">
-              <div className="max-w-5xl mx-auto space-y-10">
-                <h2 className="text-3xl font-playfair font-bold text-neutral-800">
+            <section id="admission_requirements" className="pt-16 sm:pt-20 px-4 sm:px-6 md:px-12 bg-white border-t border-neutral-200">
+              <div className="max-w-5xl mx-auto space-y-6 sm:space-y-10">
+                <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-neutral-800">
                   Admission Requirements
                 </h2>
 
                 {Array.isArray(program.admission) ? (
-                  <ul className="list-disc list-inside space-y-4 text-neutral-800 text-base leading-relaxed">
+                  <ul className="list-disc list-inside space-y-3 sm:space-y-4 text-neutral-800 text-base leading-relaxed">
                     {program.admission.map((item, i) => {
-                      if (typeof item === "string") {
-                        return <li key={i}>{item}</li>;
-                      } else if (typeof item === "object" && item.label && item.description) {
+                      if (typeof item === "string") return <li key={i}>{item}</li>;
+                      if (typeof item === "object" && item.label && item.description) {
                         return (
                           <li key={i}>
                             <span className="font-semibold">{item.label}:</span> {item.description}
                           </li>
                         );
-                      } else {
-                        return null; 
                       }
+                      return null;
                     })}
                   </ul>
                 ) : typeof program.admission === "string" ? (
                   <p className="text-base text-neutral-700">{program.admission}</p>
                 ) : null}
+
+                {/* --- MOBILE/TABLET ONLY: Got Questions AFTER Admission --- */}
+                <div className="lg:hidden mt-6 sm:mt-10 bg-white border border-neutral-200 shadow-sm p-6 text-center space-y-3">
+                  <h4 className="text-lg font-semibold text-red-800 font-playfair">Got Questions?</h4>
+                  <p className="text-sm sm:text-base text-neutral-600">
+                    Our admissions team is ready to guide you every step of the way.
+                  </p>
+                  <a
+                    href="mailto:admissions@youruniversity.edu"
+                    className="inline-block font-medium text-red-800 underline hover:text-red-900 transition"
+                  >
+                    admissions@youruniversity.edu
+                  </a>
+                </div>
+                {/* --- /MOBILE ONLY --- */}
               </div>
             </section>
 
           </div>
 
-          <aside className="space-y-10 self-start sticky top-32 hidden lg:block">
-
+          {/* DESKTOP ASIDE (unchanged for lg+) */}
+          <aside className="hidden lg:block space-y-10 self-start sticky top-32">
             {/* SUMMARY BOX */}
             <div className="bg-white border border-neutral-200 shadow-sm p-6 space-y-4">
               <h3 className="text-lg font-playfair font-semibold text-red-800">Program Snapshot</h3>
               <table className="w-full text-md text-neutral-700">
                 <tbody>
-                  <tr className="border-neutral-200">
+                  <tr>
                     <td className="py-2 text-neutral-500">Level</td>
                     <td className="py-2 text-right font-medium">{program.level}</td>
                   </tr>
@@ -155,32 +215,13 @@ export default async function ProgramDetailPage({ params }: any) {
               <h4 className="text-lg font-playfair font-semibold text-red-800 mb-4">Jump to Section</h4>
               <ul className="space-y-4 text-md text-neutral-700 leading-tight">
                 {[
-                  {
-                    href: "#program_overview",
-                    label: "Program Overview",
-                    description: "What you’ll study and why it matters",
-                  },
-                  {
-                    href: "#curriculum",
-                    label: "Curriculum",
-                    description: "Semester-by-semester breakdown",
-                  },
-                  {
-                    href: "#career",
-                    label: "Career Prospects",
-                    description: "Where this program can take you",
-                  },
-                  {
-                    href: "#admission_requirements",
-                    label: "Admission",
-                    description: "What you need to apply",
-                  },
+                  { href: "#program_overview", label: "Program Overview", description: "What you’ll study and why it matters" },
+                  { href: "#curriculum", label: "Curriculum", description: "Semester-by-semester breakdown" },
+                  { href: "#career", label: "Career Prospects", description: "Where this program can take you" },
+                  { href: "#admission_requirements", label: "Admission", description: "What you need to apply" },
                 ].map(({ href, label, description }) => (
                   <li key={href}>
-                    <a
-                      href={href}
-                      className="flex items-center gap-2 text-md font-medium text-neutral-800 hover:text-red-800 transition"
-                    >
+                    <a href={href} className="flex items-center gap-2 text-md font-medium text-neutral-800 hover:text-red-800 transition">
                       <ArrowRight className="w-4 h-4 text-red-800" />
                       {label}
                     </a>
@@ -188,7 +229,6 @@ export default async function ProgramDetailPage({ params }: any) {
                   </li>
                 ))}
               </ul>
-
             </div>
 
             {/* CTA CONTACT BOX */}
@@ -213,7 +253,6 @@ export default async function ProgramDetailPage({ params }: any) {
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>
               <span className="relative z-10">Apply now</span>
             </Link>
-
           </aside>
 
         </div>
@@ -221,7 +260,9 @@ export default async function ProgramDetailPage({ params }: any) {
         {/* CTA FINAL SECTION */}
         <section className="text-center pt-16 border-t border-neutral-300">
           <h2 className="text-3xl font-playfair mb-4">Still exploring your path?</h2>
-          <p className="text-neutral-600 mb-6">We offer a range of programs designed to shape the leaders, creators, and problem-solvers of tomorrow.</p>
+          <p className="text-neutral-600 mb-6">
+            We offer a range of programs designed to shape the leaders, creators, and problem-solvers of tomorrow.
+          </p>
           <Link
             href="/study-programs"
             className="relative inline-block px-8 py-4 font-roboto text-white bg-red-800 group transition"
@@ -231,7 +272,7 @@ export default async function ProgramDetailPage({ params }: any) {
           </Link>
         </section>
 
-      </main>
+      </div>
     </PageWrapper>
   );
 }

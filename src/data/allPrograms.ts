@@ -7,7 +7,7 @@ export const allPrograms = [
     "departmentCode": "Business Administration",
     "department": "Business Administration",
     "departmentSlug": "business-administration",
-    "description": "Comprehensive bachelor program in management and business skills.",
+    "description": "Comprehensive bachelor program in management and business skills. Comprehensive bachelor program in management and business skills. Comprehensive bachelor program in management and business skills. Comprehensive bachelor program in management and business skills. Comprehensive bachelor program in management and business skills. Comprehensive bachelor program in management and business skills. Comprehensive bachelor program in management and business skills.Comprehensive bachelor program in management and business skills.",
     "whyTitle": "Why Choose Business Administration?",
     "whyIntro": "Business Administration isn’t just a degree - it's a mindset. In a world shaped by innovation, disruption, and global competition, this program equips you with the tools to lead, adapt, and thrive.",
     "whyBulletPoints": [
