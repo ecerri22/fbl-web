@@ -9,11 +9,6 @@ import SiteHeader from "@/components/SiteHeader";
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"], variable: "--font-playfair", display: "swap" });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400","500","700"], variable: "--font-roboto", display: "swap" });
 
-export const metadata = {
-  title: "Fakulteti i Biznesit dhe Drejtësisë",
-  description: "Zbuloni programet tona akademike dhe aktivitetet kërkimore.",
-};
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${roboto.variable}`}>

@@ -9,9 +9,9 @@ import { Dialog, Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
 
 type NavbarProps = {
-  open?: boolean;                    // controlled (optional)
-  setOpen?: (v: boolean) => void;    // controlled (optional)
-  externalTrigger?: boolean;         // hide internal hamburger if true
+  open?: boolean;                    
+  setOpen?: (v: boolean) => void;    
+  externalTrigger?: boolean;         
 };
 
 export default function Navbar({ open, setOpen, externalTrigger = false }: NavbarProps) {

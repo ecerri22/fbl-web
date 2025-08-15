@@ -9,7 +9,7 @@ export default function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="grid grid-cols-[1fr_auto_1fr] items-center px-15 py-6 w-full">
+    <nav className="grid grid-cols-[1fr_auto_1fr] items-center lg:px-15 md:px-10 sm:px-8 py-6 w-full max-[640px]:px-6">
       {/* Left: brand */}
       <Link href="/" className="justify-self-start text-xl font-bold text-red-800">
         FBL
