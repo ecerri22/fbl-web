@@ -289,7 +289,7 @@ export default function Home() {
                 const number = String(idx + 1).padStart(2, "0");
                 return (
                   <Link
-                    href={`/events/${ev.slug}`}
+                    href={`/events/${ev.slug}?from=home`}
                     key={ev.id}
                     className="
                       group flex items-start gap-6 p-5 cursor-pointer transition-colors duration-300 hover:bg-red-800
@@ -419,7 +419,7 @@ export default function Home() {
           {latestNews.map((post) => (
             <Link
               key={post.id}
-              href={`/news?id=${post.id}`}
+              href={`/news?id=${post.id}&from=home`}
               aria-label={`Read news: ${post.title}`}
               className="group flex gap-5 p-5 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow
                         max-[963px]:flex-col max-[963px]:gap-4"

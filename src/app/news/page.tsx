@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useRef, Suspense } from "react";
+import { useMemo, useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import PageWrapper from "@/components/PageWrapper";
 import {
@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { newsData } from "@/data/newsData";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import BackBar from "@/components/BackBar";
 
 
 type Post = (typeof newsData)[number];
@@ -86,7 +87,8 @@ function NewsPageInner() {
   const openPost = (p: Post) => {
     setSelectedPost(p);
     const params = new URLSearchParams(Array.from(searchParams.entries()));
-    params.set("id", p.id); // use id (slugs repeat)
+    params.set("id", p.id);
+    params.set("from", "list");
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
@@ -94,6 +96,7 @@ function NewsPageInner() {
     setSelectedPost(null);
     const params = new URLSearchParams(Array.from(searchParams.entries()));
     params.delete("id");
+    params.delete("from"); // optional
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
@@ -104,29 +107,6 @@ function NewsPageInner() {
     const p = newsData.find(n => n.id === id) || null;
     setSelectedPost(p);
   }, [searchParams]);
-
-  const articleRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (selectedPost) {
-      articleRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [selectedPost]);
-
-  useEffect(() => {
-    const id = searchParams.get("id");
-    if (!id) { setSelectedPost(null); return; }
-
-    const p = newsData.find(n => n.id === id) || null;
-    setSelectedPost(p);
-
-    if (performance?.navigation?.type === performance.navigation.TYPE_RELOAD || document.referrer) {
-      requestAnimationFrame(() => {
-        articleRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
-  }, [searchParams]);
-
 
   return (
     <PageWrapper>
@@ -292,7 +272,7 @@ function NewsPageInner() {
                 </div>
               </>
             ) : (
-              <div ref={articleRef}>
+              <div >
                 <ArticleView post={selectedPost} onBack={clearSelection} />
               </div>
             )}
@@ -391,15 +371,17 @@ function NewsPageInner() {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function ArticleView({ post, onBack }: { post: any, onBack: () => void }) {
+
   return (
     <div>
-      <button
-        onClick={onBack}
-        className="mb-8 max-[640px]:my-5 inline-flex items-center gap-2 text-neutral-600 hover:text-red-800"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        <span className="text-sm">Back to News</span>
-      </button>
+      <BackBar
+        defaultHref="/news"
+        defaultLabel="Back to News"
+        allHref="/news"
+        allLabel="See all news"
+        onBack={onBack}      
+        homeHref="/"         
+      />
 
       <div className="relative h-72 md:h-96 lg:h-[28rem] overflow-hidden ">
         <Image
