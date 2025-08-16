@@ -56,7 +56,7 @@ function StaffCard({ member }: { member: StaffMember }) {
       </div>
 
       {/* Content */}
-      <div className="p-5 sm:p-6 flex flex-col gap-4 justify-between">
+      <div className="p-5 sm:p-6 flex flex-col gap-4 justify-between md:items-center ">
         <div>
           <h3 className="font-playfair text-lg sm:text-2xl max-[425px]:text-lg font-semibold text-neutral-900">
             {member.name}
@@ -82,19 +82,19 @@ function StaffCard({ member }: { member: StaffMember }) {
         </div>
 
         <Link
-  href={{ pathname: `/staff/${member.slug}`, query: { from: pathname } }}
-  className={`
-    relative px-4 py-2 font-roboto text-white bg-red-800
-    transition-colors duration-300 group overflow-hidden
-    ${/* Full width and at bottom on mobile */""}
-    w-full text-center mt-auto
-    sm:w-auto sm:self-start sm:mt-0
-  `}
->
-  <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
-  <span className="relative max-[425px]:text-sm text-base z-10 capitalize whitespace-nowrap">
-    More Details
-  </span>
+          href={{ pathname: `/staff/${member.slug}`, query: { from: pathname } }}
+          className={`
+            relative px-4 py-2 font-roboto text-white bg-red-800 md:self-center
+            transition-colors duration-300 group overflow-hidden
+            ${/* Full width and at bottom on mobile */""}
+            w-full text-center mt-auto
+            sm:w-auto sm:self-start sm:mt-0
+          `}
+        >
+          <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
+          <span className="relative max-[425px]:text-sm text-base z-10 capitalize whitespace-nowrap">
+            More Details
+          </span>
         </Link>
 
       </div>

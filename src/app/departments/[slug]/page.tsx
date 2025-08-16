@@ -21,7 +21,7 @@ export default function DepartmentPage({ params }: { params: any }) {
           <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 lg:text-start">
             {department.name}
           </h1>
-          <p className="font-roboto text-neutral-600 leading-relaxed max-w-prose max-[425px]:text-sm text-base">
+          <p className="font-roboto text-neutral-600 sm:text-end leading-relaxed max-w-prose max-[425px]:text-sm text-base">
             {department.shortDescription}
           </p>
         </section>

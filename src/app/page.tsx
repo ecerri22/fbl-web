@@ -8,32 +8,32 @@ export default function Home() {
   const departments = [
     {
       name: "Business Administration",
-      slug: "business-administration",
+      slug: "departments/business-administration",
       image: "/images/departments/business-admn-img.jpg",
     },
     {
       name: "Economics",
-      slug: "economics",
+      slug: "departments/economics",
       image: "/images/departments/economics-img.jpg",
     },
     {
       name: "Law",
-      slug: "law",
+      slug: "departments/law",
       image: "/images/departments/law-img.jpg",
     },
     {
       name: "Marketing & Engineering",
-      slug: "marketing-engineering",
+      slug: "departments/marketing-engineering",
       image: "/images/departments/marketing-img.jpg",
     },
     {
       name: "Finance & Accounting",
-      slug: "finance-accounting",
+      slug: "departments/finance-accounting",
       image: "/images/departments/finance-accounting-img.jpg",
     },
     {
       name: "Scientific Research Center for Research and Development in Law and Economics",
-      slug: "scientific-research-center",
+      slug: "research",
       image: "/images/departments/research-img.jpg",
     },
   ];
@@ -146,11 +146,11 @@ export default function Home() {
             </p>
 
             <Link
-              href="/study-programs"
+              href="/about-us"
               className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
             >
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
-              <span className="relative z-10 capitalize whitespace-nowrap">View our programs</span>
+              <span className="relative z-10 capitalize whitespace-nowrap">Read More</span>
             </Link>
           </div>
         </section>
@@ -184,7 +184,7 @@ export default function Home() {
 
               <li>
                 <Link
-                  href="#"
+                  href="/study-programs?level=bachelor"
                   className="inline-flex justify-center border border-neutral-800/60 text-neutral-800/80 sm:px-6 sm:py-3 px-4 py-2 font-roboto text-sm sm:text-base w-full hover:border-neutral-800 hover:text-neutral-800 transition-colors"
                 >
                   See More
@@ -216,7 +216,7 @@ export default function Home() {
 
               <li>
                 <Link
-                  href="#"
+                  href="/study-programs?level=master"
                   className="inline-flex justify-center border border-white/60 text-white/80 sm:px-6 sm:py-3 px-4 py-2 font-roboto text-sm sm:text-base w-full hover:text-white hover:border-white transition-colors"
                 >
                   See More
@@ -264,7 +264,7 @@ export default function Home() {
             Events
           </h1>
           <Link
-            href="#"
+            href="/events"
             className="text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors md:text-md sm:text-sm max-[640px]:text-sm"
           >
             View All
@@ -363,7 +363,7 @@ export default function Home() {
             >
               {/* Image */}
               <Link
-                href={`/departments/${slug}`}
+                href={`/${slug}`}
                 className="block w-full overflow-hidden group"
                 aria-label={`Visit ${name} department page`}
               >
@@ -378,7 +378,7 @@ export default function Home() {
 
               {/* Box immediately below image */}
               <Link
-                href={`/departments/${slug}`}
+                href={`/${slug}`}
                 className="flex justify-between items-center w-full border border-neutral-100 border-t-0 px-3 py-2 text-sm font-roboto text-black transition-colors duration-300 hover:text-red-800 group"
               >
                 <span className="group-hover:underline lg:text-lg sm:text-md group-hover:decoration-red-800 max-[640px]:text-md">
