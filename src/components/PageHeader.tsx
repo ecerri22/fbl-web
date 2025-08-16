@@ -19,8 +19,7 @@ export default function PageHeader({ title, backgroundImage }: PageHeaderProps) 
       <div className="absolute inset-0 bg-black/40 md:bg-black/35" />
 
       {/* container + vertical rhythm */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-        {/* center on small screens; left-align on md+ if you prefer */}
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-18 md:py-25">
         <div className="text-center">
           <h1 className="font-playfair font-bold mb-2
                          text-2xl sm:text-3xl md:text-4xl
@@ -28,11 +27,10 @@ export default function PageHeader({ title, backgroundImage }: PageHeaderProps) 
             {title}
           </h1>
 
-          {/* breadcrumb: wraps gracefully on small screens */}
+          {/* breadcrumb */}
           <nav className="mt-2 text-xs sm:text-sm flex flex-wrap justify-center items-center gap-2 text-zinc-200">
             <Link href="/" className="hover:underline">Home</Link>
             <ChevronRight className="w-4 h-4 text-red-400" />
-            {/* truncate very long titles so they don’t overflow */}
             <span className="text-white max-w-[80vw] sm:max-w-none truncate">{title}</span>
           </nav>
         </div>

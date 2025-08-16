@@ -7,6 +7,12 @@ import Link from "next/link";
 import { Menu as MenuIcon, X, ChevronDown } from "lucide-react";
 import { Dialog, Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
 type NavbarProps = {
   open?: boolean;                    
@@ -32,13 +38,13 @@ export default function Navbar({ open, setOpen, externalTrigger = false }: Navba
     }
   }, [pathname, pendingHref, setMenuOpen]);
 
-  useEffect(() => {
-    const original = document.body.style.overflow;
-    document.body.style.overflow = menuOpen ? "hidden" : original;
-    return () => {
-      document.body.style.overflow = original;
-    };
-  }, [menuOpen]);
+  // useEffect(() => {
+  //   const original = document.body.style.overflow;
+  //   document.body.style.overflow = menuOpen ? "hidden" : original;
+  //   return () => {
+  //     document.body.style.overflow = original;
+  //   };
+  // }, [menuOpen]);
 
   function go(href: string) {
     if (href === pathname) {
@@ -92,45 +98,40 @@ export default function Navbar({ open, setOpen, externalTrigger = false }: Navba
 
             {/* Departments dropdown (desktop) */}
             <NavigationMenuItem>
-              <Menu as="div" className="relative inline-block text-left">
-                <MenuButton
-                  className={`inline-flex items-center gap-x-1 px-0 py-2 focus:outline-none ${
+              <DropdownMenu modal={false}>
+                <DropdownMenuTrigger asChild>
+                <button
+                  className={`group inline-flex items-center gap-x-1 px-0 py-2 focus:outline-none ${
                     pathname.startsWith("/departments")
                       ? "text-red-800 font-semibold"
-                      : "text-neutral-800 hover:text-red-900"
+                      : "text-neutral-800 hover:text-red-900 data-[state=open]:text-red-800"
                   }`}
                 >
                   Departments
-                  <ChevronDown className="ml-1 h-5 w-5 text-gray-400" />
-                </MenuButton>
+                  <ChevronDown
+                    className="ml-1 h-5 w-5 text-gray-400
+                              transition-colors transition-transform duration-200
+                              group-hover:text-red-900
+                              group-data-[state=open]:text-red-800
+                              group-data-[state=open]:rotate-180"
+                  />
+                </button>
+              </DropdownMenuTrigger>
 
-                <MenuItems className="absolute left-0 z-50 mt-2 w-56 origin-top-left bg-white shadow-lg ring-1 ring-neutral-200 ring-opacity-5 focus:outline-none">
-                  <div className="py-1">
-                    {departments.map(([label, slug]) => {
-                      const active = pathname === `/departments/${slug}`;
-                      return (
-                        <MenuItem key={slug}>
-                          {({ active: itemActive }) => (
-                            <Link
-                              href={`/departments/${slug}`}
-                              className={`block px-4 py-2 text-sm ${
-                                active
-                                  ? "bg-red-50 text-red-800 font-medium"
-                                  : itemActive
-                                  ? "text-red-800"
-                                  : "text-gray-700"
-                              }`}
-                            >
-                              {label}
-                            </Link>
-                          )}
-                        </MenuItem>
-                      );
-                    })}
-                  </div>
-                </MenuItems>
-              </Menu>
+
+                <DropdownMenuContent align="start" sideOffset={8} className="w-56 z-[60]">
+                  {departments.map(([label, slug]) => (
+                    <DropdownMenuItem asChild key={slug}>
+                      <Link href={`/departments/${slug}`} className="block w-full text-sm text-gray-700 hover:text-red-800">
+                        {label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </NavigationMenuItem>
+
+
 
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={isActive("/research")}>
