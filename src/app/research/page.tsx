@@ -13,14 +13,14 @@ export default function ResearchPage() {
         <section className="grid grid-cols-1 gap-10 text-center md:flex md:flex-row items-center pb-10 border-b border-neutral-300">
           {/* Left */}
           <div className="lg:w-2/5 ">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight font-playfair text-neutral-800">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl md:text-start font-semibold leading-tight font-playfair text-neutral-800">
               Scientific Research
             </h1>
           </div>
 
           {/* Right */}
           <div className="lg:w-3/5 flex flex-col justify-center h-full space-y-6 lg:items-end">
-            <p className="font-roboto text-neutral-600 leading-relaxed max-w-prose max-[425px]:text-sm text-base">
+            <p className="font-roboto text-neutral-600 md:text-end leading-relaxed max-w-prose max-[425px]:text-sm text-base">
               We conduct impactful research in fields such as business, digital technology, law, and public policy. The faculty supports initiatives that bring tangible change to society and the economy.
             </p>
           </div>
@@ -94,7 +94,6 @@ export default function ResearchPage() {
             </Link>
           </div>
         </section>
-
 
         {/* collaborations */}
         <section className="">
