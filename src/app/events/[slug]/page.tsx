@@ -58,7 +58,7 @@ export default function EventDetailPage({params}: any ) {
       </div>
 
       {/* Title */}
-      <h1 className="text-3xl md:text-4xl font-playfair font-semibold text-neutral-900 leading-tight">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight font-playfair text-neutral-800">
         {event.title}
       </h1>
 
@@ -79,15 +79,15 @@ export default function EventDetailPage({params}: any ) {
           <article className="space-y-6">
 
             {/* Lead paragraph */}
-            <p className="text-md md:text-base leading-relaxed text-neutral-700 border-l-4 border-red-800/70 pl-4 py-1 bg-red-50/40">
+            <p className="max-[425px]:text-sm text-base leading-relaxed text-neutral-700 border-l-4 border-red-800/70 pl-4 py-1 bg-red-50/40">
               {event.description ?? "Details coming soon."}
             </p>
 
             {/* Body paragraphs */}
-            <div className="prose max-w-none text-md">
+            <div className="prose max-w-none max-[425px]:text-sm text-base">
               {Array.isArray((event as any).content) && (event as any).content.length ? (
                 ((event as any).content as string[]).map((para, i) => (
-                  <p key={i} className="text-md pb-5 md:text-base leading-relaxed">{para}</p>
+                  <p key={i} className=" pb-5 max-[425px]:text-sm text-base leading-relaxed">{para}</p>
                 ))
               ) : null}
             </div>
@@ -119,11 +119,7 @@ export default function EventDetailPage({params}: any ) {
                 </ul>
               </section>
             )}
-
-
-
           </article>
-
         </div>
 
         {/* Right column: aside cards */}
@@ -131,7 +127,7 @@ export default function EventDetailPage({params}: any ) {
           {/* Information card */}
           <div className="border border-neutral-200 bg-white shadow-sm">
             <div className=" text-neutral-100 border-b border-neutral-200 px-5 py-3 bg-red-800 ">
-              <h3 className="text-lg font-semibold font-playfair ">
+              <h3 className="text-base font-semibold font-playfair ">
                 Information
               </h3>
             </div>

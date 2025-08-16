@@ -21,7 +21,7 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
 
   return (
     <PageWrapper>
-      <div className="text-neutral-800 space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
+      <div className="text-neutral-800 space-y-15 sm:space-y-15 max-[640px]:space-y-15 ">
         {/* Back button */}
         <div className="flex flex-row items-center mb-10 gap-2 hover:text-red-800 text-sm text-neutral-600">
           <ArrowLeft className="w-4 h-4" />
@@ -30,15 +30,17 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
           </Link>
         </div>
 
-        <div>
+        <div className="text-neutral-800 space-y-15 sm:space-y-15 max-[640px]:space-y-15">
           {/* GRID */}
-          <div className="grid gap-12 lg:grid-cols-[2fr_1fr]">
+          <div className="grid w-full gap-12 lg:grid-cols-[2fr_1fr] overflow-x-clip">
+
             {/* LEFT COLUMN */}
-            <div className="space-y-16 md:space-y-20 sm:space-y-20 max-[640px]:space-y-15">
+              <div className="min-w-0 space-y-15 sm:space-y-15 max-[640px]:space-y-15">
+             
               {/* OVERVIEW */}
               <section id="program_overview">
                 <div className="flex flex-col gap-8 sm:gap-12">
-                  <div className="relative w-full h-64 sm:h-[20rem] overflow-hidden rounded shadow-md">
+                  <div className="relative w-full h-64 sm:h-[20rem] overflow-hidden shadow-md">
                     <Image
                       src="/images/departments/business-admn-img.jpg"
                       alt="Program image"
@@ -52,13 +54,13 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
                     <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800 mb-3 sm:mb-4">
                       About the program
                     </h2>
-                    <p className="leading-relaxed">{program.description}</p>
+                    <p className="leading-relaxed max-[425px]:text-sm text-base">{program.description}</p>
                   </div>
                 </div>
               </section>
 
               {/* --- MOBILE/TABLET ONLY: Snapshot + Jump Links --- */}
-              <div className="lg:hidden space-y-8 lg:border-t lg:border-neutral-200 md:pt-6">
+              <div className="lg:hidden space-y-8 lg:border-t lg:border-neutral-200 lg:pt-6">
                 {/* SUMMARY BOX */}
                 <div className="bg-white border border-neutral-200 shadow-sm p-6 space-y-4">
                   <h3 className="text-lg font-playfair font-semibold text-red-800">Program Snapshot</h3>
@@ -113,9 +115,9 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
                   <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800 mb-3 sm:mb-4">
                     {program.whyTitle}
                   </h2>
-                  <p className="text-base leading-relaxed">{program.whyIntro}</p>
+                  <p className="leading-relaxed max-[425px]:text-sm text-base">{program.whyIntro}</p>
                   {program.whyBulletPoints && (
-                    <ul className="list-disc list-inside space-y-2 text-base text-neutral-700">
+                    <ul className="list-disc list-inside space-y-2 max-[425px]:text-sm text-base text-neutral-700">
                       {program.whyBulletPoints.map((point, index) => (
                         <li key={index}>
                           <span className="font-semibold">{point.label}:</span> {point.description}
@@ -132,11 +134,11 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
               </section>
 
               {/* CAREER PROSPECTS */}
-              <section id="career" className="bg-neutral-100 py-16 sm:py-20 px-4 sm:px-6 md:px-12">
+              <section id="career" className="bg-neutral-100 py-8 px-4 sm:px-8 sm:py-12 lg:px-12 lg:py-20 ">
                 <div className="max-w-5xl mx-auto space-y-6 sm:space-y-10">
                   <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-neutral-800">Career Prospects</h2>
-                  <p className="text-neutral-700 text-base leading-relaxed">{program.careerIntro}</p>
-                  <ul className="list-disc list-inside space-y-3 sm:space-y-4 text-neutral-800 text-base leading-relaxed">
+                  <p className="text-neutral-700 leading-relaxed max-[425px]:text-sm text-base">{program.careerIntro}</p>
+                  <ul className="list-disc list-inside space-y-3 sm:space-y-4 text-neutral-800 max-[425px]:text-sm text-base leading-relaxed">
                     {program.careerBulletPoints?.map((item, index) => (
                       <li key={index}>
                         <span className="font-semibold text-red-800">{item.label}:</span> {item.description}
@@ -147,12 +149,12 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
               </section>
 
               {/* ADMISSION REQUIREMENTS */}
-              <section id="admission_requirements" className="pt-16 sm:pt-20 px-4 sm:px-6 md:px-12 bg-white border-t border-neutral-200">
+              <section id="admission_requirements" className="pt-15 sm:pt-15 md:px-12 bg-white border-t border-neutral-200">
                 <div className="max-w-5xl mx-auto space-y-6 sm:space-y-10">
                   <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-neutral-800">Admission Requirements</h2>
 
                   {Array.isArray(program.admission) ? (
-                    <ul className="list-disc list-inside space-y-3 sm:space-y-4 text-neutral-800 text-base leading-relaxed">
+                    <ul className="list-disc list-inside space-y-3 sm:space-y-4 text-neutral-800 max-[425px]:text-sm text-base leading-relaxed">
                       {program.admission.map((item, i) => {
                         if (typeof item === "string") return <li key={i}>{item}</li>;
                         if (typeof item === "object" && item.label && item.description) {
@@ -188,7 +190,7 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
             </div>
 
             {/* DESKTOP ASIDE */}
-            <aside className="hidden lg:block space-y-10 self-start sticky top-32">
+            <aside className="hidden lg:block min-w-0 space-y-10 self-start sticky top-32">
               {/* SUMMARY BOX */}
               <div className="bg-white border border-neutral-200 shadow-sm p-6 space-y-4">
                 <h3 className="text-lg font-playfair font-semibold text-red-800">Program Snapshot</h3>
@@ -235,7 +237,7 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
                 </ul>
               </div>
 
-              {/* CTA CONTACT BOX */}
+               {/* CTA CONTACT BOX */}
               <div className="bg-white border border-neutral-200 shadow-sm p-6 text-center space-y-3">
                 <h4 className="text-lg font-semibold text-red-800 font-playfair">Got Questions?</h4>
                 <p className="text-md text-neutral-600">
@@ -249,29 +251,21 @@ export default function ProgramDetailPage({ params, searchParams }: PageProps) {
                 </a>
               </div>
 
-              {/* APPLY BUTTON */}
-              <Link
-                href="/apply"
-                className="relative text-center block px-8 py-4 font-roboto text-white bg-red-800 group transition"
-              >
-                <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>
-                <span className="relative z-10">Apply now</span>
-              </Link>
             </aside>
           </div>
 
           {/* CTA FINAL SECTION */}
-          <section className="text-center pt-16 border-t border-neutral-300">
-            <h2 className="text-3xl font-playfair mb-4">Still exploring your path?</h2>
-            <p className="text-neutral-600 mb-6">
+          <section className="text-center pt-10 pb-5 sm:pt-16 border-t border-neutral-300">
+            <h2 className="text-2xl sm:text-3xl font-playfair mb-4">Still exploring your path?</h2>
+            <p className="text-neutral-600 mb-6 max-[425px]:text-sm text-base">
               We offer a range of programs designed to shape the leaders, creators, and problem-solvers of tomorrow.
             </p>
             <Link
               href="/study-programs"
-              className="relative inline-block px-8 py-4 font-roboto text-white bg-red-800 group transition"
+              className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
             >
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>
-              <span className="relative z-10">View Programs</span>
+              <span className="relative z-10 capitalize whitespace-nowrap">View Programs</span>
             </Link>
           </section>
         </div>

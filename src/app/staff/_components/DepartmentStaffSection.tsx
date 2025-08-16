@@ -58,13 +58,13 @@ function StaffCard({ member }: { member: StaffMember }) {
       {/* Content */}
       <div className="p-5 sm:p-6 flex flex-col gap-4 justify-between">
         <div>
-          <h3 className="font-playfair text-xl sm:text-2xl font-semibold text-neutral-900">
+          <h3 className="font-playfair text-lg sm:text-2xl max-[425px]:text-lg font-semibold text-neutral-900">
             {member.name}
           </h3>
           <p className="font-roboto text-neutral-500 mt-1">{member.title}</p>
         </div>
 
-        <div className="space-y-2 text-red-800 font-roboto">
+        <div className="space-y-2 text-red-800 text-md max-[425px]:text-sm font-roboto">
           <div className="flex items-start gap-3">
             <Mail size={18} className="shrink-0 mt-0.5" />
             <a
@@ -92,7 +92,7 @@ function StaffCard({ member }: { member: StaffMember }) {
   `}
 >
   <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
-  <span className="relative text-sm sm:text-base z-10 capitalize whitespace-nowrap">
+  <span className="relative max-[425px]:text-sm text-base z-10 capitalize whitespace-nowrap">
     More Details
   </span>
         </Link>
@@ -137,7 +137,6 @@ export default function DepartmentStaffSection({
       <h2 className="text-center text-3xl font-playfair font-semibold text-neutral-800 mb-8">
         Department Staff
     </h2>
-
 
       {/* Head of Department */}
       {head && (

@@ -75,7 +75,7 @@ export default function NewsPage() {
         {/* Mobile filter bar (≤1024px) */}
         <div className="lg:hidden sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-neutral-200">
           <div className="flex items-center justify-between px-1 pb-6">
-            <h2 className="font-playfair font-semibold text-3xl">News</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800">News</h2>
             <button
               onClick={() => setFiltersOpen((v) => !v)}
               aria-expanded={filtersOpen}
@@ -159,33 +159,36 @@ export default function NewsPage() {
               </div>
 
               {/* Bottom action bar (mobile filters) */}
-              <div className="sticky bottom-0 bg-white/95 backdrop-blur  px-2 py-3 flex items-end justify-between gap-3">
+              <div
+                className="
+                  sticky bottom-0 bg-white/95 backdrop-blur px-2 py-3
+                  flex flex-col gap-3
+                  min-[426px]:flex-row min-[426px]:items-center min-[426px]:justify-between
+                "
+              >
                 <button
-                  onClick={() => {
-                    setQ("");
-                    setActiveCat("All");
-                    setSelectedPost(null);
-                  }}
-                  className="text-sm text-neutral-600 underline"
+                  onClick={() => { setQ(""); setActiveCat("All"); setSelectedPost(null); }}
+                  className="text-sm text-neutral-600 underline self-start min-[426px]:self-auto"
                 >
                   Clear
                 </button>
 
-                <div className="flex items-center gap-2">
+                <div className="flex w-full flex-col gap-2 min-[426px]:w-auto min-[426px]:flex-row">
                   <button
                     onClick={() => setFiltersOpen(false)}
-                    className="text-sm px-4 py-2 border border-neutral-300"
+                    className="w-full text-sm px-4 py-2 border border-neutral-300 min-[426px]:w-auto"
                   >
                     Close
                   </button>
                   <button
                     onClick={() => setFiltersOpen(false)}
-                    className="text-sm px-4 py-2 bg-red-800 text-white hover:bg-red-700"
+                    className="w-full text-sm px-4 py-2 bg-red-800 text-white hover:bg-red-700 min-[426px]:w-auto"
                   >
                     Show results ({filtered.length})
                   </button>
                 </div>
               </div>
+
             </div>
           )}
         </div>
@@ -348,12 +351,12 @@ function ArticleView({ post, onBack }: { post: any; onBack: () => void }) {
         />
       </div>
 
-      <h1 className="mt-6 text-3xl md:text-4xl font-playfair font-semibold leading-tight">
+      <h1 className="mt-6 text-2xl sm:text-3xl md:text-4xl font-playfair font-semibold leading-tight">
         {post.title}
       </h1>
 
       <div className="mt-3 flex flex-wrap gap-4 text-sm text-neutral-500">
-        <span className="uppercase tracking-wide text-red-800 font-medium">
+        <span className="uppercase tracking-wide text-red-800 ">
           {post.category}
         </span>
         <span className="inline-flex items-center gap-1">
@@ -361,7 +364,7 @@ function ArticleView({ post, onBack }: { post: any; onBack: () => void }) {
         </span>
       </div>
 
-      <article className="prose max-w-none mt-8 text-neutral-800">
+      <article className="prose max-w-none mt-8 text-neutral-800 max-[425px]:text-sm text-base">
         {(post as any).content?.map((para: string, i: number) => (
           <p key={i}>{para}</p>
         )) || <p>{post.excerpt}</p>}
@@ -410,7 +413,7 @@ function PostCard({
       <div className="p-5 flex flex-1 flex-col">
         {/* Meta */}
         <div className="flex items-center gap-3 text-xs text-neutral-500">
-          <span className="uppercase tracking-wide text-red-800 font-medium">{post.category}</span>
+          <span className="uppercase tracking-wide text-red-800 ">{post.category}</span>
           <span>•</span>
           <span className="inline-flex items-center gap-1">
             <CalendarDays size={14} /> {formatDate(post.date)}

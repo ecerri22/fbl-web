@@ -71,7 +71,7 @@ export default function Home() {
 
               <Link
                 href="/study-programs"
-                className="relative inline-block px-6 py-3 sm:px-8 sm:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
+                className="relative inline-block px-6 py-3 text-sm sm:text-base sm:px-8 sm:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
               >
                 <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full" />
                 <span className="relative z-10 capitalize whitespace-nowrap">
@@ -141,13 +141,13 @@ export default function Home() {
               About FBL
             </h1>
 
-            <p className="text-neutral-600 text-center min-[881px]:text-left max-w-prose">
+            <p className="text-neutral-600 text-center min-[881px]:text-left max-w-prose text-base max-[425px]:text-sm">
               At FBL, we believe in the transformative power of education and the boundless potential that resides within each individual. Our mission is to foster intellectual curiosity, empower individuals to realize their fullest potential, and contribute meaningfully to the betterment of society. commitment to academic excellence, diversity, and community engagement.
             </p>
 
             <Link
               href="/study-programs"
-              className="relative inline-block xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 xl:text-md lg:text-sm sm:text-xs sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
+              className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
             >
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
               <span className="relative z-10 capitalize whitespace-nowrap">View our programs</span>
@@ -174,7 +174,7 @@ export default function Home() {
                 <li key={major}>
                   <Link
                     href="#"
-                    className="group inline-flex items-center justify-between border border-neutral-800 px-6 py-3 text-neutral-800 font-roboto xl:text-lg lg:text-md md:text-sm sm-:text-xs w-full hover:border-transparent hover:bg-red-800 hover:text-white transition-colors"
+                    className="group inline-flex items-center justify-between border border-neutral-800 px-6 py-3 text-neutral-800 font-roboto text-sm sm:text-base w-full hover:border-transparent hover:bg-red-800 hover:text-white transition-colors"
                   >
                     {major}
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -185,7 +185,7 @@ export default function Home() {
               <li>
                 <Link
                   href="#"
-                  className="inline-flex justify-center border border-neutral-800/60 text-neutral-800/80 px-6 py-3 font-roboto xl:text-lg lg:text-md md:text-sm sm:text-xs w-full hover:border-neutral-800 hover:text-neutral-800 transition-colors"
+                  className="inline-flex justify-center border border-neutral-800/60 text-neutral-800/80 sm:px-6 sm:py-3 px-4 py-2 font-roboto text-sm sm:text-base w-full hover:border-neutral-800 hover:text-neutral-800 transition-colors"
                 >
                   See More
                 </Link>
@@ -205,7 +205,7 @@ export default function Home() {
                   <li key={major}>
                     <Link
                       href="#"
-                      className="group inline-flex items-center justify-between border border-neutral-100 px-6 py-3 text-neutral-100 font-roboto xl:text-lg lg:text-md md:text-sm sm-:text-xs w-full hover:bg-neutral-100 hover:text-red-800 transition-colors"
+                      className="group inline-flex items-center justify-between border border-neutral-100 px-6 py-3 text-neutral-100 font-roboto text-sm sm:text-base w-full hover:bg-neutral-100 hover:text-red-800 transition-colors"
                     >
                       {major}
                       <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -217,7 +217,7 @@ export default function Home() {
               <li>
                 <Link
                   href="#"
-                  className="inline-flex justify-center border border-white/60 text-white/80 px-6 py-3 font-roboto xl:text-lg lg:text-md md:text-sm sm:text-xs w-full hover:text-white hover:border-white transition-colors"
+                  className="inline-flex justify-center border border-white/60 text-white/80 sm:px-6 sm:py-3 px-4 py-2 font-roboto text-sm sm:text-base w-full hover:text-white hover:border-white transition-colors"
                 >
                   See More
                 </Link>
@@ -232,20 +232,20 @@ export default function Home() {
       <section className="relative bg-fixed bg-center bg-cover bg-[url('/images/rut-miit-3EMw3T-ZjkE-unsplash.jpg')]">
         <div className="absolute inset-0 bg-black/80 z-0" />
 
-        <div className="relative z-10 flex items-center justify-center sm:px-20 sm:py-20 max-[640px]:py-20 max-[640px]:px-10">
+        <div className="relative z-10 flex items-center justify-center sm:px-20 sm:py-20 px-15 py-15 max-[640px]:py-20 max-[640px]:px-10">
           <div className="max-w-3xl text-center text-white space-y-8">
             <h1 className="xl:text-5xl lg:text-4xl md:text-3xl sm:text-sxl max-[640px]:text-3xl font-semibold leading-tight font-playfair">
               Scholarships & Financial Aid
             </h1>
-            <p className="lg:text-lg md:text-md sm:text-sm font-roboto">
+            <p className="lg:text-lg md:text-md sm:text-sm font-roboto text-base max-[425px]:text-sm">
               Each semester, we are proud to honor academically talented and exceptionally skilled students
               with a variety of scholarships and awards. Lorem ipsum dolor sit amet consectetur adipisicing
               elit. Est reiciendis sed aspernatur aliquam facilis repellat quaerat a fugiat fuga quam!
             </p>
             <Link
               href="/study-programs"
-              className="relative inline-block font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800
-              xl:px-8 xl:py-4 xl:text-md lg:text-sm sm:text-xs sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
+              className="relative text-sm sm:text-base inline-block font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800
+              xl:px-8 xl:py-4 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
             >
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
               <span className="relative z-10 capitalize whitespace-nowrap">
@@ -315,6 +315,7 @@ export default function Home() {
                         flex items-center gap-6 text-sm text-neutral-600 mt-1 font-roboto group-hover:text-neutral-200
                         max-[640px]:flex-col max-[640px]:items-start max-[640px]:gap-1 max-[640px]:mt-2 max-[640px]:text-xs
                         max-[425px]:flex-row max-[425px]:items-center max-[425px]:justify-center max-[425px]:gap-4 max-[425px]:text-sm max-[425px]:mt-3
+                        max-[385px]:text-xs max-[355px]:flex-col 
                       "
                     >
                       <span className="inline-flex items-center gap-2 leading-tight">
@@ -390,9 +391,8 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* NEWS */}
-      <section className="flex flex-col gap-12 max-w-7xl mx-auto sm:px-20 sm:pb-20 lg:pb-25 max-[640px]:pb-20 max-[640px]:px-10">
+      <section className="flex flex-col gap-8 max-w-7xl mx-auto sm:px-20 sm:pb-20 lg:pb-25 max-[640px]:pb-20 max-[640px]:px-10">
         {/* Header */}
         <div className="flex justify-between items-end">
           <h1 className="justify-center max-[640px]:text-center xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl max-[640px]:text-3xl font-semibold leading-tight font-playfair text-neutral-800">
@@ -451,7 +451,7 @@ export default function Home() {
                 >
                   {title}
                 </Link>
-                <p className="text-sm font-roboto text-neutral-600 mt-1">{content}</p>
+                <p className="text-sm font-roboto text-neutral-600 mt-1 text-sm sm:text-base">{content}</p>
                 <span className="text-sm text-stone-500 font-roboto mt-2">{date}</span>
               </div>
             </div>
@@ -463,7 +463,8 @@ export default function Home() {
           <Link
             href="/news"
             className="hidden max-[640px]:block max-[640px]:self-center max-[640px]:text-center
-                      text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
+                      text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors
+                       md:text-md sm:text-sm max-[640px]:text-sm"
           >
             View All
           </Link>

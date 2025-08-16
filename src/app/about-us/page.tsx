@@ -19,12 +19,11 @@ export default function AboutPage() {
 
           {/* Right */}
           <div className="lg:border-l lg:border-neutral-300 lg:pl-10 ">
-            <p className="font-roboto text-neutral-600 leading-relaxed max-w-prose">
+            <p className="font-roboto text-neutral-600 leading-relaxed max-w-prose max-[425px]:text-sm text-base">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente consequuntur officia id error? Ipsum harum tempora laboriosam magni aut deserunt, illo ipsa porro totam. Doloremque perspiciatis deleniti officiis quibusdam sint?
             </p>
           </div>
         </section>
-
 
         {/* Stats section  */}
         <section className="grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-8 md:gap-12 space-between">
@@ -59,17 +58,16 @@ export default function AboutPage() {
           </div>
         </section>
 
-
         {/* Message from the Dean Section */}
         <section className="max-w-3xl mx-auto text-center space-y-6 py-10 border-y border-neutral-200">
           <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800">Message from the Dean</h2>
-            <p className="text-neutral-600 font-roboto italic text-lg leading-relaxed">
+            <p className="text-neutral-600 font-roboto italic max-[425px]:text-sm text-md leading-relaxed">
             Welcome to the Faculty of Business and Law. Our mission is to cultivate future leaders who are grounded in ethics, driven by innovation, and committed to making meaningful contributions to society. 
           </p>
-          <p className="text-neutral-600 font-roboto italic text-lg leading-relaxed">
+          <p className="text-neutral-600 font-roboto italic max-[425px]:text-sm text-md leading-relaxed">
             At FBL, we believe in the power of education to transform lives and communities. Whether you&#39;re a prospective student, a parent, or a partner, I invite you to explore what makes our faculty a place of excellence and opportunity.
           </p>
-          <p className="text-neutral-700 font-roboto font-semibold mt-4 text-red-800">– John Doe, Dean of the Faculty of Business and Law</p>
+          <p className="text-sm sm:text-base font-roboto font-semibold mt-4 text-red-800">– John Doe, Dean of the Faculty of Business and Law</p>
         </section>
 
         {/* History of FBL Section */}
@@ -91,19 +89,18 @@ export default function AboutPage() {
             <h3 className="text-2xl sm:text-3xl font-semibold leading-tight font-playfair text-neutral-800">
               The History of FBL
             </h3>
-            <p className="text-neutral-700 leading-relaxed">
+            <p className="text-neutral-700 leading-relaxed max-[425px]:text-sm text-base">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente consequuntur officia id error? Ipsum harum tempora laboriosam magni aut deserunt, illo ipsa porro totam. Doloremque perspiciatis deleniti officiis quibusdam sint?
             </p>
-            <p className="text-neutral-700 leading-relaxed">
+            <p className="text-neutral-700 leading-relaxed max-[425px]:text-sm text-base">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum excepturi reprehenderit debitis. Repudiandae cum totam labore tenetur quasi, corrupti facere, corporis reiciendis consectetur eveniet ipsam nemo exercitationem nesciunt earum eum?
             </p>
           </div>
         </section>
 
-
         {/* Mission and Values Section */}
         <section className="px-4 md:px-0 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold font-playfair text-neutral-800 text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800 text-center mb-10">
             Mission and Values
           </h2>
 
@@ -128,7 +125,7 @@ export default function AboutPage() {
                   className="flex flex-col gap-3 items-center text-center md:items-end md:text-right"
                 >
                   <h3 className="text-xl font-playfair text-neutral-800">{item.title}</h3>
-                  <p className="text-md font-roboto text-neutral-500 w-full md:w-4/5 xl:w-3/5">
+                  <p className="max-[425px]:text-sm text-base font-roboto text-neutral-500 w-full md:w-4/5 xl:w-3/5">
                     {item.description}
                   </p>
                   <div className="relative overflow-hidden w-full h-40 sm:h-48 md:aspect-auto md:h-80">
@@ -163,7 +160,7 @@ export default function AboutPage() {
                   className="flex flex-col gap-3 items-center text-center md:items-start md:text-left"
                 >
                   <h3 className="text-xl font-playfair text-neutral-800">{item.title}</h3>
-                  <p className="text-md font-roboto text-neutral-500 w-full md:w-4/5 xl:w-3/5">
+                  <p className="max-[425px]:text-sm text-base font-roboto text-neutral-500 w-full md:w-4/5 xl:w-3/5">
                     {item.description}
                   </p>
                   <div className="relative overflow-hidden w-full h-40 sm:h-48 md:aspect-auto md:h-80">
@@ -181,19 +178,16 @@ export default function AboutPage() {
           </div>
         </section>
 
-
         {/* CTA */}
-        <section className="text-center pt-16 border-t border-neutral-300">
-          <h2 className="text-2xl font-playfair mb-4">Ready to explore more?</h2>
-          <p className="text-neutral-600 mb-6">Discover our academic programs and see where your future begins.</p>
+        <section className="text-center pb-5 pt-10 sm:pt-16 border-t border-neutral-300">
+          <h2 className="text-2xl sm:text-3xl font-playfair mb-4">Ready to explore more?</h2>
+          <p className="text-neutral-600 mb-6 max-[425px]:text-sm text-base">Discover our academic programs and see where your future begins.</p>
           <Link
-            href="/programs"
-            className="relative inline-block px-8 py-4 font-roboto text-white overflow-hidden bg-red-800 group"
-          >
-            <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>
-            <span className="relative z-10 capitalize whitespace-nowrap">
-              View our programs
-            </span>
+              href="/study-programs"
+              className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
+            >
+              <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
+              <span className="relative z-10 capitalize whitespace-nowrap">View our programs</span>
           </Link>
 
         </section>

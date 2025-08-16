@@ -32,7 +32,10 @@ export function CurriculumSection({ curriculum }: { curriculum: Curriculum }) {
         const isOpen = openYear === yearKey;
 
         return (
-          <div key={yearKey} className="border border-neutral-300 rounded overflow-hidden">
+          <div
+            key={yearKey}
+            className="border border-neutral-300 rounded overflow-hidden"
+          >
             <button
               onClick={() => toggleYear(yearKey)}
               className={`w-full flex justify-between items-center px-4 py-3 font-semibold text-left transition-colors duration-300 ${
@@ -56,11 +59,15 @@ export function CurriculumSection({ curriculum }: { curriculum: Curriculum }) {
                 >
                   <div className="p-4 space-y-8 bg-white">
                     <div>
-                      <h3 className="font-semibold mb-2 text-neutral-700">Semester 1</h3>
+                      <h3 className="font-semibold mb-2 text-neutral-700">
+                        Semester 1
+                      </h3>
                       <CurriculumTable courses={yearData.semester1} />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-2 text-neutral-700">Semester 2</h3>
+                      <h3 className="font-semibold mb-2 text-neutral-700">
+                        Semester 2
+                      </h3>
                       <CurriculumTable courses={yearData.semester2} />
                     </div>
                   </div>
@@ -76,21 +83,28 @@ export function CurriculumSection({ curriculum }: { curriculum: Curriculum }) {
 
 function CurriculumTable({ courses }: { courses: Course[] }) {
   return (
-    <table className="w-full border text-sm">
-      <thead>
-        <tr className="bg-red-800 text-white">
-          <th className="text-left p-2">Course Title</th>
-          <th className="text-left p-2">Credits</th>
-        </tr>
-      </thead>
-      <tbody>
-        {courses.map((course, idx) => (
-          <tr key={idx} className="border-t">
-            <td className="p-2">{course.title}</td>
-            <td className="p-2">{course.credits} Credits</td>
+    <div className="overflow-x-auto"> {/* <- no -mx-4 */}
+      <table className="min-w-full table-fixed border text-sm">
+        <colgroup>
+          <col className="w-[70%]" />
+          <col className="w-[30%]" />
+        </colgroup>
+        <thead>
+          <tr className="bg-red-800 text-white">
+            <th className="text-left p-2">Course Title</th>
+            <th className="text-left p-2">Credits</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {courses.map((course, idx) => (
+            <tr key={idx} className="border-t">
+              <td className="p-2 break-words whitespace-normal ">{course.title}</td>
+              <td className="p-2 whitespace-nowrap">{course.credits} Credits</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
+
