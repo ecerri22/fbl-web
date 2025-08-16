@@ -3,7 +3,7 @@ export const allPrograms = [
     "name": "Bachelor in Business Administration",
     "slug": "business-administration-bachelor",
     "level": "Bachelor",
-    "image": "/images/departments/business-admn-img.jpg",
+    "image": "/images/departments/business-admn-img.webp",
     "departmentCode": "Business Administration",
     "department": "Business Administration",
     "departmentSlug": "business-administration",

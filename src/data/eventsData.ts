@@ -7,7 +7,7 @@ export const events = [
     date: "2024-08-20",
     time: "10:00 AM – 4:00 PM",
     location: "Yarra Park, UK",
-    image: "/images/news/fakulteti-ekonomik-uniel.jpg",
+    image: "/images/news/fakulteti-ekonomik-uniel.webp",
     description:
       "A thought-provoking event aimed at fostering intercultural understanding through collaborative workshops, art exhibitions, and language immersion experiences.",
     content: [
@@ -45,7 +45,7 @@ export const events = [
     date: "2024-09-15",
     time: "09:30 AM – 3:30 PM",
     location: "London Conference Hall, UK",
-    image: "/images/news/fakulteti-ekonomik-uniel.jpg",
+    image: "/images/news/fakulteti-ekonomik-uniel.webp",
     description:
       "An educational event dedicated to exploring innovation, leadership, and the future of work.",
     content: [
@@ -79,7 +79,7 @@ export const events = [
     date: "2024-10-05",
     time: "11:00 AM – 5:00 PM",
     location: "Green Hall, Manchester, UK",
-    image: "/images/news/fakulteti-ekonomik-uniel.jpg",
+    image: "/images/news/fakulteti-ekonomik-uniel.webp",
     description:
       "A gathering of business leaders and students to discuss sustainable practices and green innovation.",
     content: [
@@ -111,7 +111,7 @@ export const events = [
     date: "2024-11-12",
     time: "09:00 AM – 6:00 PM",
     location: "Innovation Hub, Birmingham, UK",
-    image: "/images/news/fakulteti-ekonomik-uniel.jpg",
+    image: "/images/news/fakulteti-ekonomik-uniel.webp",
     description:
       "A full-day bootcamp designed for aspiring entrepreneurs to develop, refine, and pitch their business ideas.",
     content: [
@@ -144,7 +144,7 @@ export const events = [
     date: "2024-12-03",
     time: "10:00 AM – 5:00 PM",
     location: "City Expo Center, Leeds, UK",
-    image: "/images/news/fakulteti-ekonomik-uniel.jpg",
+    image: "/images/news/fakulteti-ekonomik-uniel.webp",
     description:
       "An annual event exploring the trends, tools, and techniques shaping the future of marketing.",
     content: [
@@ -177,7 +177,7 @@ export const events = [
     date: "2025-01-25",
     time: "09:30 AM – 4:30 PM",
     location: "TechEd Hall, Oxford, UK",
-    image: "/images/news/fakulteti-ekonomik-uniel.jpg",
+    image: "/images/news/fakulteti-ekonomik-uniel.webp",
     description:
       "Exploring the intersection of artificial intelligence and education for a smarter future.",
     content: [
@@ -210,7 +210,7 @@ export const events = [
     date: "2025-01-25",
     time: "09:30 AM – 4:30 PM",
     location: "TechEd Hall, Oxford, UK",
-    image: "/images/news/fakulteti-ekonomik-uniel.jpg",
+    image: "/images/news/fakulteti-ekonomik-uniel.webp",
     description:
       "Exploring the intersection of artificial intelligence and education for a smarter future.",
     content: [

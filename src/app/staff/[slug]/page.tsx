@@ -41,7 +41,7 @@ export default function StaffDetailPage({ params, searchParams}: any ) {
                 "
               >
                 <Image
-                  src={staff.photo || "/images/default-profile-icon-6.jpg"}
+                  src={staff.photo || "/images/default-profile-icon-6.webp"}
                   alt={staff.name}
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 90vw"

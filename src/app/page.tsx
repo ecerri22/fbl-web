@@ -10,32 +10,32 @@ export default function Home() {
     {
       name: "Business Administration",
       slug: "departments/business-administration",
-      image: "/images/departments/business-admn-img.jpg",
+      image: "/images/departments/business-admn-img.webp",
     },
     {
       name: "Economics",
       slug: "departments/economics",
-      image: "/images/departments/economics-img.jpg",
+      image: "/images/departments/economics-img.webp",
     },
     {
       name: "Law",
       slug: "departments/law",
-      image: "/images/departments/law-img.jpg",
+      image: "/images/departments/law-img.webp",
     },
     {
       name: "Marketing & Engineering",
       slug: "departments/marketing-engineering",
-      image: "/images/departments/marketing-img.jpg",
+      image: "/images/departments/marketing-img.webp",
     },
     {
       name: "Finance & Accounting",
       slug: "departments/finance-accounting",
-      image: "/images/departments/finance-accounting-img.jpg",
+      image: "/images/departments/finance-accounting-img.webp",
     },
     {
       name: "Scientific Research Center for Research and Development in Law and Economics",
       slug: "research",
-      image: "/images/departments/research-img.jpg",
+      image: "/images/departments/research-img.webp",
     },
   ];
 
@@ -46,9 +46,21 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       {/* HERO SECTION */}
-      <section className="relative h-[50rem]">
-        {/* Background image */}
-        <div className="absolute inset-0 bg-[url('/images/rut-miit-3EMw3T-ZjkE-unsplash.jpg')] bg-cover bg-center" />
+      <section className="relative isolate h-[50rem] overflow-hidden">
+        {/* Optimized background image */}
+        <div aria-hidden className="absolute inset-0 z-0">
+          <Image
+            src="/images/rut-miit-3EMw3T-ZjkE-unsplash.webp"
+            alt=""                
+            fill
+            className="object-cover"
+            sizes="100vw"
+            quality={60}
+            priority        
+          />
+        </div>
+
+        <div className="absolute inset-0 z-10 bg-black/60 md:bg-black/50" />
 
         {/* Content overlay */}
         <div className="relative z-10 h-full flex items-end">
@@ -114,7 +126,7 @@ export default function Home() {
               {/* 1st image box */}
               <div className="relative aspect-[3/4] basis-[48%] min-w-0 md:-translate-y-4">
                 <Image
-                  src="/images/rut-miit-oTglG1D4hRA-unsplash.jpg"
+                  src="/images/rut-miit-oTglG1D4hRA-unsplash.webp"
                   alt="Graduation cap in the air"
                   fill
                   sizes="(max-width: 880px) 90vw, (max-width: 1280px) 38vw, 360px"
@@ -125,7 +137,7 @@ export default function Home() {
               {/* 2nd image box */}
               <div className="relative aspect-[3/4] basis-[48%] min-w-0 md:translate-y-4">
                 <Image
-                  src="/images/joecalih-WyBizVgCrDY-unsplash.jpg"
+                  src="/images/joecalih-WyBizVgCrDY-unsplash.webp"
                   alt="Student graduation"
                   fill
                   sizes="(max-width: 880px) 90vw, (max-width: 1280px) 38vw, 360px"
@@ -234,9 +246,21 @@ export default function Home() {
       </section>
 
       {/* Scholarships */}
-      <section className="relative bg-fixed bg-center bg-cover bg-[url('/images/rut-miit-3EMw3T-ZjkE-unsplash.jpg')]">
-        <div className="absolute inset-0 bg-black/80 z-0" />
+      <section className="relative isolate min-h-[22rem] sm:min-h-[26rem]">
+      {/* Optimized background */}
+      <div aria-hidden className="absolute inset-0 z-0">
+        <Image
+          src="/images/rut-miit-3EMw3T-ZjkE-unsplash.webp"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          quality={60}
+        />
+      </div>
 
+      {/* Readability overlay on top of the image, but below content */}
+      <div className="absolute inset-0 z-10 bg-black/40 md:bg-black/80" />
         <div className="relative z-10 flex items-center justify-center sm:px-20 sm:py-20 px-15 py-15 max-[640px]:py-20 max-[640px]:px-10">
           <div className="max-w-3xl text-center text-white space-y-8">
             <h1 className="xl:text-5xl lg:text-4xl md:text-3xl sm:text-sxl max-[640px]:text-3xl font-semibold leading-tight font-playfair">
@@ -343,7 +367,7 @@ export default function Home() {
             {/* Side image: keep your static image (or use the first event image if you prefer) */}
             <div className="w-full lg:w-2/5 flex-shrink-0">
               <Image
-                src="/images/rut-miit-3EMw3T-ZjkE-unsplash.jpg"
+                src="/images/rut-miit-3EMw3T-ZjkE-unsplash.webp"
                 width={1000}
                 height={700}
                 alt="Graduating students"

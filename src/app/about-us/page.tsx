@@ -36,7 +36,7 @@ export default function AboutPage() {
             "
           >
             <Image
-              src="/images/javier-trueba-iQPr1XkF5F0-unsplash.jpg"
+              src="/images/javier-trueba-iQPr1XkF5F0-unsplash.webp"
               alt="Happy students celebrating"
               fill
               className="object-cover object-top"
@@ -75,7 +75,7 @@ export default function AboutPage() {
           {/* Left: Image */}
           <div className="relative w-full overflow-hidden shadow-md aspect-[16/10] h-48 sm:h-64 md:h-auto">
             <Image
-              src="/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.jpg"
+              src="/images/the-jopwell-collection-0UnuYI_HrTA-unsplash.webp"
               alt="Historic photo related to FBL"
               fill
               className="object-cover"
@@ -112,12 +112,12 @@ export default function AboutPage() {
                   title: "Diversity",
                   description:
                     "Celebrating a rich tapestry of backgrounds, perspectives, and talents",
-                  image: "/images/sincerely-media-dGxOgeXAXm8-unsplash.jpg",
+                  image: "/images/sincerely-media-dGxOgeXAXm8-unsplash.webp",
                 },
                 {
                   title: "Integrity",
                   description: "Upholding the highest standards of honesty and ethics",
-                  image: "/images/priscilla-du-preez-ggeZ9oyI-PE-unsplash.jpg",
+                  image: "/images/priscilla-du-preez-ggeZ9oyI-PE-unsplash.webp",
                 },
               ].map((item, index) => (
                 <div
@@ -147,12 +147,12 @@ export default function AboutPage() {
                 {
                   title: "Excellence",
                   description: "Pursuing the highest standards in learning and leadership",
-                  image: "/images/jeswin-thomas-MvTdmNqE_dA-unsplash.jpg",
+                  image: "/images/jeswin-thomas-MvTdmNqE_dA-unsplash.webp",
                 },
                 {
                   title: "Innovation",
                   description: "Encouraging creativity, curiosity, and new ideas",
-                  image: "/images/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                  image: "/images/dom-fou-YRMWVcdyhmI-unsplash.webp",
                 },
               ].map((item, index) => (
                 <div

@@ -27,11 +27,11 @@ function StaffCard({ member }: { member: StaffMember }) {
   const [imgSrc, setImgSrc] = useState(
     member.imgSrc && member.imgSrc.trim() !== ""
       ? member.imgSrc
-      : `/images/staff/${member.slug}.jpg`
+      : `/images/staff/${member.slug}.webp`
   );
 
   function onImgError() {
-    setImgSrc("/images/default-profile-icon-6.jpg");
+    setImgSrc("/images/default-profile-icon-6.webp");
   }
 
   return (

@@ -17,13 +17,8 @@ import {
 import { events } from "@/data/eventsData";
 import PageWrapper from "@/components/PageWrapper";
 import BackBar from "@/components/BackBar";
+import { Suspense } from "react";
 
-// Types
-type EventItem = (typeof events)[number];
-
-export async function generateStaticParams() {
-  return events.map((e) => ({ slug: e.slug }));
-}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function EventDetailPage({params}: any ) {
@@ -48,12 +43,15 @@ export default function EventDetailPage({params}: any ) {
     <PageWrapper>
       <div className="text-neutral-800 ">
         {/* Back link */}
-        <BackBar
-          defaultHref="/events"
-          defaultLabel="Back to Events"
-          allHref="/events"
-          allLabel="See all events"
-        />
+        <Suspense fallback={<BackBarFallback />}>
+          <BackBar
+            defaultHref="/events"
+            defaultLabel="Back to Events"
+            allHref="/events"
+            allLabel="See all events"
+          />
+        </Suspense>
+
 
         {/* Title */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight font-playfair text-neutral-800">
@@ -260,4 +258,18 @@ function formatDate(d: string) {
     month: "long",
     day: "2-digit",
   });
+}
+
+export async function generateStaticParams() {
+  return events.map((e) => ({ slug: e.slug }));
+}
+
+function BackBarFallback() {
+  return (
+    <div className="mb-6 flex items-center gap-3">
+      <div className="h-5 w-40 rounded bg-neutral-200 animate-pulse" />
+      <span className="text-neutral-300">•</span>
+      <div className="h-5 w-28 rounded bg-neutral-200 animate-pulse" />
+    </div>
+  );
 }

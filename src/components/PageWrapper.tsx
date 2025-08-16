@@ -5,7 +5,6 @@ import PageHeader from "./PageHeader";
 
 interface PageWrapperProps {
   children: React.ReactNode;
-  /** Optional: pass a custom header background for a page */
   headerBackground?: string;
 }
 
@@ -29,6 +28,7 @@ export default function PageWrapper({ children, headerBackground }: PageWrapperP
         <PageHeader
           title={dynamicTitle || "Page"}
           backgroundImage={headerBackground}
+          priority 
         />
       )}
 

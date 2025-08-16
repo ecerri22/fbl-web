@@ -37,7 +37,7 @@ export default function ProgramDetailPage({ params, searchParams }: any) {
                 <div className="flex flex-col gap-8 sm:gap-12">
                   <div className="relative w-full h-64 sm:h-[20rem] overflow-hidden shadow-md">
                     <Image
-                      src="/images/departments/business-admn-img.jpg"
+                      src="/images/departments/business-admn-img.webp"
                       alt="Program image"
                       fill
                       className="object-cover"
