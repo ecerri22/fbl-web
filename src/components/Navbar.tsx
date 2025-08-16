@@ -151,8 +151,13 @@ export default function Navbar({ open, setOpen, externalTrigger = false }: Navba
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className={isActive("/news")}>
-                <Link href="/news">Conference</Link>
+              <NavigationMenuLink asChild className="text-neutral-800 hover:text-red-900">
+                <Link 
+                href="https://fblconferences.info/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.currentTarget.blur()}
+                >Conferences</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
 
@@ -246,7 +251,7 @@ export default function Navbar({ open, setOpen, externalTrigger = false }: Navba
                   <MobileItem label="Research" onSelect={() => go("/research")} current={pathname === "/research"} />
                   <MobileItem label="Events" onSelect={() => go("/events")} current={pathname === "/events"} />
                   <MobileItem label="News" onSelect={() => go("/news")} current={pathname === "/news"} />
-                  <MobileItem label="Conference" onSelect={() => go("/news")} />
+                  <MobileItem label="Conference" onSelect={() => go("https://fblconferences.info/")} />
                   <MobileItem label="Contact" onSelect={() => go("/news")} />
                 </nav>
               </Dialog.Panel>
