@@ -17,9 +17,9 @@ export default function Footer({ className = "" }: { className?: string }) {
         <div>
           <h4 className="text-sm font-semibold uppercase tracking-wide mb-3">Quick Links</h4>
           <ul className="space-y-2 text-sm text-neutral-300">
-            <li><Link href="/about" className="hover:text-red-800">About</Link></li>
-            <li><Link href="/programs" className="hover:text-red-800">Programs</Link></li>
-            <li><Link href="/departments" className="hover:text-red-800">Departments</Link></li>
+            <li><Link href="/about-us" className="hover:text-red-800">About Us</Link></li>
+            <li><Link href="/study-programs" className="hover:text-red-800">Study Programs</Link></li>
+            <li><Link href="/research" className="hover:text-red-800">Research</Link></li>
             <li><Link href="/events" className="hover:text-red-800">Events</Link></li>
             <li><Link href="/news" className="hover:text-red-800">News</Link></li>
           </ul>
@@ -33,7 +33,7 @@ export default function Footer({ className = "" }: { className?: string }) {
               <Mail className="w-4 h-4"/> info@fbl.edu.al
             </p>
             <p className="flex items-center gap-2">
-              <Phone className="w-4 h-4"/> +355 67 123 456
+              <Phone className="w-4 h-4"/> +355 00000000
             </p>
             <p className="flex items-center gap-2">
               <MapPin className="w-4 h-4"/> Elbasan, Albania
