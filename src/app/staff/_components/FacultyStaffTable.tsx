@@ -75,13 +75,14 @@ const departments = [
 
 export default function FacultyStaffTable() {
   return (
-    <div className="bg-white shadow rounded-md p-6 space-y-8">
-      <h2 className="text-3xl font-playfair font-bold capitalize text-red-800">
+    <div className="">
+      <span>Organizational Schema Image</span>
+      {/* <h2 className="text-3xl font-playfair font-bold capitalize text-red-800">
         faculty&apos;s organizational schema
-      </h2>
+      </h2> */}
 
       {/* Faculty-wide Staff */}
-      <table className="min-w-full table-auto border border-neutral-200">
+      {/* <table className="min-w-full table-auto border border-neutral-200">
         <tbody>
           {facultyData.map((item, idx) => (
             <tr key={idx} className="border-b border-neutral-200">
@@ -98,10 +99,10 @@ export default function FacultyStaffTable() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
 
       {/* Per-Department Staff */}
-      {departments.map((dept, idx) => (
+      {/* {departments.map((dept, idx) => (
         <div key={idx}>
           <h3 className="text-red-800 font-semibold mb-2">{dept.title}</h3>
           <table className="min-w-full table-auto border border-neutral-200">
@@ -123,7 +124,7 @@ export default function FacultyStaffTable() {
             </tbody>
           </table>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
