@@ -30,10 +30,10 @@ export default function ResearchDetailPage({ params, searchParams}: any ) {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl font-playfair font-semibold max-[640px]:text-center text-start">{project.title}</h1>
+        <h1 className="sm:text-3xl max-[425px]:text-2xl  font-playfair font-semibold max-[640px]:text-center text-start">{project.title}</h1>
 
         {/* Project Info */}
-        <section className="space-y-1 text-md text-neutral-600">
+        <section className="space-y-1 text-neutral-600 max-[425px]:text-sm text-base">
           <p>
             <strong className="text-red-800">Coordinator:</strong> {project.coordinator}
           </p>
@@ -52,7 +52,7 @@ export default function ResearchDetailPage({ params, searchParams}: any ) {
         </section>
 
         {/* Description */}
-        <section className="prose max-w-none text-neutral-700 leading-relaxed">
+        <section className="prose max-w-none text-neutral-700 leading-relaxed max-[425px]:text-sm text-base">
           <p>{project.description}</p>
         </section>
       </main>

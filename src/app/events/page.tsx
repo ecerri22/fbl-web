@@ -188,7 +188,7 @@ function EventCard({ event }: { event: EventItem }) {
               <span>{formatDate(event.date)}</span>
             </div>
 
-            <h3 className="mt-4 text-xl font-playfair leading-snug">
+            <h3 className="mt-4 sm:text-xl text-lg font-playfair leading-snug">
               <Link href={`/events/${event.slug}`} className="hover:text-red-800">
                 <span className="block overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
                   {event.title}
