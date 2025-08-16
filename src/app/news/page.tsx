@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import PageWrapper from "@/components/PageWrapper";
 import {
@@ -13,6 +13,8 @@ import {
   Filter,
 } from "lucide-react";
 import { newsData } from "@/data/newsData";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+
 
 type Post = (typeof newsData)[number];
 const POSTS_PER_PAGE = 4;
@@ -68,6 +70,55 @@ export default function NewsPage() {
   useEffect(() => {
     if (page > totalPages && totalPages > 0) setPage(1);
   }, [page, totalPages]);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const openPost = (p: Post) => {
+    setSelectedPost(p);
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    params.set("id", p.id); // use id (slugs repeat)
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  const clearSelection = () => {
+    setSelectedPost(null);
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    params.delete("id");
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  // when the URL has ?id=..., select that post on load / param change
+  useEffect(() => {
+    const id = searchParams.get("id");
+    if (!id) { setSelectedPost(null); return; }
+    const p = newsData.find(n => n.id === id) || null;
+    setSelectedPost(p);
+  }, [searchParams]);
+
+  const articleRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (selectedPost) {
+      articleRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [selectedPost]);
+
+  useEffect(() => {
+    const id = searchParams.get("id");
+    if (!id) { setSelectedPost(null); return; }
+
+    const p = newsData.find(n => n.id === id) || null;
+    setSelectedPost(p);
+
+    if (performance?.navigation?.type === performance.navigation.TYPE_RELOAD || document.referrer) {
+      requestAnimationFrame(() => {
+        articleRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }, [searchParams]);
+
 
   return (
     <PageWrapper>
@@ -205,7 +256,7 @@ export default function NewsPage() {
                     <PostCard
                       key={post.id}
                       post={post}
-                      onReadMore={() => setSelectedPost(post)}
+                      onReadMore={() => openPost(post)}
                     />
                   ))}
                 </div>
@@ -233,7 +284,9 @@ export default function NewsPage() {
                 </div>
               </>
             ) : (
-              <ArticleView post={selectedPost} onBack={() => setSelectedPost(null)} />
+              <div ref={articleRef}>
+                <ArticleView post={selectedPost} onBack={clearSelection} />
+              </div>
             )}
           </div>
 
@@ -329,7 +382,7 @@ export default function NewsPage() {
 /* ---------- Helpers & subcomponents ---------- */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-function ArticleView({ post, onBack }: { post: any; onBack: () => void }) {
+function ArticleView({ post, onBack }: { post: any, onBack: () => void }) {
   return (
     <div>
       <button

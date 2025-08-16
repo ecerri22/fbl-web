@@ -92,9 +92,9 @@ function EventsInner() {
   }, [searchTerm, selectedYear]);
 
   return (
-    <main className="text-neutral-800 ">
+    <main className="text-neutral-800 space-y-10">
       {/* Filters */}
-      <div className="flex flex-col lg:flex-row gap-6 sm:gap-10 sm:pb-10 md:pb-15 max-[640px]:gap-8 max-[640px]:pb-10">
+      <div className="flex flex-col lg:flex-row gap-6 max-[640px]:gap-8 ">
         {/* Search (boxed) */}
         <div className="w-full lg:flex-1 bg-white">
           <h3 className="text-xl font-playfair font-semibold mb-3">Search Events:</h3>

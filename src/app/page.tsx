@@ -2,7 +2,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Briefcase, Globe, GraduationCap, Lightbulb, User, UserCheck, Users, CalendarDays, MapPin, Clock, Ticket } from "lucide-react";
 import Link from "next/link";
-// import { events } from "@/data/eventsData";
+import { events as eventsData } from "@/data/eventsData";
+import { newsData } from "@/data/newsData";
 
 export default function Home() {
   const departments = [
@@ -37,6 +38,10 @@ export default function Home() {
       image: "/images/departments/research-img.jpg",
     },
   ];
+
+  const latestNews = [...newsData]
+  .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+  .slice(0, 2);
 
   return (
     <main className="min-h-screen bg-white">
@@ -276,64 +281,66 @@ export default function Home() {
           {/* Stack on mobile/tablet, row only on lg+ */}
           <div className="flex flex-col lg:flex-row">
             {/* Events list */}
-            <div className="w-full lg:w-3/5 flex flex-col justify-between ">
-              {[
-                { number: "01", title: "Cultural Exchange: Building Global Connections", date: "August 20, 2024", location: "Albania" },
-                { number: "02", title: "International Symposium on Business Ethics", date: "September 15, 2024", location: "Rome, Italy" },
-                { number: "03", title: "Annual Career Fair and Networking Event", date: "October 10, 2024", location: "New York, USA" }
-              ].map(({ number, title, date, location }) => (
-                <div
-                  key={number}
-                  className="
-                    group flex items-start gap-6 p-5 cursor-pointer transition-colors duration-300 hover:bg-red-800
-                    max-[425px]:flex-col max-[425px]:items-center max-[425px]:gap-2 last:pb-10 
-                  "
-                >
-                  {/* Number */}
-                  <div
+            <div className="w-full lg:w-3/5 flex flex-col justify-between">
+              {([...eventsData]
+                .sort((a, b) => +new Date(b.date) - +new Date(a.date)) 
+                .slice(0, 3)                                           
+              ).map((ev, idx) => {
+                const number = String(idx + 1).padStart(2, "0");
+                return (
+                  <Link
+                    href={`/events/${ev.slug}`}
+                    key={ev.id}
                     className="
-                      text-5xl font-bold min-w-[3rem] font-playfair text-red-800 group-hover:text-neutral-100 px-4 py-3
-                      max-[425px]:px-0 max-[425px]:py-0 max-[425px]:text-red-800 max-[425px]:text-4xl
+                      group flex items-start gap-6 p-5 cursor-pointer transition-colors duration-300 hover:bg-red-800
+                      max-[425px]:flex-col max-[425px]:items-center max-[425px]:gap-2 last:pb-10
                     "
                   >
-                    {number}
-                  </div>
-
-                  {/* Right column (title + details) */}
-                  <div className="flex flex-col px-4 py-3 max-[640px]:py-0 max-[425px]:px-0 max-[425px]:items-center max-[425px]:w-full">
-                    {/* Thin divider only on small */}
-                    <hr className="hidden max-[425px]:block w-full border-t border-neutral-200/70 my-3" />
-
-                    {/* Title */}
-                    <p className="text-lg font-semibold font-playfair text-red-800 group-hover:text-neutral-100 max-[425px]:text-center">
-                      {title}
-                    </p>
-
-                    {/* Details row */}
+                    {/* Number */}
                     <div
                       className="
-                        flex items-center gap-6 text-sm text-neutral-600 mt-1 font-roboto group-hover:text-neutral-200
-                        max-[640px]:flex-col max-[640px]:items-start max-[640px]:gap-1 max-[640px]:mt-2 max-[640px]:text-xs
-                        max-[425px]:flex-row max-[425px]:items-center max-[425px]:justify-center max-[425px]:gap-4 max-[425px]:text-sm max-[425px]:mt-3
-                        max-[385px]:text-xs max-[355px]:flex-col 
+                        text-5xl font-bold min-w-[3rem] font-playfair text-red-800 group-hover:text-neutral-100 px-4 py-3
+                        max-[425px]:px-0 max-[425px]:py-0 max-[425px]:text-red-800 max-[425px]:text-4xl
                       "
                     >
-                      <span className="inline-flex items-center gap-2 leading-tight">
-                        <CalendarDays className="h-4 w-4" />
-                        <span>{date}</span>
-                      </span>
-                      <span className="inline-flex items-center gap-2 leading-tight">
-                        <MapPin className="h-4 w-4" />
-                        <span>{location}</span>
-                      </span>
+                      {number}
                     </div>
-                  </div>
-                </div>
 
-              ))}
+                    {/* Right column (title + details) */}
+                    <div className="flex flex-col px-4 py-3 max-[640px]:py-0 max-[425px]:px-0 max-[425px]:items-center max-[425px]:w-full">
+                      {/* Thin divider only on small */}
+                      <hr className="hidden max-[425px]:block w-full border-t border-neutral-200/70 my-3" />
+
+                      {/* Title */}
+                      <p className="text-lg font-semibold font-playfair text-red-800 group-hover:text-neutral-100 max-[425px]:text-center">
+                        {ev.title}
+                      </p>
+
+                      {/* Details row */}
+                      <div
+                        className="
+                          flex items-center gap-6 text-sm text-neutral-600 mt-1 font-roboto group-hover:text-neutral-200
+                          max-[640px]:flex-col max-[640px]:items-start max-[640px]:gap-1 max-[640px]:mt-2 max-[640px]:text-xs
+                          max-[425px]:flex-row max-[425px]:items-center max-[425px]:justify-center max-[425px]:gap-4 max-[425px]:text-sm max-[425px]:mt-3
+                          max-[385px]:text-xs max-[355px]:flex-col
+                        "
+                      >
+                        <span className="inline-flex items-center gap-2 leading-tight">
+                          <CalendarDays className="h-4 w-4" />
+                          <span>{formatDate(ev.date)}</span>
+                        </span>
+                        <span className="inline-flex items-center gap-2 leading-tight">
+                          <MapPin className="h-4 w-4" />
+                          <span>{ev.location}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
 
-            {/* Side image: full width below on mobile, right column on lg+ */}
+            {/* Side image: keep your static image (or use the first event image if you prefer) */}
             <div className="w-full lg:w-2/5 flex-shrink-0">
               <Image
                 src="/images/rut-miit-3EMw3T-ZjkE-unsplash.jpg"
@@ -394,7 +401,7 @@ export default function Home() {
       {/* NEWS */}
       <section className="flex flex-col gap-8 max-w-7xl mx-auto sm:px-20 sm:pb-20 lg:pb-25 max-[640px]:pb-20 max-[640px]:px-10">
         {/* Header */}
-        <div className="flex justify-between items-end">
+        <div className="flex justify-between items-center">
           <h1 className="justify-center max-[640px]:text-center xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl max-[640px]:text-3xl font-semibold leading-tight font-playfair text-neutral-800">
             Read Our Latest News
           </h1>
@@ -409,68 +416,54 @@ export default function Home() {
 
         {/* News list */}
         <div className="grid grid-cols-1 min-[767px]:grid-cols-2 gap-8">
-          {[
-            {
-              img_alt: "students auditorium",
-              img_src: "/images/joecalih-WyBizVgCrDY-unsplash.jpg",
-              title: "Those Inequalities Are Inequalities",
-              content: "10 Effective Study Tips for College Success. Welcome...",
-              date: "August 20, 2024",
-            },
-            {
-              img_alt: "students graduating",
-              img_src: "/images/joecalih-WyBizVgCrDY-unsplash.jpg",
-              title: "After Decades of Improvement",
-              content: "10 Effective Study Tips for College Success. Welcome...",
-              date: "September 15, 2024",
-            },
-          ].map(({ title, content, date, img_src, img_alt }, idx) => (
-            <div
-              key={idx}
-              className="flex gap-5 p-5 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow
+          {latestNews.map((post) => (
+            <Link
+              key={post.id}
+              href={`/news?id=${post.id}`}
+              aria-label={`Read news: ${post.title}`}
+              className="group flex gap-5 p-5 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow
                         max-[963px]:flex-col max-[963px]:gap-4"
             >
-              <Link href={`/news/${idx}`} className="flex-shrink-0 block group max-[963px]:w-full">
-                <div className="h-[12rem] w-[12rem] overflow-hidden
-                                max-[963px]:w-full max-[963px]:h-56">
-                  <Image
-                    src={img_src}
-                    alt={img_alt}
-                    width={160}
-                    height={160}
-                    sizes="(max-width: 963px) 100vw, 12rem"
-                    className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-                  />
-                </div>
-              </Link>
-
-              <div className="flex flex-col gap-2 justify-center max-[963px]:pt-2">
-                <Link
-                  href={`/news/${idx}`}
-                  className="text-lg font-semibold font-playfair text-neutral-800 hover:text-red-800"
-                >
-                  {title}
-                </Link>
-                <p className="text-sm font-roboto text-neutral-600 mt-1 text-sm sm:text-base">{content}</p>
-                <span className="text-sm text-stone-500 font-roboto mt-2">{date}</span>
+              <div className="h-[12rem] w-[12rem] overflow-hidden max-[963px]:w-full max-[963px]:h-56">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={1920}
+                  height={1080}
+                  sizes="(max-width: 963px) 100vw, 12rem"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                />
               </div>
-            </div>
-
+              <div className="flex flex-col gap-2 justify-center max-[963px]:pt-2">
+                <h3 className="text-lg font-semibold font-playfair text-neutral-800 group-hover:text-red-800">
+                  {post.title}
+                </h3>
+                <p className="text-sm sm:text-base font-roboto text-neutral-600 mt-1">{post.excerpt}</p>
+                <span className="text-sm text-stone-500 font-roboto mt-2">
+                  {new Date(post.date).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
 
-         {/* Show below the grid only on ≤640px */}
-          <Link
-            href="/news"
-            className="hidden max-[640px]:block max-[640px]:self-center max-[640px]:text-center
-                      text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors
-                       md:text-md sm:text-sm max-[640px]:text-sm"
-          >
-            View All
-          </Link>
+        {/* Show below the grid only on ≤640px */}
+        <Link
+          href="/news"
+          className="hidden max-[640px]:block max-[640px]:self-center max-[640px]:text-center
+                    text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors
+                      md:text-md sm:text-sm max-[640px]:text-sm"
+        >
+          View All
+        </Link>
 
       </section>
 
     </main>
   );
+}
+
+function formatDate(d: string) {
+  const date = new Date(d);
+  return date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
 }
