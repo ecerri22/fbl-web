@@ -34,8 +34,8 @@ export default function PageWrapper({ children, headerBackground }: PageWrapperP
 
       {/* Standardized container + responsive paddings  */}
       <main className="mx-auto w-full max-w-7xl 
-      px-15 sm:px-20 md:px-20 lg:px-20  
-      py-15 sm:py-20 md:py-20 lg:py-20
+      px-10 sm:px-20 md:px-20 lg:px-20  
+      py-10 sm:py-20 md:py-20 lg:py-20
       ">
         {children}
       </main>
