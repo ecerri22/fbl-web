@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useMemo, useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import PageWrapper from "@/components/PageWrapper";
 import {
@@ -20,6 +20,14 @@ type Post = (typeof newsData)[number];
 const POSTS_PER_PAGE = 4;
 
 export default function NewsPage() {
+  return (
+    <Suspense fallback={<PageWrapper><div className="py-10 text-center">Loading…</div></PageWrapper>}>
+      <NewsPageInner />
+    </Suspense>
+  );
+}
+
+function NewsPageInner() {
   const [q, setQ] = useState("");
   const [activeCat, setActiveCat] = useState<string>("All");
   const [page, setPage] = useState(1);
