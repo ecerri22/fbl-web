@@ -100,24 +100,24 @@ export default function Navbar({ open, setOpen, externalTrigger = false }: Navba
             <NavigationMenuItem>
               <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
-                <button
-                  className={`group inline-flex items-center gap-x-1 px-0 py-2 focus:outline-none ${
-                    pathname.startsWith("/departments")
-                      ? "text-red-800 font-semibold"
-                      : "text-neutral-800 hover:text-red-900 data-[state=open]:text-red-800"
-                  }`}
-                >
-                  Departments
-                  <ChevronDown
-                    className="ml-1 h-5 w-5 text-gray-400
-                              transition-colors transition-transform duration-200
-                              group-hover:text-red-900
-                              group-data-[state=open]:text-red-800
-                              group-data-[state=open]:rotate-180"
-                  />
-                </button>
-              </DropdownMenuTrigger>
-
+                  <button
+                    className={`group/dep inline-flex items-center gap-x-1 px-0 py-2 focus:outline-none ${
+                      pathname.startsWith("/departments")
+                        ? "text-red-800 font-semibold"
+                        : "text-neutral-800 hover:text-red-900 data-[state=open]:text-red-800"
+                    }`}
+                  >
+                    Departments
+                    <ChevronDown
+                      className="
+                        ml-1 h-5 w-5 text-gray-400 transition-colors transition-transform duration-200
+                        group-hover/dep:text-red-900
+                        group-data-[state=open]/dep:text-red-800
+                        group-data-[state=open]/dep:rotate-180
+                      "
+                    />
+                  </button>
+                </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="start" sideOffset={8} className="w-56 z-[60]">
                   {departments.map(([label, slug]) => (
