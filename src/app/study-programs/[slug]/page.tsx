@@ -6,16 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 
-type PageProps = {
-  params: { slug: string };
-  searchParams?: { from?: string };
-};
-
-export default function ProgramDetailPage({ params, searchParams }: PageProps) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function ProgramDetailPage({ params, searchParams }: any) {
   const program = allPrograms.find((p) => p.slug === params.slug);
   if (!program) notFound();
 
-  // Safe "back" link: use only internal paths and default to /study-programs
   const rawFrom = searchParams?.from ?? "/study-programs";
   const from = rawFrom.startsWith("/") ? rawFrom : "/study-programs";
 
