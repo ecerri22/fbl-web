@@ -10,22 +10,37 @@ export default function ResearchPage() {
     <PageWrapper>
       <div className="text-neutral-800 space-y-15 sm:space-y-15 max-[640px]:space-y-15 ">
         {/* About Section */}
-        <section className="grid grid-cols-1 gap-10 text-center md:flex md:flex-row items-center pb-10 border-b border-neutral-300">
-          {/* Left */}
-          <div className="lg:w-2/5 ">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl md:text-start font-semibold leading-tight font-playfair text-neutral-800">
-              Scientific Research
-            </h1>
-          </div>
+        <section
+          className="
+            grid grid-cols-1 gap-6 md:gap-8
+            justify-items-center text-center
+            pb-10 border-b border-neutral-300
+            lg:grid-cols-[2fr_3fr] lg:items-center lg:gap-12
+            lg:justify-items-stretch lg:text-left
+          "
+        >
+          <h1
+            className="
+              text-2xl sm:text-3xl md:text-4xl
+              font-semibold leading-tight font-playfair text-neutral-800
+              lg:text-start lg:justify-self-start
+            "
+          >
+            Scientific Research
+          </h1>
 
-          {/* Right */}
-          <div className="lg:w-3/5 flex flex-col justify-center h-full space-y-6 lg:items-end">
-            <p className="font-roboto text-neutral-600 md:text-end leading-relaxed max-w-prose max-[425px]:text-sm text-base">
-              We conduct impactful research in fields such as business, digital technology, law, and public policy. The faculty supports initiatives that bring tangible change to society and the economy.
-            </p>
-          </div>
-
+          <p
+            className="
+              font-roboto text-neutral-600 leading-relaxed max-w-prose
+              max-[425px]:text-sm text-base
+              lg:text-right lg:justify-self-end
+            "
+          >
+            We conduct impactful research in fields such as business, digital technology, law, and public
+            policy. The faculty supports initiatives that bring tangible change to society and the economy.
+          </p>
         </section>
+
 
         {/* Research Fields */}
         <section className="">

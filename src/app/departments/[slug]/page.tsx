@@ -17,14 +17,36 @@ export default function DepartmentPage({ params }: { params: any }) {
       <div className="text-neutral-800 space-y-15 sm:space-y-15 max-[640px]:space-y-15 ">
 
         {/* Header */}
-        <section className="sm:text-center max-[640px]:text-center grid grid-cols-1 lg:grid-cols-[2fr_3fr] items-center gap-8 md:gap-12 pb-10 border-b border-neutral-300 md:justify-items-center sm:justify-items-center max-[640px]:justify-items-center">
-          <h1 className="text-3xl font-semibold leading-tight font-playfair text-neutral-800 lg:text-start">
+        <section
+          className="
+            grid grid-cols-1 gap-6 md:gap-8
+            justify-items-center text-center
+            pb-10 border-b border-neutral-300
+            lg:grid-cols-[2fr_3fr] lg:items-center lg:gap-12
+            lg:justify-items-stretch lg:text-left
+          "
+        >
+          <h1
+            className="
+              text-3xl font-semibold leading-tight font-playfair text-neutral-800
+              lg:text-start lg:justify-self-start
+            "
+          >
             {department.name}
           </h1>
-          <p className="font-roboto text-neutral-600 sm:text-end leading-relaxed max-w-prose max-[425px]:text-sm text-base">
+
+          <p
+            className="
+              font-roboto text-neutral-600 leading-relaxed max-w-prose
+              max-[425px]:text-sm text-base
+              lg:text-right lg:justify-self-end
+            "
+          >
             {department.shortDescription}
           </p>
         </section>
+
+
 
         {/* About Section */}
         <section className="flex flex-col gap-12">
@@ -44,26 +66,6 @@ export default function DepartmentPage({ params }: { params: any }) {
             <p>{department.description}</p>
           </div>
         </section>
-
-        {/* {department.whyStudy && (
-          <section className="bg-neutral-100 p-8 shadow-sm text-neutral-800 font-roboto ">
-            <h3 className="text-3xl font-playfair font-semibold mb-6 text-red-800">
-              Why Choose <span className="capitalize">{department.name.split(" ")[2] || "This Field"}</span>?
-            </h3>
-
-            <ul className="list-inside space-y-5 text-lg leading-relaxed border-red-800">
-              {department.whyStudy.split("\n").map((point, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-4 hover:text-red-800 transition-colors cursor-pointer border-red-800 pl-4 border-l-2"
-                >
-                  {point.trim()}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )} */}
-
 
         {/* Programs Section */}
         <section className="space-y-10">
@@ -105,9 +107,7 @@ export default function DepartmentPage({ params }: { params: any }) {
         </section>
 
         {/* Staff Section */}
-        {/* <section className="mt-16 space-y-12"> */}
-           <DepartmentStaffSection staff={department.staff} />
-        {/* </section> */}
+        <DepartmentStaffSection staff={department.staff} />
 
         {/* CTA */}
         <section className="text-center pt-16 pb-5 border-t border-neutral-300 space-y-4">
