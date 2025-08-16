@@ -69,7 +69,7 @@ export default function AboutPage() {
           <p className="text-neutral-600 font-roboto italic text-lg leading-relaxed">
             At FBL, we believe in the power of education to transform lives and communities. Whether you&#39;re a prospective student, a parent, or a partner, I invite you to explore what makes our faculty a place of excellence and opportunity.
           </p>
-          <p className="text-neutral-700 font-roboto font-semibold mt-4 text-red-800">– Shpëtim Çerri, Dean of the Faculty of Business and Law</p>
+          <p className="text-neutral-700 font-roboto font-semibold mt-4 text-red-800">– John Doe, Dean of the Faculty of Business and Law</p>
         </section>
 
         {/* History of FBL Section */}
