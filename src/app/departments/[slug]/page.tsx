@@ -6,10 +6,47 @@ import { Metadata } from "next";
 import { Users } from "lucide-react";
 import PageWrapper from "@/components/PageWrapper";
 import DepartmentStaffSection from "@/app/staff/_components/DepartmentStaffSection";
+import { prisma } from "@/lib/prisma";
+
+const DEPT_FALLBACK_SVG =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'>
+       <rect width='100%' height='100%' fill='#f3f4f6'/>
+       <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'
+             font-family='Arial, sans-serif' font-size='40' fill='#6b7280'>
+         No image available
+       </text>
+     </svg>`
+  );
+
+export const runtime = "nodejs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function DepartmentPage({ params }: { params: any }) {
-  const department = departmentsData.find((d) => d.slug === params.slug);
+export default async function DepartmentPage({ params }: { params: any }) {
+  const department = await prisma.department.findUnique({
+    where: { slug: params.slug },
+    include: {
+      programs: {
+        orderBy: { name: "asc" },
+        select: { name: true, slug: true },
+      },
+      staff: {
+        orderBy: { name: "asc" },
+        select: {
+          name: true,
+          slug: true,
+          title: true,
+          isFullTime: true, 
+          photoUrl: true,   
+          email: true,
+          office: true,
+        },
+      },
+    },
+  });
+
+  // const department = departmentsData.find((d) => d.slug === params.slug);
   if (!department) return notFound();
 
   return (
@@ -53,7 +90,11 @@ export default function DepartmentPage({ params }: { params: any }) {
           {/* Image */}
           <div className="relative w-full h-[18rem] md:h-[20rem] overflow-hidden shadow-md">
             <Image
-              src={department.image}
+              src={
+                department.image && department.image.trim() !== ""
+                  ? department.image
+                  : DEPT_FALLBACK_SVG
+              }
               alt={`Image of ${department.name}`}
               fill
               className="object-cover"
@@ -82,7 +123,11 @@ export default function DepartmentPage({ params }: { params: any }) {
                   aria-label={`Visit ${name}`}
                 >
                   <Image
-                    src={department.image}
+                    src={
+                      department.image && department.image.trim() !== ""
+                        ? department.image
+                        : DEPT_FALLBACK_SVG
+                    }
                     alt={`Program: ${name}`}
                     width={300}
                     height={200}
@@ -107,7 +152,17 @@ export default function DepartmentPage({ params }: { params: any }) {
         </section>
 
         {/* Staff Section */}
-        <DepartmentStaffSection staff={department.staff} />
+        <DepartmentStaffSection 
+          staff={department.staff.map((s) => ({
+            name: s.name,
+            title: s.title ?? "",
+            slug: s.slug,
+            fullTime: !!s.isFullTime,               
+            email: s.email ?? "",
+            office: s.office ?? "",
+            imgSrc: s.photoUrl ?? undefined, 
+          }))}
+         />
 
         {/* CTA */}
         <section className="text-center pt-16 pb-5 border-t border-neutral-300 space-y-4">
@@ -119,7 +174,8 @@ export default function DepartmentPage({ params }: { params: any }) {
           </p>
           {/* {department.department_email && ( */}
             <a
-              href={`mailto:${department.department_email}`}
+              // href={`mailto:${department.department_email}`}
+              href="#"
               className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
             >
               <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>

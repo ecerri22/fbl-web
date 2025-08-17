@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+enum ProgramLevel {
+  BACHELOR
+  PROFESSIONAL_MASTER
+  MASTER_OF_SCIENCE
+  INTEGRATED_MASTER
+}
+
+model Department {
+  id               String   @id @default(cuid())
+  code             String   @unique
+  name             String
+  slug             String   @unique
+  description      String?
+  shortDescription String?
+  image            String?
+  quote            String?
+  highlights       String[] // was String[]?
+
+  staff    Staff[]
+  programs Program[]
+  events   Event[]
+  news     NewsArticle[]
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  ResearchProject ResearchProject[]
+}
+
+model Program {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  level       ProgramLevel
+  image       String?
+  description String?
+
+  whyTitle           String?
+  whyIntro           String?
+  whyBulletPoints    Json?
+  careerIntro        String?
+  careerBulletPoints Json?
+  futureIntro        String?
+  future             Json?
+  admission          Json?
+  curriculum         Json?
+
+  duration String?
+  language String?
+  tuition  String?
+
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  departmentId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Staff {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  title       String?
+  isFullTime  Boolean?
+  photoUrl    String?
+  email       String?
+  office      String?
+  officePhone String?
+
+  bio          String?
+  expertise    String[] // was String[]?
+  courses      String[] // was String[]?
+  publications String[] // was String[]?
+
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  departmentId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  date        DateTime
+  timeLabel   String?
+  location    String?
+  image       String?
+  description String?
+  content     String[] // was String[]?
+
+  categories String[] // was String[]?
+  organizer  Json?
+  highlights Json?
+
+  department   Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  departmentId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String?
+  image       String?
+  date        DateTime
+  author      String?
+  category    String?
+  tags        String[] // was String[]?
+  readingTime Int?
+  featured    Boolean  @default(false)
+  content     String[] // was String[]?
+
+  department   Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  departmentId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ResearchProject {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  coordinator String
+  year        Int
+  field       String?
+  partners    String[] // was String[]?
+  description String
+
+  department   Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  departmentId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
