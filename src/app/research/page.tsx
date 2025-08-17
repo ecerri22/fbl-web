@@ -1,11 +1,47 @@
-"use client";
-
-import { BookOpen, FlaskConical, Landmark, Users, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { researchProjects } from "@/data/researchProjects";
 import PageWrapper from "@/components/PageWrapper";
+import { prisma } from "@/lib/prisma";
+import {
+  BookOpen,
+  FlaskConical,
+  Landmark,
+  Users,
+  ArrowRight,
+} from "lucide-react";
 
-export default function ResearchPage() {
+export const runtime = "nodejs";
+export const revalidate = 60; 
+
+type ProjectCard = {
+  slug: string;
+  title: string;
+  coordinator: string | null;
+  year: number | null;
+  field: string | null;
+  partners: string[] | null;
+};
+
+export default async function ResearchPage() {
+  const projects = await prisma.researchProject.findMany({
+    select: {
+      slug: true,
+      title: true,
+      coordinator: true,
+      year: true,
+      field: true,
+      partners: true,
+      // createdAt: true, // not required
+    },
+    orderBy: [{ year: "desc" }],
+    take: 3,
+  });
+
+  const partners = Array.from(
+    new Set(
+      projects.flatMap((p) => p.partners ?? []).filter((p) => p && p.trim() !== "")
+    )
+  ).slice(0, 6);
+
   return (
     <PageWrapper>
       <div className="text-neutral-800 space-y-15 sm:space-y-15 max-[640px]:space-y-15 ">
@@ -41,10 +77,11 @@ export default function ResearchPage() {
           </p>
         </section>
 
-
         {/* Research Fields */}
-        <section className="">
-          <h2 className="text-2xl sm:text-3xl mb-6 font-semibold font-playfair text-neutral-800">Main Research Areas</h2>
+        <section>
+          <h2 className="text-2xl sm:text-3xl mb-6 font-semibold font-playfair text-neutral-800">
+            Main Research Areas
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {[
               { title: "ABC", icon: <FlaskConical className="w-6 h-6 text-red-700" /> },
@@ -52,23 +89,29 @@ export default function ResearchPage() {
               { title: "ABC", icon: <Landmark className="w-6 h-6 text-red-700" /> },
               { title: "ABC", icon: <BookOpen className="w-6 h-6 text-red-700" /> },
             ].map((field, i) => (
-              <div key={i} className="border border-neutral-200 p-6 shadow-sm hover:shadow-md transition bg-neutral-50">
+              <div
+                key={i}
+                className="border border-neutral-200 p-6 shadow-sm hover:shadow-md transition bg-neutral-50"
+              >
                 <div className="mb-4">{field.icon}</div>
-                <h3 className="text-lg font-playfair text-neutral-800 mb-3 ">{field.title}</h3>
-                <p className="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3 className="text-lg font-playfair text-neutral-800 mb-3 ">
+                  {field.title}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* projects */}
+        {/* Latest projects */}
         <section>
           {/* header */}
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
             <h2 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800">
               Latest Projects
             </h2>
-            {/* Hide on small screens, show on sm+ */}
             <Link
               href="/research/all-projects"
               className="hidden sm:inline text-red-800 underline underline-offset-4 font-medium hover:text-red-600 transition-colors"
@@ -79,15 +122,21 @@ export default function ResearchPage() {
 
           {/* cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {researchProjects.slice(-3).reverse().map((project, i) => (
+            {projects.map((project: ProjectCard) => (
               <div
-                key={i}
+                key={project.slug}
                 className="p-6 bg-white border border-neutral-200 shadow-sm hover:shadow-md transition space-y-2"
               >
-                <h3 className="text-neutral-800 font-playfair text-lg">{project.title}</h3>
-                <p className="text-sm text-neutral-500 italic">{project.coordinator}</p>
+                <h3 className="text-neutral-800 font-playfair text-lg">
+                  {project.title}
+                </h3>
+                {project.coordinator && (
+                  <p className="text-sm text-neutral-500 italic">
+                    {project.coordinator}
+                  </p>
+                )}
                 <p className="text-sm text-neutral-600">
-                  {project.field} • Year: {project.year}
+                  {(project.field ?? "Field")} • Year: {project.year ?? "—"}
                 </p>
                 <Link
                   href={`/research/all-projects/${project.slug}?from=research`}
@@ -99,7 +148,7 @@ export default function ResearchPage() {
             ))}
           </div>
 
-          {/* Show View All below grid on small screens */}
+          {/* View All on small screens */}
           <div className="mt-6 sm:hidden text-center">
             <Link
               href="/research/all-projects"
@@ -110,19 +159,19 @@ export default function ResearchPage() {
           </div>
         </section>
 
-        {/* collaborations */}
-        <section className="">
+        {/* Partners & Collaborations */}
+        <section>
           <h2 className="text-2xl mb-6 sm:text-3xl font-semibold font-playfair text-neutral-800">
             Partners & Collaborations
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-sm">
-            {[
+            {(partners.length ? partners : [
               "Universiteti i X",
               "Qendra Rajonale e Inovacionit",
               "Instituti për Zhvillim Ekonomik",
-            ].map((partner, i) => (
+            ]).map((partner, i) => (
               <div
-                key={i}
+                key={`${partner}-${i}`}
                 className="p-4 border border-neutral-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 <p className="text-neutral-700 font-medium">{partner}</p>
@@ -133,22 +182,23 @@ export default function ResearchPage() {
 
         {/* CTA */}
         <section className="mx-auto pb-5 text-center space-y-4 pt-16 border-t border-neutral-200">
-          <h2 className="text-2xl mb-4 font-playfair text-neutral-800">Do you want to get involved in scientific research?</h2>
+          <h2 className="text-2xl mb-4 font-playfair text-neutral-800">
+            Do you want to get involved in scientific research?
+          </h2>
           <p className="text-neutral-600 mb-6 max-[425px]:text-sm text-base">
             If you are a student or academic staff member and have a research idea, contact us and become part of our network.
           </p>
 
           <Link
             href="#"
-              className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
+            className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
           >
-              <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
+            <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full"></span>
             <span className="relative z-10 capitalize whitespace-nowrap">
               Contact Us
             </span>
           </Link>
         </section>
-
       </div>
     </PageWrapper>
   );
