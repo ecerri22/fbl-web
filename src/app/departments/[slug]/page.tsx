@@ -1,9 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { departmentsData } from "@/data/departmentsData";
-import { Metadata } from "next";
-import { Users } from "lucide-react";
 import PageWrapper from "@/components/PageWrapper";
 import DepartmentStaffSection from "@/app/staff/_components/DepartmentStaffSection";
 import { prisma } from "@/lib/prisma";
@@ -46,7 +43,6 @@ export default async function DepartmentPage({ params }: { params: any }) {
     },
   });
 
-  // const department = departmentsData.find((d) => d.slug === params.slug);
   if (!department) return notFound();
 
   return (
@@ -193,19 +189,10 @@ export default async function DepartmentPage({ params }: { params: any }) {
   );
 }
 
-export async function generateStaticParams() {
-  return departmentsData.map((d) => ({ slug: d.slug }));
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const rows = await prisma.department.findMany({
+    select: { slug: true },
+    orderBy: { name: "asc" },
+  });
+  return rows.map((d) => ({ slug: d.slug }));
 }
-
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { slug: string };
-// }): Promise<Metadata> {
-//   const department = departments.find((d) => d.slug === params.slug);
-//   return {
-//     title: department?.name || "Departament i panjohur",
-//     description:
-//       department?.shortDescription || "Faqja e departamentit në FBL.",
-//   };
-// }
