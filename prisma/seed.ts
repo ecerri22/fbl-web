@@ -1,14 +1,10 @@
-// prisma/seed.ts
 import { PrismaClient, ProgramLevel } from "@prisma/client";
 
-// ⬇️ Adjust these paths to where your files actually live.
-// If your data is under src/data, these relative imports from prisma/ should work.
 import { departmentsData } from "../src/data/departmentsData";
 import { allPrograms } from "../src/data/allPrograms";
 import { events as eventsData } from "../src/data/eventsData";
 import { newsData } from "../src/data/newsData";
 import { researchProjects } from "../src/data/researchProjects";
-// We’re NOT using facultyStaff/staffMembers separately (your dept staff already covers leadership).
 
 const prisma = new PrismaClient();
 
@@ -24,7 +20,6 @@ function mapLevel(level: string): ProgramLevel {
 function toDate(dateStr: string | Date | undefined): Date {
   if (!dateStr) return new Date();
   if (dateStr instanceof Date) return dateStr;
-  // Force midnight UTC to avoid timezone shifts
   return new Date(`${dateStr}T00:00:00.000Z`);
 }
 
@@ -94,7 +89,6 @@ async function seedDepartmentsAndStaff() {
 }
 
 async function seedPrograms() {
-  // Build Dept lookups by code + slug
   const depts = await prisma.department.findMany({ select: { id: true, code: true, slug: true } });
   const byCode = new Map(depts.map(d => [d.code, d.id]));
   const bySlug = new Map(depts.map(d => [d.slug, d.id]));
