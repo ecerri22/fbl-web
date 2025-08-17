@@ -1,49 +1,38 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  CalendarDays,
-  Clock,
-  MapPin,
-  User,
-  Mail,
-  Phone,
-  Link as LinkIcon,
-  Tag,
-  ArrowLeft,
-  CheckCircle2,   
-  Quote,         
-} from "lucide-react";
-import { events } from "@/data/eventsData";
+import { CalendarDays, Clock, MapPin, User, Mail, Phone, Link as LinkIcon, Tag, CheckCircle2 } from "lucide-react";
 import PageWrapper from "@/components/PageWrapper";
 import BackBar from "@/components/BackBar";
+import { prisma } from "@/lib/prisma";
 import { Suspense } from "react";
 
+export const runtime = "nodejs";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export default function EventDetailPage({params}: any ) {
-  const event = events.find((e) => e.slug === params.slug);
+type MaybeTime = { time?: string | null };
+
+type Highlight = { title: string; text: string };
+type Organizer = { name?: string; role?: string; phone?: string; email?: string; website?: string };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function EventDetailPage({ params }: any) {
+  const event = await prisma.event.findUnique({
+    where: { slug: params.slug },
+  });
+
   if (!event) return notFound();
 
-  // convenience helpers
+  const content = (event.content as string[] | null) ?? [];
+  const highlights = (event.highlights as Highlight[] | null) ?? [];
+  const categories = event.categories ?? [];
+  const organizer = (event.organizer as Organizer | null) ?? {};
+  const time = (event as MaybeTime).time ?? undefined; 
+  const img = event.image ?? "/images/news/fakulteti-ekonomik-uniel.webp";
   const dt = formatDate(event.date);
-  const time = (event as any).time as string | undefined;
-  const categories = ((event as any).categories ?? []) as string[];
-  const org = (event as any).organizer as
-    | {
-        name?: string;
-        role?: string;
-        phone?: string;
-        email?: string;
-        website?: string;
-      }
-    | undefined;
 
   return (
     <PageWrapper>
-      <div className="text-neutral-800 ">
-        {/* Back link */}
-        <Suspense fallback={<BackBarFallback />}>
+      <div className="text-neutral-800">
+        <Suspense>
           <BackBar
             defaultHref="/events"
             defaultLabel="Back to Events"
@@ -52,18 +41,13 @@ export default function EventDetailPage({params}: any ) {
           />
         </Suspense>
 
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight font-playfair">{event.title}</h1>
 
-        {/* Title */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight font-playfair text-neutral-800">
-          {event.title}
-        </h1>
-
-        {/* Main grid */}
         <section className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-10">
-            <div className="relative aspect-[16/9] ">
+            <div className="relative aspect-[16/9]">
               <Image
-                src={event.image}
+                src={img}
                 alt={event.title}
                 fill
                 className="object-cover"
@@ -71,42 +55,29 @@ export default function EventDetailPage({params}: any ) {
               />
             </div>
 
-            {/* About the Event */}
             <article className="space-y-6">
-
-              {/* Lead paragraph */}
-              <p className="max-[425px]:text-sm text-base leading-relaxed text-neutral-700 border-l-4 border-red-800/70 pl-4 py-1 bg-red-50/40">
+              <p className="leading-relaxed text-neutral-700 border-l-4 border-red-800/70 pl-4 py-1 bg-red-50/40">
                 {event.description ?? "Details coming soon."}
               </p>
 
-              {/* Body paragraphs */}
-              <div className="prose max-w-none max-[425px]:text-sm text-base">
-                {Array.isArray((event as any).content) && (event as any).content.length ? (
-                  ((event as any).content as string[]).map((para, i) => (
-                    <p key={i} className=" pb-5 max-[425px]:text-sm text-base leading-relaxed">{para}</p>
-                  ))
-                ) : null}
-              </div>
+              {content.length > 0 && (
+                <div className="prose max-w-none">
+                  {content.map((para, i) => (
+                    <p key={i} className="pb-5 leading-relaxed">{para}</p>
+                  ))}
+                </div>
+              )}
 
-
-              {/* Highlights grid */}
-              {Array.isArray((event as any).highlights) && (event as any).highlights.length > 0 && (
+              {highlights.length > 0 && (
                 <section className="space-y-4">
-                  <h3 className="text-xl font-playfair text-neutral-800 max-[640px]:text-center">Highlights</h3>
+                  <h3 className="text-xl font-playfair">Highlights</h3>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {((event as any).highlights as { title: string; text: string }[]).map((h, i) => (
-                      <li
-                        key={i}
-                        className="rounded border border-neutral-200 p-4 hover:shadow-sm transition"
-                      >
-                        <div className="flex items-start gap-3 max-[640px]:gap-0">
-                          {/* Hide icon at ≤640px */}
-                          <CheckCircle2
-                            className="w-5 h-5 text-red-800 mt-0.5 shrink-0 max-[640px]:hidden"
-                            aria-hidden="true"
-                          />
+                    {highlights.map((h, i) => (
+                      <li key={`${i}-${h.title}`} className="rounded border border-neutral-200 p-4 hover:shadow-sm transition">
+                        <div className="flex items-start gap-3">
+                          <CheckCircle2 className="w-5 h-5 text-red-800 mt-0.5 shrink-0" />
                           <div>
-                            <div className="font-medium text-neutral-800">{h.title}</div>
+                            <div className="font-medium">{h.title}</div>
                             <p className="text-sm text-neutral-700 mt-1">{h.text}</p>
                           </div>
                         </div>
@@ -118,35 +89,15 @@ export default function EventDetailPage({params}: any ) {
             </article>
           </div>
 
-          {/* Right column: aside cards */}
           <aside className="lg:col-span-4 space-y-6">
-            {/* Information card */}
             <div className="border border-neutral-200 bg-white shadow-sm">
-              <div className=" text-neutral-100 border-b border-neutral-200 px-5 py-3 bg-red-800 ">
-                <h3 className="text-base font-semibold font-playfair ">
-                  Information
-                </h3>
+              <div className="text-neutral-100 border-b border-neutral-200 px-5 py-3 bg-red-800">
+                <h3 className="text-base font-semibold font-playfair">Information</h3>
               </div>
               <div className="px-5 py-4 space-y-5 text-sm">
-                <InfoRow
-                  icon={<CalendarDays className="h-4 w-4" />}
-                  label="Date"
-                  value={dt}
-                />
-                {time && (
-                  <InfoRow
-                    icon={<Clock className="h-4 w-4" />}
-                    label="Time"
-                    value={time}
-                  />
-                )}
-                {event.location && (
-                  <InfoRow
-                    icon={<MapPin className="h-4 w-4" />}
-                    label="Location"
-                    value={event.location}
-                  />
-                )}
+                <InfoRow icon={<CalendarDays className="h-4 w-4" />} label="Date" value={dt} />
+                {time && <InfoRow icon={<Clock className="h-4 w-4" />} label="Time" value={time} />}
+                {event.location && <InfoRow icon={<MapPin className="h-4 w-4" />} label="Location" value={event.location} />}
 
                 {categories.length > 0 && (
                   <div className="flex items-start gap-3">
@@ -155,12 +106,7 @@ export default function EventDetailPage({params}: any ) {
                       <div className="text-neutral-500/90 mb-1">Categories</div>
                       <div className="flex flex-wrap gap-2">
                         {categories.map((c) => (
-                          <span
-                            key={c}
-                            className="text-xs px-2 py-1 border border-neutral-200"
-                          >
-                            {c}
-                          </span>
+                          <span key={c} className="text-xs px-2 py-1 border border-neutral-200">{c}</span>
                         ))}
                       </div>
                     </div>
@@ -169,58 +115,22 @@ export default function EventDetailPage({params}: any ) {
               </div>
             </div>
 
-            {/* Organizer card */}
             <div className="border border-neutral-200 bg-white shadow-sm">
               <div className="border-b border-neutral-200 px-5 py-3 bg-neutral-200">
-                <h3 className="text-base font-semibold text-neutral-900 font-playfair">
-                  Organizer
-                </h3>
+                <h3 className="text-base font-semibold text-neutral-900 font-playfair">Organizer</h3>
               </div>
               <div className="px-5 py-4 space-y-5 text-sm">
-                {org?.name && (
-                  <InfoRow
-                    icon={<User className="h-4 w-4" />}
-                    label="Name"
-                    value={org.name + (org.role ? ` – ${org.role}` : "")}
-                  />
+                {organizer.name && (
+                  <InfoRow icon={<User className="h-4 w-4" />} label="Name" value={`${organizer.name}${organizer.role ? ` – ${organizer.role}` : ""}`} />
                 )}
-                {org?.phone && (
-                  <InfoRow
-                    icon={<Phone className="h-4 w-4" />}
-                    label="Phone"
-                    value={
-                      <a href={`tel:${org.phone}`} className="hover:text-red-800">
-                        {org.phone}
-                      </a>
-                    }
-                  />
+                {organizer.phone && (
+                  <InfoRow icon={<Phone className="h-4 w-4" />} label="Phone" value={<a href={`tel:${organizer.phone}`} className="hover:text-red-800">{organizer.phone}</a>} />
                 )}
-                {org?.email && (
-                  <InfoRow
-                    icon={<Mail className="h-4 w-4" />}
-                    label="Email"
-                    value={
-                      <a href={`mailto:${org.email}`} className="hover:text-red-800">
-                        {org.email}
-                      </a>
-                    }
-                  />
+                {organizer.email && (
+                  <InfoRow icon={<Mail className="h-4 w-4" />} label="Email" value={<a href={`mailto:${organizer.email}`} className="hover:text-red-800">{organizer.email}</a>} />
                 )}
-                {org?.website && (
-                  <InfoRow
-                    icon={<LinkIcon className="h-4 w-4" />}
-                    label="Website"
-                    value={
-                      <a
-                        href={org.website}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="hover:text-red-800"
-                      >
-                        {org.website}
-                      </a>
-                    }
-                  />
+                {organizer.website && (
+                  <InfoRow icon={<LinkIcon className="h-4 w-4" />} label="Website" value={<a href={organizer.website} target="_blank" rel="noreferrer" className="hover:text-red-800">{organizer.website}</a>} />
                 )}
               </div>
             </div>
@@ -231,15 +141,7 @@ export default function EventDetailPage({params}: any ) {
   );
 }
 
-function InfoRow({
-  icon,
-  label,
-  value,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: React.ReactNode | string;
-}) {
+function InfoRow({ icon, label, value }: { icon: React.ReactNode; label: string; value: React.ReactNode | string }) {
   return (
     <div className="flex items-start gap-3">
       <span className="mt-0.5 text-neutral-500">{icon}</span>
@@ -251,25 +153,11 @@ function InfoRow({
   );
 }
 
-function formatDate(d: string) {
-  const date = new Date(d);
-  return date.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
+function formatDate(d: Date) {
+  return new Date(d).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "2-digit" });
 }
 
 export async function generateStaticParams() {
-  return events.map((e) => ({ slug: e.slug }));
-}
-
-function BackBarFallback() {
-  return (
-    <div className="mb-6 flex items-center gap-3">
-      <div className="h-5 w-40 rounded bg-neutral-200 animate-pulse" />
-      <span className="text-neutral-300">•</span>
-      <div className="h-5 w-28 rounded bg-neutral-200 animate-pulse" />
-    </div>
-  );
+  const slugs = await prisma.event.findMany({ select: { slug: true } });
+  return slugs.map((e) => ({ slug: e.slug }));
 }
