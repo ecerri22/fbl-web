@@ -168,7 +168,6 @@ export default async function DepartmentPage({ params }: { params: any }) {
           <p className="text-neutral-600 mb-6 max-[425px]:text-sm text-base">
             Reach out to our team or visit the faculty to learn more about what we offer.
           </p>
-          {/* {department.department_email && ( */}
             <a
               // href={`mailto:${department.department_email}`}
               href="#"
@@ -179,7 +178,6 @@ export default async function DepartmentPage({ params }: { params: any }) {
                 Contact the Department
               </span>
             </a>
-          {/* )} */}
 
         </section>
 

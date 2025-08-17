@@ -1,4 +1,3 @@
-// app/study-programs/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import PageWrapper from "@/components/PageWrapper";
@@ -15,12 +14,6 @@ const LEVEL_OPTIONS = [
   { label: "Master of Science", value: "MASTER_OF_SCIENCE" },
   { label: "Integrated Master", value: "INTEGRATED_MASTER" },
 ] as const;
-
-type SearchParams = {
-  q?: string;
-  dept?: string;
-  level?: string; // comes from URL as string
-};
 
 function isProgramLevel(v: string): v is ProgramLevel {
   return (
@@ -40,7 +33,6 @@ export default async function StudyProgramsPage({ searchParams }: any) {
     ? levelParam
     : undefined;
 
-  // Build typed filters
   const filters: Prisma.ProgramWhereInput[] = [];
 
   if (q) {

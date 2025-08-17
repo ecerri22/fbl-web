@@ -17,7 +17,6 @@ export default function AllProjectsClient({ projects }: { projects: Project[] })
   const [selectedField, setSelectedField] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
 
-  // Unique dropdown options (sorted)
   const fields = useMemo(
     () =>
       Array.from(

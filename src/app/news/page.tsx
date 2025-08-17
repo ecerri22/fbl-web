@@ -1,10 +1,9 @@
-// app/news/page.tsx
 import { prisma } from "@/lib/prisma";
 import { Suspense } from "react";
 import NewsClient, { Post } from "./NewsClient";
 
 export const runtime = "nodejs";
-export const revalidate = 60; // ISR cache; tweak as you like
+export const revalidate = 60; 
 
 const DEFAULT_IMG = "/images/news/fakulteti-ekonomik-uniel.webp";
 
@@ -20,21 +19,20 @@ export default async function NewsPage() {
       date: true,
       author: true,
       category: true,
-      tags: true,         // string[]
-      readingTime: true,  // number | null
+      tags: true,         
+      readingTime: true,  
       featured: true,
-      content: true,      // string[]
+      content: true,     
     },
   });
 
-  // Map DB → UI shape (strings only where UI expects)
   const initialPosts: Post[] = news.map((n) => ({
     id: n.id,
     slug: n.slug,
     title: n.title,
     excerpt: n.excerpt ?? "",
     image: n.image ?? DEFAULT_IMG,
-    date: n.date.toISOString(), // keep ISO; client will format
+    date: n.date.toISOString(), 
     author: n.author ?? null,
     category: n.category ?? "General",
     tags: n.tags ?? [],

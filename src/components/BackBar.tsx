@@ -6,19 +6,13 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 type BackBarProps = {
-  /** Where to go when not coming from "home" */
   defaultHref: string;
-  /** Label when not coming from "home" */
   defaultLabel: string;
-  /** Secondary link (always visible) */
   allHref: string;
   allLabel: string;
-  /** Fallback target if from=home but no history (e.g., opened in new tab) */
   homeHref?: string;
-  /** Optional: inline back handler (e.g., clear selection on News) */
   onBack?: () => void;
   className?: string;
-  /** Hide the secondary link if needed */
   showAllLink?: boolean;
 };
 
@@ -48,7 +42,7 @@ export default function BackBar({
       return;
     }
     if (onBack) {
-      onBack(); // e.g., clear selection in News list view
+      onBack(); 
       return;
     }
     router.push(defaultHref);

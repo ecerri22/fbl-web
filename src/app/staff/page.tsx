@@ -6,7 +6,6 @@ export default function StaffPage() {
     <PageWrapper>
       <main className="text-neutral-800 min-h-screen max-w-7xl mx-auto space-y-24 px-6 md:px-0 py-10">
 
-        {/* Staff Section */}
         <FacultyStaffTable/>
 
       </main>

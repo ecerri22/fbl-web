@@ -5,7 +5,7 @@ export default function Footer({ className = "" }: { className?: string }) {
   return (
     <footer className={`bg-neutral-800 text-white px-6 md:px-20 pt-16 pb-10 ${className}`}>
       <div className="max-w-7xl mx-auto grid gap-12 sm:grid-cols-2 md:grid-cols-4">
-        {/* Brand / About */}
+        {/*  About */}
         <div className="space-y-4 flex flex-col gap-1">
           <h2 className="text-2xl font-bold tracking-wide">FBL</h2>
           <p className="text-sm text-neutral-400">

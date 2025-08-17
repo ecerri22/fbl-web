@@ -1,4 +1,3 @@
-// layout.tsx
 import "./globals.css";
 import { ReactNode } from "react";
 import Footer from "@/components/Footer";

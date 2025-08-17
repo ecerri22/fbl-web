@@ -7,14 +7,13 @@ import { CalendarDays, Search, ChevronLeft, ChevronRight, Tag, Filter } from "lu
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import BackBar from "@/components/BackBar";
 
-// ---- Types the client expects ----
 export type Post = {
   id: string;
   slug: string;
   title: string;
   excerpt: string;
   image: string;
-  date: string;              // ISO string from server
+  date: string;              
   author?: string | null;
   category: string;
   tags: string[];
@@ -42,27 +41,23 @@ function NewsPageInner({ posts }: { posts: Post[] }) {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
-  // categories (with "All")
   const categories = useMemo(() => {
     const set = new Set<string>(["All"]);
     posts.forEach((p) => set.add(p.category));
     return Array.from(set);
   }, [posts]);
 
-  // counts per category
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { All: posts.length };
     for (const p of posts) counts[p.category] = (counts[p.category] || 0) + 1;
     return counts;
   }, [posts]);
 
-  // unique tags
   const allTags = useMemo(
     () => Array.from(new Set(posts.flatMap((p) => p.tags ?? []))),
     [posts]
   );
 
-  // filter + sort
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return posts
@@ -82,7 +77,6 @@ function NewsPageInner({ posts }: { posts: Post[] }) {
   const start = (page - 1) * POSTS_PER_PAGE;
   const current = filtered.slice(start, start + POSTS_PER_PAGE);
 
-  // guard: reset to page 1 if range changes
   useEffect(() => {
     if (page > totalPages && totalPages > 0) setPage(1);
   }, [page, totalPages]);
@@ -107,7 +101,6 @@ function NewsPageInner({ posts }: { posts: Post[] }) {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  // sync selection from URL (?id=...)
   useEffect(() => {
     const id = searchParams.get("id");
     if (!id) {
@@ -364,7 +357,7 @@ function NewsPageInner({ posts }: { posts: Post[] }) {
   );
 }
 
-/* ---------- Helpers & subcomponents ---------- */
+/* ---------- Helpers ---------- */
 
 function ArticleView({ post, onBack }: { post: Post; onBack: () => void }) {
   return (

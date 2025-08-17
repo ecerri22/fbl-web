@@ -168,7 +168,6 @@ export default async function ProgramDetailPage({ params, searchParams }: any) {
               </section>
             )}
 
-            {/* Curriculum (DB-first; JSON fallback) */}
             {curriculumForUI ? (
               <section id="curriculum">
                 <CurriculumSection curriculum={curriculumForUI} />

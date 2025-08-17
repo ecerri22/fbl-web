@@ -1,11 +1,10 @@
-// app/research/all-projects/page.tsx
 import Link from "next/link";
 import PageWrapper from "@/components/PageWrapper";
 import { prisma } from "@/lib/prisma";
 import AllProjectsClient from "./AllProjectsClient";
 
 export const runtime = "nodejs";
-export const revalidate = 60; // ISR
+export const revalidate = 60; 
 
 export default async function AllProjectsPage() {
   const projects = await prisma.researchProject.findMany({
@@ -22,13 +21,11 @@ export default async function AllProjectsPage() {
   return (
     <PageWrapper>
       <main className="text-neutral-800 ">
-        {/* Header */}
         <div className="flex flex-col items-start sm:pb-10 border-b border-neutral-200 sm:flex-row sm:items-center sm:justify-between max-[640px]:gap-8 max-[640px]:pb-8">
           <Link
             href="/research"
             className="order-1 sm:order-2 inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-red-800 transition-colors "
           >
-            {/* arrow will be rendered inside client too if you prefer; leaving simple text here */}
             ← Back to Research
           </Link>
 
@@ -37,7 +34,6 @@ export default async function AllProjectsPage() {
           </h1>
         </div>
 
-        {/* Client-side filters + grid */}
         <AllProjectsClient projects={projects} />
       </main>
     </PageWrapper>

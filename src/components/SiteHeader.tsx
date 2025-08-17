@@ -22,7 +22,7 @@ export default function SiteHeader() {
         FBL
       </Link>
 
-      {/* Center: desktop nav (and the mobile Dialog lives inside Navbar) */}
+      {/* Center */}
       <div className="justify-self-center">
         <Navbar open={mobileOpen} setOpen={setMobileOpen} externalTrigger />
       </div>

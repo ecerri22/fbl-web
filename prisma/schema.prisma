@@ -24,7 +24,7 @@ model Department {
   shortDescription String?
   image            String?
   quote            String?
-  highlights       String[] // was String[]?
+  highlights       String[] 
 
   staff    Staff[]
   programs Program[]
@@ -95,7 +95,7 @@ model Course {
   title    String  @unique
   credits  Int
 
-  instructors   Staff[]        // existing
+  instructors   Staff[]        
   programCourses ProgramCourse[]
 
   createdAt DateTime @default(now())
@@ -111,9 +111,9 @@ model Event {
   location    String?
   image       String?
   description String?
-  content     String[] // was String[]?
+  content     String[] 
 
-  categories String[] // was String[]?
+  categories String[] 
   organizer  Json?
   highlights Json?
 
@@ -133,10 +133,10 @@ model NewsArticle {
   date        DateTime
   author      String?
   category    String?
-  tags        String[] // was String[]?
+  tags        String[] 
   readingTime Int?
   featured    Boolean  @default(false)
-  content     String[] // was String[]?
+  content     String[] 
 
   department   Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
   departmentId String?
@@ -152,7 +152,7 @@ model ResearchProject {
   coordinator String
   year        Int
   field       String?
-  partners    String[] // was String[]?
+  partners    String[] 
   description String
 
   department   Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
@@ -170,10 +170,10 @@ model ProgramCourse {
   course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId  String
 
-  year     Int      // 1..N
-  semester Int      // 1 or 2
-  order    Int?     // optional sort within the semester
-  ects     Int?     // credits override (if different from Course.credits)
+  year     Int      
+  semester Int      
+  order    Int?    
+  ects     Int?    
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -4,19 +4,18 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
-export const revalidate = 300; // revalidate every 5 minutes (adjust as you like)
+export const revalidate = 300; 
 
 type DeptCard = { name: string; slug: string; image: string | null };
 type EventCard = { id: string; slug: string; title: string; date: Date; location: string | null };
 type NewsCard = { id: string; slug: string; title: string; excerpt: string | null; image: string | null; date: Date };
 
 export default async function Home() {
-  // Fetch in parallel
   const [departments, events, latestNews] = await Promise.all([
     prisma.department.findMany({
       select: { name: true, slug: true, image: true },
       orderBy: { name: "asc" },
-      take: 9, // sane limit for home grid
+      take: 9, 
     }),
     prisma.event.findMany({
       select: { id: true, slug: true, title: true, date: true, location: true },

@@ -1,4 +1,3 @@
-// app/research/all-projects/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import PageWrapper from "@/components/PageWrapper";
@@ -6,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
-export const revalidate = 60; // ISR
+export const revalidate = 60; 
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,14 +18,13 @@ export default async function ResearchDetailPage({ params, searchParams }: any) 
       coordinator: true,
       field: true,
       year: true,
-      partners: true,      // String[] in your schema
+      partners: true,      
       description: true,
     },
   });
 
   if (!project) return notFound();
 
-  // support ?from=all-projects to choose the back link
   const fromParam = Array.isArray(searchParams?.from)
     ? searchParams?.from[0]
     : searchParams?.from;

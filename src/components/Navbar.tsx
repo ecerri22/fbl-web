@@ -1,4 +1,3 @@
-// Navbar.tsx
 "use client";
 
 import { useEffect, useState, Fragment } from "react";
@@ -24,7 +23,6 @@ export default function Navbar({ open, setOpen, externalTrigger = false }: Navba
   const router = useRouter();
   const pathname = usePathname();
 
-  // Controlled/uncontrolled pattern
   const [internalOpen, setInternalOpen] = useState(false);
   const menuOpen = open ?? internalOpen;
   const setMenuOpen = setOpen ?? setInternalOpen;
@@ -37,14 +35,6 @@ export default function Navbar({ open, setOpen, externalTrigger = false }: Navba
       setPendingHref(null);
     }
   }, [pathname, pendingHref, setMenuOpen]);
-
-  // useEffect(() => {
-  //   const original = document.body.style.overflow;
-  //   document.body.style.overflow = menuOpen ? "hidden" : original;
-  //   return () => {
-  //     document.body.style.overflow = original;
-  //   };
-  // }, [menuOpen]);
 
   function go(href: string) {
     if (href === pathname) {

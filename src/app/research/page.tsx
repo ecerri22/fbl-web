@@ -30,7 +30,6 @@ export default async function ResearchPage() {
       year: true,
       field: true,
       partners: true,
-      // createdAt: true, // not required
     },
     orderBy: [{ year: "desc" }],
     take: 3,

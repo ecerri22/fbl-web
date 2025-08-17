@@ -5,13 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 type Course = { code?: string; title: string; credits?: number };
 
-// UI shape the table expects
 type UICurriculum = Record<
   string,
   { semester1: Course[]; semester2: Course[] }
 >;
 
-// DB shape coming from buildCurriculumFromDB()
 type DBCurriculum = {
   years: {
     year: number;
@@ -53,7 +51,7 @@ function isDbCurriculum(v: unknown): v is DBCurriculum {
 function isLegacyCurriculum(v: unknown): v is LegacyCurriculum {
   if (!isObject(v)) return false;
   for (const [k, val] of Object.entries(v)) {
-    if (!/^year\d+$/.test(k)) continue; // ignore unknown keys
+    if (!/^year\d+$/.test(k)) continue;
     if (!isObject(val)) return false;
     const s1 = (val as { semester1?: unknown }).semester1;
     const s2 = (val as { semester2?: unknown }).semester2;
@@ -63,7 +61,6 @@ function isLegacyCurriculum(v: unknown): v is LegacyCurriculum {
   return true;
 }
 
-/** Normalize any incoming curriculum (DB or legacy JSON) into UICurriculum */
 function toUICurriculum(input: unknown): UICurriculum {
   if (isDbCurriculum(input)) {
     const ui: UICurriculum = {};
@@ -94,7 +91,6 @@ function toUICurriculum(input: unknown): UICurriculum {
 export function CurriculumSection({ curriculum }: { curriculum: unknown }) {
   const ui = useMemo(() => toUICurriculum(curriculum), [curriculum]);
 
-  // Sort years numerically: year1, year2, ...
   const entries = useMemo(
     () =>
       Object.entries(ui).sort(
