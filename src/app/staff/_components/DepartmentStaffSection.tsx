@@ -24,6 +24,7 @@ const roleOrder = ["Professor", "Lecturer", "Assistant Lecturer"];
 
 function StaffCard({ member }: { member: StaffMember }) {
   const pathname = usePathname();
+  
   const [imgSrc, setImgSrc] = useState(
     member.imgSrc && member.imgSrc.trim() !== ""
       ? member.imgSrc
