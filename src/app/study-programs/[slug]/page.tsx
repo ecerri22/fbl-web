@@ -16,38 +16,97 @@ type PageProps = {
   searchParams?: { from?: string };
 };
 
-// Small helpers to safely read JSON arrays you stored
 function arr<T = unknown>(v: unknown): T[] {
   return Array.isArray(v) ? (v as T[]) : [];
 }
 
-export default async function ProgramDetailPage({ params, searchParams }: PageProps) {
+function buildCurriculumFromDB(
+  rows: Array<{
+    year: number;
+    semester: number;
+    order: number | null;
+    ects: number | null;
+    course: { title: string; credits: number };
+  }>
+) {
+  const sorted = [...rows].sort((a, b) =>
+    a.year !== b.year
+      ? a.year - b.year
+      : a.semester !== b.semester
+      ? a.semester - b.semester
+      : (a.order ?? 9999) - (b.order ?? 9999)
+  );
+
+  const yearsMap = new Map<number, Map<number, { title: string; credits?: number }[]>>();
+  for (const r of sorted) {
+    const y = r.year;
+    const s = r.semester;
+    const credits = r.ects ?? r.course.credits ?? undefined;
+
+    if (!yearsMap.has(y)) yearsMap.set(y, new Map());
+    const semMap = yearsMap.get(y)!;
+    if (!semMap.has(s)) semMap.set(s, []);
+    semMap.get(s)!.push({ title: r.course.title, credits });
+  }
+
+  const years = [...yearsMap.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([year, semMap]) => ({
+      year,
+      semesters: [...semMap.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .map(([semester, courses]) => ({
+          semester,
+          courses,
+        })),
+    }));
+
+  return { years };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function ProgramDetailPage({ params, searchParams }: any) {
   const program = await prisma.program.findUnique({
-    where: { slug: params.slug },
-    include: {
-      department: { select: { name: true, image: true, slug: true } },
-    },
-  });
+      where: { slug: params.slug },
+      include: {
+        department: { select: { name: true, image: true, slug: true } },
+        programCourses: {
+          select: {
+            year: true,
+            semester: true,
+            order: true,
+            ects: true,
+            course: { select: { title: true, credits: true } },
+          },
+          orderBy: [{ year: "asc" }, { semester: "asc" }, { order: "asc" }],
+        },
+      },
+    });
+
 
   if (!program) return notFound();
 
+  const hasDbCurriculum = program.programCourses.length > 0;
+  
+  const curriculumForUI = hasDbCurriculum
+    ? buildCurriculumFromDB(
+        program.programCourses.map((pc) => ({
+          year: pc.year,
+          semester: pc.semester,
+          order: pc.order,
+          ects: pc.ects,
+          course: { title: pc.course.title, credits: pc.course.credits },
+        }))
+      )
+    : (program.curriculum ?? []);
+
   const fromRaw = searchParams?.from ?? "/study-programs";
-  const from = fromRaw.startsWith("/") ? fromRaw : "/study-programs";
+  const from = typeof fromRaw === "string" && fromRaw.startsWith("/") ? fromRaw : "/study-programs";
 
-  const img =
-    program.image || program.department?.image || "/images/programs/default.webp";
+  const img = program.image || program.department?.image || "/images/programs/default.webp";
 
-  // JSON fields
-  const whyBulletPoints = arr<{ label?: string; description?: string }>(
-    program.whyBulletPoints
-  );
-  const careerBulletPoints = arr<{ label?: string; description?: string }>(
-    program.careerBulletPoints
-  );
-  const curriculum = program.curriculum ?? []; // pass as-is to your component
-  const admissionList = arr<string | { label?: string; description?: string }>(
-    program.admission
-  );
+  const whyBulletPoints = arr<{ label?: string; description?: string }>(program.whyBulletPoints);
+  const careerBulletPoints = arr<{ label?: string; description?: string }>(program.careerBulletPoints);
 
   return (
     <PageWrapper>
@@ -67,22 +126,14 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
             <section id="program_overview">
               <div className="flex flex-col gap-8 sm:gap-12">
                 <div className="relative w-full h-64 sm:h-[20rem] overflow-hidden shadow-md">
-                  <Image
-                    src={img}
-                    alt={program.name}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+                  <Image src={img} alt={program.name} fill className="object-cover" priority />
                 </div>
 
                 <div className="text-neutral-600">
                   <h1 className="text-2xl sm:text-3xl font-semibold font-playfair text-neutral-800 mb-3 sm:mb-4">
                     {program.name}
                   </h1>
-                  {program.description && (
-                    <p className="leading-relaxed">{program.description}</p>
-                  )}
+                  {program.description && <p className="leading-relaxed">{program.description}</p>}
                 </div>
               </div>
             </section>
@@ -96,9 +147,7 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
                       {program.whyTitle}
                     </h2>
                   )}
-                  {program.whyIntro && (
-                    <p className="leading-relaxed">{program.whyIntro}</p>
-                  )}
+                  {program.whyIntro && <p className="leading-relaxed">{program.whyIntro}</p>}
                   {whyBulletPoints.length > 0 && (
                     <ul className="list-disc list-inside space-y-2 text-neutral-700">
                       {whyBulletPoints.map((p, i) => (
@@ -113,10 +162,10 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
               </section>
             )}
 
-            {/* Curriculum (expects your stored JSON shape) */}
-            {curriculum && (
+            {/* Curriculum (DB-first; JSON fallback) */}
+            {curriculumForUI && (
               <section id="curriculum">
-                <CurriculumSection curriculum={curriculum as any} />
+                <CurriculumSection curriculum={curriculumForUI as any} />
               </section>
             )}
 
@@ -127,9 +176,7 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
                   <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-neutral-800">
                     Career Prospects
                   </h2>
-                  {program.careerIntro && (
-                    <p className="text-neutral-700 leading-relaxed">{program.careerIntro}</p>
-                  )}
+                  {program.careerIntro && <p className="text-neutral-700 leading-relaxed">{program.careerIntro}</p>}
                   {careerBulletPoints.length > 0 && (
                     <ul className="list-disc list-inside space-y-3 text-neutral-800 leading-relaxed">
                       {careerBulletPoints.map((p, i) => (
@@ -145,15 +192,14 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
             )}
 
             {/* Admission */}
-            {(Array.isArray(admissionList) && admissionList.length > 0) && (
+            {Array.isArray(program.admission) && program.admission.length > 0 && (
               <section id="admission_requirements" className="pt-15 sm:pt-15 md:px-12 bg-white border-t border-neutral-200">
                 <div className="max-w-5xl mx-auto space-y-6">
                   <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-neutral-800">
                     Admission Requirements
                   </h2>
-
                   <ul className="list-disc list-inside space-y-3 text-neutral-800 leading-relaxed">
-                    {admissionList.map((item, i) => {
+                    {arr<string | { label?: string; description?: string }>(program.admission).map((item, i) => {
                       if (typeof item === "string") return <li key={i}>{item}</li>;
                       if (item && typeof item === "object") {
                         return (
@@ -172,9 +218,7 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
 
             {/* CTA */}
             <section className="text-center pt-10 pb-5 sm:pt-16 border-t border-neutral-300">
-              <h2 className="text-2xl sm:text-3xl font-playfair mb-4">
-                Still exploring your path?
-              </h2>
+              <h2 className="text-2xl sm:text-3xl font-playfair mb-4">Still exploring your path?</h2>
               <p className="text-neutral-600 mb-6">
                 We offer a range of programs designed to shape tomorrow’s leaders.
               </p>
@@ -188,7 +232,7 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
             </section>
           </div>
 
-          {/* RIGHT column (desktop snapshot) */}
+          {/* RIGHT column (desktop) */}
           <aside className="hidden lg:block min-w-0 space-y-10 self-start sticky top-32">
             <div className="bg-white border border-neutral-200 shadow-sm p-6 space-y-4">
               <h3 className="text-lg font-playfair font-semibold text-red-800">Program Snapshot</h3>
@@ -224,7 +268,10 @@ export default async function ProgramDetailPage({ params, searchParams }: PagePr
                   { href: "#admission_requirements", label: "Admission" },
                 ].map(({ href, label }) => (
                   <li key={href}>
-                    <a href={href} className="flex items-center gap-2 text-md font-medium text-neutral-800 hover:text-red-800 transition">
+                    <a
+                      href={href}
+                      className="flex items-center gap-2 text-md font-medium text-neutral-800 hover:text-red-800 transition"
+                    >
                       <ArrowRight className="w-4 h-4 text-red-800" />
                       {label}
                     </a>

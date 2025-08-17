@@ -24,13 +24,11 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
   const dept = searchParams?.dept ?? "";
   const level = searchParams?.level ?? "";
 
-  // Departments for the filter dropdown
   const departments = await prisma.department.findMany({
     select: { id: true, name: true },
     orderBy: { name: "asc" },
   });
 
-  // Build dynamic where
   const where: any = { AND: [] as any[] };
 
   if (q) {
@@ -48,7 +46,6 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
   }
 
   if (level) {
-    // exact enum from dropdown (BACHELOR, PROFESSIONAL_MASTER, etc.)
     where.AND.push({ level });
   }
 
@@ -67,7 +64,6 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
           Academic Areas of Study
         </h1>
 
-        {/* Filters: plain GET form updates the URL */}
         <form className="flex flex-col lg:flex-row gap-6" method="GET">
           {/* Search */}
           <div className="w-full lg:w-1/2">
@@ -98,7 +94,7 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
             </select>
           </div>
 
-          {/* Program Level (enum) */}
+          {/* Program Level */}
           <div className="w-full lg:w-1/4">
             <p className="text-xl font-playfair mb-2">Program Level:</p>
             <select

@@ -1,4 +1,3 @@
-// app/staff/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper";
 import Image from "next/image";
@@ -23,7 +22,9 @@ export default async function StaffDetailPage({ params, searchParams }: any) {
       officePhone: true,    
       photoUrl: true,       
       expertise: true,      
-      courses: true,        
+      courses: {
+        select: { id: true, title: true, credits: true },
+      },       
       publications: true,   
     },
   });
@@ -37,6 +38,7 @@ export default async function StaffDetailPage({ params, searchParams }: any) {
     typeof fromParam === "string" && fromParam.startsWith("/")
       ? fromParam
       : "/departments";
+
 
   return (
     <PageWrapper>
@@ -125,17 +127,22 @@ export default async function StaffDetailPage({ params, searchParams }: any) {
               )}
 
               {staff.courses && staff.courses.length > 0 && (
-                <section className="pt-10 pb-8 border-b border-neutral-200">
-                  <h2 className="text-2xl font-semibold text-neutral-800 font-playfair mb-5 uppercase tracking-wide">
-                    Courses
-                  </h2>
-                  <ul className="list-inside space-y-5 text-red-800">
-                    {staff.courses.map((course, i) => (
-                      <li key={i}>{course}</li>
-                    ))}
-                  </ul>
-                </section>
-              )}
+              <section className="pt-10 pb-8 border-b border-neutral-200">
+                <h2 className="text-2xl font-semibold text-neutral-800 font-playfair mb-5 uppercase tracking-wide">
+                  Courses
+                </h2>
+                <ul className="list-inside space-y-5 text-red-800">
+                  {staff.courses.map((c) => (
+                    <li key={c.id}>
+                      {c.title}
+                      {/* If you *don’t* want credits shown, delete the next span */}
+                      {/* <span className="text-neutral-500"> • {c.credits} ECTS</span> */}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
 
               {staff.publications && staff.publications.length > 0 && (
                 <section className="pt-10">
