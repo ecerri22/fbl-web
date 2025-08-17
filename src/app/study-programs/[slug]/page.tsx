@@ -1,4 +1,3 @@
-// app/study-programs/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import PageWrapper from "@/components/PageWrapper";
@@ -11,10 +10,23 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-type PageProps = {
-  params: { slug: string };
-  searchParams?: { from?: string };
+type ProgramCourseForUI = {
+  year: number;
+  semester: number;
+  order: number | null;
+  ects: number | null;
+  course: { title: string; credits: number };
 };
+
+type CourseUI = { title: string; credits?: number };
+
+type UICurriculum = {
+  years: {
+    year: number;
+    semesters: { semester: number; courses: CourseUI[] }[];
+  }[];
+};
+
 
 function arr<T = unknown>(v: unknown): T[] {
   return Array.isArray(v) ? (v as T[]) : [];
@@ -28,7 +40,7 @@ function buildCurriculumFromDB(
     ects: number | null;
     course: { title: string; credits: number };
   }>
-) {
+): UICurriculum {
   const sorted = [...rows].sort((a, b) =>
     a.year !== b.year
       ? a.year - b.year
@@ -37,16 +49,13 @@ function buildCurriculumFromDB(
       : (a.order ?? 9999) - (b.order ?? 9999)
   );
 
-  const yearsMap = new Map<number, Map<number, { title: string; credits?: number }[]>>();
+  const yearsMap = new Map<number, Map<number, CourseUI[]>>();
   for (const r of sorted) {
-    const y = r.year;
-    const s = r.semester;
     const credits = r.ects ?? r.course.credits ?? undefined;
-
-    if (!yearsMap.has(y)) yearsMap.set(y, new Map());
-    const semMap = yearsMap.get(y)!;
-    if (!semMap.has(s)) semMap.set(s, []);
-    semMap.get(s)!.push({ title: r.course.title, credits });
+    if (!yearsMap.has(r.year)) yearsMap.set(r.year, new Map());
+    const semMap = yearsMap.get(r.year)!;
+    if (!semMap.has(r.semester)) semMap.set(r.semester, []);
+    semMap.get(r.semester)!.push({ title: r.course.title, credits });
   }
 
   const years = [...yearsMap.entries()]
@@ -55,10 +64,7 @@ function buildCurriculumFromDB(
       year,
       semesters: [...semMap.entries()]
         .sort((a, b) => a[0] - b[0])
-        .map(([semester, courses]) => ({
-          semester,
-          courses,
-        })),
+        .map(([semester, courses]) => ({ semester, courses })),
     }));
 
   return { years };
@@ -86,20 +92,6 @@ export default async function ProgramDetailPage({ params, searchParams }: any) {
 
   if (!program) return notFound();
 
-  const hasDbCurriculum = program.programCourses.length > 0;
-  
-  const curriculumForUI = hasDbCurriculum
-    ? buildCurriculumFromDB(
-        program.programCourses.map((pc) => ({
-          year: pc.year,
-          semester: pc.semester,
-          order: pc.order,
-          ects: pc.ects,
-          course: { title: pc.course.title, credits: pc.course.credits },
-        }))
-      )
-    : (program.curriculum ?? []);
-
   const fromRaw = searchParams?.from ?? "/study-programs";
   const from = typeof fromRaw === "string" && fromRaw.startsWith("/") ? fromRaw : "/study-programs";
 
@@ -107,6 +99,20 @@ export default async function ProgramDetailPage({ params, searchParams }: any) {
 
   const whyBulletPoints = arr<{ label?: string; description?: string }>(program.whyBulletPoints);
   const careerBulletPoints = arr<{ label?: string; description?: string }>(program.careerBulletPoints);
+  
+  const hasDbCurriculum = program.programCourses.length > 0;
+
+  const curriculumForUI: UICurriculum | null = hasDbCurriculum
+    ? buildCurriculumFromDB(
+        program.programCourses.map((pc): ProgramCourseForUI => ({
+          year: pc.year,
+          semester: pc.semester,
+          order: pc.order,
+          ects: pc.ects,
+          course: { title: pc.course.title, credits: pc.course.credits },
+        }))
+      )
+    : ((program.curriculum as UICurriculum | null) ?? null);
 
   return (
     <PageWrapper>
@@ -163,11 +169,12 @@ export default async function ProgramDetailPage({ params, searchParams }: any) {
             )}
 
             {/* Curriculum (DB-first; JSON fallback) */}
-            {curriculumForUI && (
+            {curriculumForUI ? (
               <section id="curriculum">
-                <CurriculumSection curriculum={curriculumForUI as any} />
+                <CurriculumSection curriculum={curriculumForUI} />
               </section>
-            )}
+            ) : null}
+
 
             {/* Career */}
             {(program.careerIntro || careerBulletPoints.length) && (

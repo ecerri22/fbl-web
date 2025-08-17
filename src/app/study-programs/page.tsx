@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import PageWrapper from "@/components/PageWrapper";
 import { prisma } from "@/lib/prisma";
+import type { Prisma, ProgramLevel } from "@prisma/client";
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic"; // don't pre-render at build; hit DB at request time
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 const LEVEL_OPTIONS = [
@@ -13,26 +14,37 @@ const LEVEL_OPTIONS = [
   { label: "Professional Master", value: "PROFESSIONAL_MASTER" },
   { label: "Master of Science", value: "MASTER_OF_SCIENCE" },
   { label: "Integrated Master", value: "INTEGRATED_MASTER" },
-];
+] as const;
 
-type PageProps = {
-  searchParams?: { q?: string; dept?: string; level?: string };
+type SearchParams = {
+  q?: string;
+  dept?: string;
+  level?: string; // comes from URL as string
 };
 
-export default async function StudyProgramsPage({ searchParams }: PageProps) {
+function isProgramLevel(v: string): v is ProgramLevel {
+  return (
+    v === "BACHELOR" ||
+    v === "PROFESSIONAL_MASTER" ||
+    v === "MASTER_OF_SCIENCE" ||
+    v === "INTEGRATED_MASTER"
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function StudyProgramsPage({ searchParams }: any) {
   const q = (searchParams?.q ?? "").trim();
   const dept = searchParams?.dept ?? "";
-  const level = searchParams?.level ?? "";
+  const levelParam = searchParams?.level ?? "";
+  const level: ProgramLevel | undefined = isProgramLevel(levelParam)
+    ? levelParam
+    : undefined;
 
-  const departments = await prisma.department.findMany({
-    select: { id: true, name: true },
-    orderBy: { name: "asc" },
-  });
-
-  const where: any = { AND: [] as any[] };
+  // Build typed filters
+  const filters: Prisma.ProgramWhereInput[] = [];
 
   if (q) {
-    where.AND.push({
+    filters.push({
       OR: [
         { name: { contains: q, mode: "insensitive" } },
         { description: { contains: q, mode: "insensitive" } },
@@ -42,20 +54,27 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
   }
 
   if (dept) {
-    where.AND.push({ department: { name: dept } });
+    filters.push({ department: { name: { equals: dept } } });
   }
 
   if (level) {
-    where.AND.push({ level });
+    filters.push({ level });
   }
 
-  const programs = await prisma.program.findMany({
-    where: where.AND.length ? where : undefined,
-    include: {
-      department: { select: { name: true, image: true } },
-    },
-    orderBy: [{ department: { name: "asc" } }, { name: "asc" }],
-  });
+  const where: Prisma.ProgramWhereInput | undefined =
+    filters.length ? { AND: filters } : undefined;
+
+  const [departments, programs] = await Promise.all([
+    prisma.department.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: "asc" },
+    }),
+    prisma.program.findMany({
+      where,
+      include: { department: { select: { name: true, image: true } } },
+      orderBy: [{ department: { name: "asc" } }, { name: "asc" }],
+    }),
+  ]);
 
   return (
     <PageWrapper>
@@ -99,7 +118,7 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
             <p className="text-xl font-playfair mb-2">Program Level:</p>
             <select
               name="level"
-              defaultValue={level}
+              defaultValue={levelParam}
               className="w-full border border-neutral-200 px-4 py-2 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-red-800"
             >
               <option value="">All Levels</option>
@@ -110,7 +129,6 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
               ))}
             </select>
           </div>
-
         </form>
 
         {/* Results */}
@@ -152,7 +170,9 @@ export default async function StudyProgramsPage({ searchParams }: PageProps) {
         </div>
 
         {programs.length === 0 && (
-          <div className="text-neutral-500 text-sm">No programs match your filters.</div>
+          <div className="text-neutral-500 text-sm">
+            No programs match your filters.
+          </div>
         )}
       </div>
     </PageWrapper>

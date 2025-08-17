@@ -19,35 +19,77 @@ type DBCurriculum = {
   }[];
 };
 
+type LegacyYear = { semester1?: Course[]; semester2?: Course[] };
+type LegacyCurriculum = Record<string, LegacyYear>;
+
+function isObject(v: unknown): v is Record<string, unknown> {
+  return typeof v === "object" && v !== null;
+}
+
+function isCourse(v: unknown): v is Course {
+  return isObject(v) && typeof v.title === "string";
+}
+
+function isCourseArray(v: unknown): v is Course[] {
+  return Array.isArray(v) && v.every(isCourse);
+}
+
+function isDbCurriculum(v: unknown): v is DBCurriculum {
+  if (!isObject(v) || !Array.isArray((v as { years?: unknown }).years)) return false;
+  const years = (v as { years: unknown[] }).years;
+  return years.every((y) => {
+    if (!isObject(y) || typeof (y as { year?: unknown }).year !== "number") return false;
+    const semesters = (y as { semesters?: unknown }).semesters;
+    return (
+      Array.isArray(semesters) &&
+      semesters.every((s) => {
+        if (!isObject(s) || typeof (s as { semester?: unknown }).semester !== "number") return false;
+        return isCourseArray((s as { courses?: unknown }).courses);
+      })
+    );
+  });
+}
+
+function isLegacyCurriculum(v: unknown): v is LegacyCurriculum {
+  if (!isObject(v)) return false;
+  for (const [k, val] of Object.entries(v)) {
+    if (!/^year\d+$/.test(k)) continue; // ignore unknown keys
+    if (!isObject(val)) return false;
+    const s1 = (val as { semester1?: unknown }).semester1;
+    const s2 = (val as { semester2?: unknown }).semester2;
+    if (s1 !== undefined && !isCourseArray(s1)) return false;
+    if (s2 !== undefined && !isCourseArray(s2)) return false;
+  }
+  return true;
+}
+
 /** Normalize any incoming curriculum (DB or legacy JSON) into UICurriculum */
 function toUICurriculum(input: unknown): UICurriculum {
-  if (!input || typeof input !== "object") return {};
-
-  const anyInput = input as any;
-
-  // DB shape: { years: [{ year, semesters: [{ semester, courses }] }] }
-  if (Array.isArray(anyInput.years)) {
+  if (isDbCurriculum(input)) {
     const ui: UICurriculum = {};
-    for (const y of anyInput.years as Array<{ year: number; semesters?: { semester: number; courses?: Course[] }[] }>) {
-      const s1 = y.semesters?.find((s) => s.semester === 1)?.courses ?? [];
-      const s2 = y.semesters?.find((s) => s.semester === 2)?.courses ?? [];
+    for (const y of input.years) {
+      const s1 = y.semesters.find((s) => s.semester === 1)?.courses ?? [];
+      const s2 = y.semesters.find((s) => s.semester === 2)?.courses ?? [];
       ui[`year${y.year}`] = { semester1: s1, semester2: s2 };
     }
     return ui;
   }
 
-  // Legacy UI shape: keys like "year1", "year2", ...
-  const ui: UICurriculum = {};
-  for (const [k, v] of Object.entries(anyInput)) {
-    if (/^year\d+$/.test(k) && v && typeof v === "object") {
+  if (isLegacyCurriculum(input)) {
+    const ui: UICurriculum = {};
+    for (const [k, v] of Object.entries(input)) {
+      if (!/^year\d+$/.test(k)) continue;
       ui[k] = {
-        semester1: (v as any).semester1 ?? [],
-        semester2: (v as any).semester2 ?? [],
+        semester1: v.semester1 ?? [],
+        semester2: v.semester2 ?? [],
       };
     }
+    return ui;
   }
-  return ui;
+
+  return {};
 }
+
 
 export function CurriculumSection({ curriculum }: { curriculum: unknown }) {
   const ui = useMemo(() => toUICurriculum(curriculum), [curriculum]);
