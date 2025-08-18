@@ -57,7 +57,7 @@ export default function BackBar({
         className="inline-flex items-center gap-2 text-neutral-600 hover:text-red-800"
       >
         <ArrowLeft className="w-4 h-4" />
-        <span className="text-sm">{backLabel}</span>
+        <span className="text-xs sm:text-sm">{backLabel}</span>
       </button>
 
       {showAllLink && (
@@ -65,7 +65,7 @@ export default function BackBar({
           <span className="text-neutral-300">•</span>
           <Link
             href={allHref}
-            className="text-sm text-neutral-600 hover:text-red-800"
+            className="text-xs sm:text-sm text-neutral-600 hover:text-red-800"
           >
             {allLabel}
           </Link>

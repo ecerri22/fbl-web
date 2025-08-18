@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { CurriculumSection } from "../_components/CurriculumSection";
+import { Suspense } from "react";
+import BackBar from "@/components/BackBar";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -93,13 +95,14 @@ export default async function ProgramDetailPage({ params, searchParams }: any) {
   if (!program) return notFound();
 
   const fromRaw = searchParams?.from ?? "/study-programs";
-  const from = typeof fromRaw === "string" && fromRaw.startsWith("/") ? fromRaw : "/study-programs";
+  const from =
+    typeof fromRaw === "string" && fromRaw.startsWith("/") ? fromRaw : String(fromRaw);
 
   const img = program.image || program.department?.image || "/images/programs/default.webp";
 
   const whyBulletPoints = arr<{ label?: string; description?: string }>(program.whyBulletPoints);
   const careerBulletPoints = arr<{ label?: string; description?: string }>(program.careerBulletPoints);
-  
+
   const hasDbCurriculum = program.programCourses.length > 0;
 
   const curriculumForUI: UICurriculum | null = hasDbCurriculum
@@ -118,12 +121,17 @@ export default async function ProgramDetailPage({ params, searchParams }: any) {
     <PageWrapper>
       <div className="text-neutral-800 space-y-15 sm:space-y-15 max-[640px]:space-y-15">
         {/* Back button */}
-        <div className="flex flex-row items-center mb-10 gap-2 hover:text-red-800 text-sm text-neutral-600">
-          <ArrowLeft className="w-4 h-4" />
-          <Link href={from} className="inline-block">
-            Back to Study Programs
-          </Link>
-        </div>
+        {/* <div className="flex flex-row items-center mb-10 gap-2 hover:text-red-800 text-sm text-neutral-600"> */}
+          <Suspense>
+            <BackBar
+              defaultHref="/study-programs"
+              defaultLabel="Back to Study Programs"
+              allHref="/study-programs"
+              allLabel="See all programs"
+              showAllLink={from === "home"}
+            />
+          </Suspense>
+        {/* </div> */}
 
         <div className="grid w-full gap-12 lg:grid-cols-[2fr_1fr] overflow-x-clip">
           {/* LEFT column */}

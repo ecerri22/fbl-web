@@ -142,7 +142,16 @@ export default async function Home() {
               Undergraduate
             </h3>
             <ul className="space-y-4">
-              {["Finance", "Marketing", "Information Systems"].map((major) => (
+              <li >
+                  <Link
+                    href={{ pathname: "/study-programs/business-administration-bachelor", query: { from: "home" } }}
+                    className="group inline-flex items-center justify-between border border-neutral-800 px-6 py-3 text-neutral-800 font-roboto text-sm sm:text-base w-full hover:border-transparent hover:bg-red-800 hover:text-white transition-colors"
+                  >
+                    Business Administration
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </li>
+              {["Marketing", "Information Systems"].map((major) => (
                 <li key={major}>
                   <Link
                     href="#"
