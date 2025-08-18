@@ -47,7 +47,7 @@ export default async function ResearchDetailPage({ params, searchParams }: any) 
         </div>
 
         {/* Title */}
-        <h1 className="sm:text-3xl max-[425px]:text-2xl font-playfair font-semibold max-[640px]:text-center text-start">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-playfair font-semibold max-[640px]:text-center text-start">
           {project.title}
         </h1>
 
