@@ -225,12 +225,12 @@ export default async function ProgramDetailPage({ params, searchParams }: any) {
             {/* CTA */}
             <section className="text-center pt-10 pb-5 sm:pt-16 border-t border-neutral-300">
               <h2 className="text-2xl sm:text-3xl font-playfair mb-4">Still exploring your path?</h2>
-              <p className="text-neutral-600 mb-6">
+              <p className="text-neutral-600 mb-6 max-[425px]:text-sm text-base">
                 We offer a range of programs designed to shape tomorrow’s leaders.
               </p>
               <Link
                 href="/study-programs"
-                className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800"
+                className="relative inline-block text-sm sm:text-base xl:px-8 xl:py-4 font-roboto text-white transition-colors duration-300 group overflow-hidden bg-red-800 mx-auto min-[881px]:mx-0 sm:px-6 sm:py-3 max-[640px]:py-3 max-[640px]:px-6"
               >
                 <span className="absolute inset-0 w-0 bg-neutral-800 transition-all duration-700 ease-out group-hover:w-full z-0"></span>
                 <span className="relative z-10 capitalize whitespace-nowrap">View Programs</span>
